@@ -1,0 +1,17 @@
+<div class="container">
+	<div class="page-header">
+			<center> <h1>Datos {{ControlAlta}}</h1>   </center>     
+	</div>
+	<div class="CajaInicio animated bounceInRight">
+		<h1> Formulario de Alta </h1>
+
+		<form id="FormIngreso" name="formIngreso"  enctype="multipart/form-data" >
+			<input type="text" name="apellido" ng-model="persona.apellido" placeholder="ingrese apellido" value="" />
+			<input type="text" name="nombre" ng-model="persona.nombre" placeholder="ingrese nombre" value="" />
+			<input type="text" name="dni" ng-model="persona.dni" placeholder="ingrese dni" value=""     /> 
+			<br/>
+			<a class="btn btn-primary " name="guardar" ng-disabled="formIngreso.$invalid" ng-click="Guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Guardar</a>
+			<br/><br/>
+		</form>
+	</div>
+</div>

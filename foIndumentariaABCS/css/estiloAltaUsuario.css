@@ -1,0 +1,121 @@
+* {
+	box-sizing: border-box;
+}
+
+body{
+	background: #DEDEDE;
+	font-family: sans-serif;
+	margin: 30px;
+}
+
+h2{
+	text-align: center;
+	color:#fff;
+}
+
+.alta-form {
+	margin: auto;
+	width: 60%;
+	background: #F3F3F3;
+	margin-top: auto;
+	border: 1px solid rgba(0,0,0.2);
+	border-radius: 7px;
+}
+
+.alta-titulo{
+	background: rgba(0,0,0,0.5);
+	padding: 15px;
+	text-align: center;
+	font-weight: 100;
+	font-size: 30px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	border-bottom: 5px solid #fff;
+}
+
+.alta-contenedor{
+	padding: 10px 30px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content:space-between;
+}
+
+input{
+	margin-bottom: 15px;
+	padding: 15px;
+	font-size: 16px;
+	border-radius: 3px;
+	border: 1px solid darkgray; 
+}
+
+select{
+	margin-bottom: 15px;
+	padding: 15px;
+	font-size: 16px;
+	border-radius: 3px;
+	border: 1px solid darkgray; 
+}
+
+input[type="radio"]{
+	padding: 25px;
+	font-size: 16px;
+	margin-top: 18px;
+}
+
+input[type="checkbox"]{
+	padding: 25px 20px;
+	font-size: 16px;
+}
+
+.input-48{
+	width: 48%;
+}
+
+.input-25{
+	width: 25%;
+}
+
+.div-100{
+	width: 100%;
+	justify-content:space-between;
+}
+
+input[type="submit"]{
+	background: linear-gradient(#204862, #3481B5);
+	border: 0;
+	color: #fff;
+	opacity: 0.8;
+	cursor: pointer;
+	border-radius: 10px;
+	margin-bottom: 0;
+}
+
+input[type="submit"]:hover {
+	opacity: 1;
+	cursor: pointer;
+}
+
+input[type="submit"]:active {
+	transform: scale(0.95);
+}
+
+.btn-guardar{
+	margin:auto;
+	padding: 10px 30px;
+}
+
+/*Estilos validacion*/
+
+input.ng-invalid{
+	border-color:red;
+}
+
+
+/*Inicio*/
+.contenedorRegistro{
+	position: relative;
+	padding-top: 10%;
+	padding-bottom:3%;
+	float: right;
+	width: 40%;
+}

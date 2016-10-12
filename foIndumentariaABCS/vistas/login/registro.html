@@ -1,0 +1,16 @@
+<div class="divLogin" name="loginForm">
+    <div class="row">
+        <h2 class="h2Login">Crea una cuenta:</h2>
+    	<input type="text" placeholder="Nombre" class="txtLogin" name="nombre" ng-model='usuario.nombre' required>
+	    <input type="text" placeholder="Usuario" class="txtLogin" name="correo" ng-model='usuario.correo' required>
+	    <input type="password" placeholder="Clave" class="txtLogin" name="clave" ng-model='usuario.clave' required>
+	    <input type="password" placeholder="Repetir Clave" class="txtLogin" name="claveRepetida" ng-model='usuario.claveRepetida' required>
+	    <select ng-model="usuario.perfil" class="txtLogin">
+	    	<option value="admin">Administrador</option>
+	    	<option value="encargado">Encargado</option>
+	    	<option value="empleado">Empleado</option>
+	    	<option value="cliente">Cliente</option>
+	    </select>
+	    <input type="submit" value="Guardar" class="btnLogin" ng-disabled="formAlta.$invalid && (usuario.clave == usuario.copiaClave)" ng-click="Guardar()">
+    </div>
+</form>

@@ -1,0 +1,10 @@
+
+CREATE TABLE `utn`.`usuario` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+  `correo` VARCHAR(50) NOT NULL , 
+  `clave` VARCHAR(30) NOT NULL , 
+  `nombre` VARCHAR(50) NOT NULL , 
+  `perfil` VARCHAR(30) NOT NULL , 
+  `fechaAcceso` DATETIME NOT NULL , 
+  `fechaCreacion` DATETIME NOT NULL , PRIMARY KEY (`id`)) 
+  ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;

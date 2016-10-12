@@ -1,0 +1,17 @@
+<div class="divLogin" name="loginForm">
+  <div class="row">
+    <div class="col-lg-4">
+      <img src="img/logoIndumentariaABCS.png" style="width:100%">
+    </div>
+    <div class="col-lg-8">
+      <h2 class="h2Login">Iniciar sesión:</h2>
+      <input type="text" placeholder="Correo" class="txtLogin" name="correo" ng-model="usuario.correo" required>
+      <input type="password" placeholder="Clave" class="txtLogin" name="clave" ng-model="usuario.clave" required>
+      <input type="submit" value="Log in" ng-disabled="loginForm.$invalid" class="btnLogin" ng-click="Verificar()">
+      <br/>
+      <p class="text-center text-muted">
+        <small>No tienes una cuenta? <a ui-sref="login.registro()">Registrate</a></small>
+      </p>
+    </div>
+  </div>
+</div>

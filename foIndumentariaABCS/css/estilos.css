@@ -1,0 +1,206 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*Estilos Generales*/
+.header {
+	background: #333;
+	color: #fff;
+	display: flex;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	border-bottom: 1.5px solid #fff;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    z-index:1;
+}
+
+.navMenu{
+	width: 100%;
+	float: left;
+}
+
+.navMenu ul{
+	list-style: none;
+	padding: 0;
+	margin-bottom: 0; 
+}
+
+.navMenu li{
+	line-height: 40px;
+	position: relative;
+}
+
+.navMenu li ul{
+	position: absolute;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    top: 100%;
+    z-index:1;
+}
+
+.li-ul-Derecha {
+	position: absolute;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    top: 100%;
+    right: 0;
+    z-index:1;
+    float:right;
+}
+
+.navMenu a{
+	color: #ddd;
+	display: block;
+	padding: 0 15px;	
+	text-decoration: none;
+	transition: .4s;
+	font-size: 12px;
+}
+
+.navMenu a:hover{
+	color: #ddd;
+	text-decoration: none;
+}
+
+.navMenu li ul li a {
+	line-height: 25px;
+	color: #000;
+	font-size: 11px;
+}
+
+.item-avatar {
+    max-width: 35px;
+    max-height: 35px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; 
+}
+
+/*Primer Nivel*/
+.navMenu ul{
+	display: table;
+}
+
+.navMenu ul > li{
+	float: left;
+}
+
+/*Segundo Nivel*/
+
+.navMenu-li-li{
+	background: #eee;
+	width: 200px;
+	max-height: 0;
+	display: none;
+}
+
+.li-li-Derecha{
+	background: #eee;
+	width: 400px;
+	display: none;
+	border-bottom: 1px solid #585858;
+}
+
+.li-li-DerechaPerfil{
+	background: #eee;
+	width: 150px;
+	max-height: 0;
+	overflow: hidden;
+	transition: all .4s;
+}
+
+.navMenu li:hover > ul > li{
+	max-height: 200px;
+	display: block;
+	float: right;
+    margin-top: 0;
+    z-index: 1000;
+}
+
+.navMenu li > ul > li:hover{
+    background: rgba(0,0,0,0.8);
+}
+
+.navMenu ul > li > ul {
+	top: 100%
+}
+
+/*Tercer Nivel*/
+
+.navMenu ul ul ul {
+	left: 100%;
+	top:0;
+}
+
+/*Login*/
+
+.divLogin {
+	margin: auto;
+	margin-top: 5%;
+	width: 60%;
+	max-width: 600px;
+	background: #F3F3F3;
+	padding: 30px;
+	border: 1px solid rgba(0,0,0.2);
+	box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.divListaUsuarios {
+	margin: auto;
+	width: 100%;
+	margin-top: 1%;
+	background: #F3F3F3;
+	padding: 30px;
+	border: 1px solid rgba(0,0,0.2);
+	box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.divBandejaEntrada {
+	margin: auto;
+	width: 90%;
+	background: #F3F3F3;
+	padding: 30px;
+	border: 1px solid rgba(0,0,0.2);
+	box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.h2Login{
+	text-align: center;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	color: #204862;
+}
+
+.txtLogin {
+	display: block;
+	padding: 10px;
+	width: 100%;
+	margin: 20px 0;
+	font-size: 20px;
+}
+
+.btnLogin{
+	display: block;
+	padding: 10px;
+	width: 100%;
+	margin: 30px 0;
+	font-size: 20px;
+	background: linear-gradient(#204862, #3481B5);
+	border: 0;
+	color: #fff;
+	opacity: 0.8;
+	cursor: pointer;
+	border-radius: 10px;
+	margin-bottom: 0;
+}
+
+.btnLogin:hover {
+	opacity: 1;
+}
+
+.btnLogin:active {
+	transform: scale(0.95);
+}
