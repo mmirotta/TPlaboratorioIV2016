@@ -1,5 +1,30 @@
-<div class="intro-header">
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation" style="background-color:#204862; border-color:#3481B5;color:#ffffff;">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand topnav" style="color:#ffffff" href="#" ng-if="logeado">Bienvenido {{usuarioLogeado.usuario}}</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="local.alta()" ng-if="logeado && admin" style="color: #ffffff;">Nueva Sucursal</a></li>
+                <li><a ui-sref="login.registro()" ng-if="logeado && admin" style="color: #ffffff;">Nuevo Usuario</a></li>
+                <li><a ui-sref="login.registro()" ng-if="!logeado" style="color: #ffffff;">Registrarse</a></li>
+                <li><a ui-sref="login.login()" ng-if="!logeado" style="color: #ffffff;">Login</a></li>
+                <li><a ng-click="Salir()" ng-if="logeado" style="color: #ffffff;">Salir</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="intro-header"> 
     <div class="container">
+        <!-- Administrador-->
         <div class="row" style="margin-top: 5px" ng-if="logeado && admin">
             <div class="col-lg-3 col-md-6">
                 <div class="panel panel-primary">
@@ -107,13 +132,13 @@
             <div class="col-lg-12">
                 <ul class="list-inline">
                     <li>
-                        <a href="https://twitter.com/mmirotta" class="btn btn-primary btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        <a href="https://twitter.com/mmirotta"><i class="fa fa-twitter fa-fw fa-2x"></i></a>
                     </li>
                     <li>
-                        <a href="https://github.com/mmirotta/ABM_AngularJs_PHP_persona" class="btn btn-primary btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+                        <a href="https://github.com/mmirotta/ABM_AngularJs_PHP_persona"><i class="fa fa-facebook fa-fw fa-2x"></i> </a>
                     </li>
                     <li>
-                        <a href="https://github.com/mmirotta/ABM_AngularJs_PHP_persona" class="btn btn-primary btn-lg"><i class="fa fa-instagram fa-fw"></i> <span class="network-name">Instagram</span></a>
+                        <a href="https://github.com/mmirotta/ABM_AngularJs_PHP_persona" ><i class="fa fa-instagram fa-fw fa-2x"></i></a>
                     </li>
                 </ul>
                 <p class="copyright text-muted small">Copyright &copy; Lab4 2016. Matias Mirotta</p>

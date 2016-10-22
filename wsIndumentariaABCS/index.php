@@ -9,6 +9,7 @@
 require 'vendor/autoload.php';
 require 'clases/Personas.php';
 require 'clases/usuario.php';
+require 'clases/local.php';
 /**
  * Step 2: Instantiate a Slim application
  *
@@ -56,11 +57,12 @@ $app->get('/usuariosPorPerfil/{perfil}', function ($request, $response, $args) {
     return $response;
 });
 
-$app->get('/usuarioCantidadPorPerfil/{perfil}', function ($request, $response, $args) {
-    $usuario=Usuario::BuscarCantidadUsuarios($args['perfil']);
-    var_dump($usuario);
-    $response->write(json_encode($usuario));
-    return $response;
+$app->get('/locales[/]', function ($request, $response, $args) {
+    $datos=Local::Buscar();
+    for ($i = 0; $i < count($datos); $i++ ){
+        $datos[$i]->foto=json_decode($datos[$i]->foto);
+    }
+    return $response->write(json_encode($datos));
 });
 
 $app->get('/personas[/]', function ($request, $response, $args) {
@@ -88,8 +90,40 @@ $app->get('/persona/{id}', function ($request, $response, $args) {
 
 /* POST: Para crear recursos GUARDAR*/
 $app->post('/usuario/{usuario}', function ($request, $response, $args) {
-    Usuario::Guardar(json_decode($args['usuario']));
-    return $response;
+    $usuario=json_decode($args['usuario']);
+    $usuario->foto=explode(';',$usuario->foto);
+    $arrayFoto = array();
+    if(count($usuario->foto) > 0){
+        for ($i = 0; $i < count($usuario->foto); $i++ ){
+            $rutaVieja="fotos/".$usuario->foto[$i];
+            $rutaNueva=$usuario->correo. "_". $i .".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+            copy($rutaVieja, "fotos/".$rutaNueva);
+            unlink($rutaVieja);
+            $arrayFoto[]=$rutaNueva;
+        } 
+        $usuario->foto=json_encode($arrayFoto); 
+    }
+
+    
+    return $response->write(Usuario::Guardar($usuario));
+});
+
+$app->post('/local/{local}', function ($request, $response, $args) {
+    $local=json_decode($args['local']);
+    $local->foto=explode(';',$local->foto);
+    $arrayFoto = array();
+    if(count($local->foto) > 0){
+        for ($i = 0; $i < count($local->foto); $i++ ){
+            $rutaVieja="fotos/".$local->foto[$i];
+            $rutaNueva=$local->sucursal. "_". $i .".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+            copy($rutaVieja, "fotos/".$rutaNueva);
+            unlink($rutaVieja);
+            $arrayFoto[]="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/".$rutaNueva;
+        } 
+        $local->foto=json_encode($arrayFoto); 
+    }
+
+    return $response->write(Local::Guardar($local));
 });
 
 $app->post('/persona/{persona}', function ($request, $response, $args) {
@@ -122,6 +156,22 @@ $app->delete('/persona/{id}', function ($request, $response, $args) {
     Persona::Borrar($args['id']);
     return $response;
 });
+
+
+/*Archivos*/
+$app->post('/archivos', function ($request, $response, $args) {
+    if ( !empty( $_FILES ) ) {
+    $tempPath = $_FILES[ 'file' ][ 'tmp_name' ];
+    $uploadPath = "fotos" . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
+    move_uploaded_file( $tempPath, $uploadPath );
+    $answer = array( 'answer' => 'Archivo Cargado!!' );
+    $json = json_encode( $answer );
+} else {
+    echo 'Sin Archivos';
+}
+    return $response;
+});
+
 /**
  * Step 4: Run the Slim application
  *

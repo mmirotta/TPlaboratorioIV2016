@@ -8,3 +8,15 @@ CREATE TABLE `utn`.`usuario`
   `fechaAcceso` DATETIME NOT NULL , 
   `fechaCreacion` DATETIME NOT NULL , PRIMARY KEY (`id`)) 
   ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
+CREATE TABLE `utn`.`local` 
+( `id` INT NOT NULL AUTO_INCREMENT, 
+  `direccion` VARCHAR(150) NOT NULL , 
+  `numero` INT NOT NULL , 
+  `localidad` VARCHAR(50) NOT NULL , 
+  `provincia` VARCHAR(50) NOT NULL , 
+  `latitud` VARCHAR(50) NOT NULL , 
+  `longitud` VARCHAR(50) NOT NULL , 
+  `foto` VARCHAR(250) NOT NULL , 
+  `sucursal` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) 
+ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;

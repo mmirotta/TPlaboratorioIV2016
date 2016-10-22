@@ -126,40 +126,19 @@ miApp.controller("controlInicio", function($scope, $auth, $http, $state, jwtHelp
 				$scope.cantidadClientes = "0";
 				$scope.cantidadLocales = "0";
 
-				$http.get('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuariosPorPerfil/encargado')
-			 	.then(function(respuesta) {     	
-			      	$scope.ListadoUsuarios = respuesta.data;
-			      	$scope.cantidadEncargados = parseInt($scope.ListadoUsuarios.length);
-			    },function errorCallback(response) {
-			    	$scope.ListadoUsuarios= [];
-			 	});
-			 	$http.get('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuariosPorPerfil/empleado')
-			 	.then(function(respuesta) {     	
-			      	$scope.ListadoUsuarios = respuesta.data;
-			      	$scope.cantidadEmpleados = parseInt($scope.ListadoUsuarios.length);
-			    },function errorCallback(response) {
-			    	$scope.ListadoUsuarios= [];
-			 	});
-			 	$http.get('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuariosPorPerfil/cliente')
-			 	.then(function(respuesta) {     	
-			      	$scope.ListadoUsuarios = respuesta.data;
-			      	$scope.cantidadClientes = parseInt($scope.ListadoUsuarios.length);
-			    },function errorCallback(response) {
-			    	$scope.ListadoUsuarios= [];
-			 	});
-			 	$http.get('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/locales')
-			 	.then(function(respuesta) {     	
-			      	$scope.ListadoLocales = respuesta.data;
-			      	$scope.cantidadLocales = parseInt($scope.ListadoLocales.length);
-			    },function errorCallback(response) {
-			    	$scope.ListadoLocales= [];
-			 	});
+				// $http.post('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuarioCantidadPorPerfil/Encargado')
+				// .then(function(respuesta) {     	
+				//     console.info(respuesta.data);
+				// },function errorCallback(response) {
+				// 		console.log(response);
+				//  	});
 
 			break;
 		}
 	}	
 	else
 	{
+		console.info("no token", $auth.getPayload());	
 		$scope.logeado = false;
 		$scope.menu = false;
 		$scope.admin = false;
@@ -176,21 +155,28 @@ miApp.controller("controlInicio", function($scope, $auth, $http, $state, jwtHelp
 });
 
 /*LOGIN*/
-miApp.controller("controlLogin", function($scope, $state, $auth, jwtHelper) {
+miApp.controller("controlLogin", function($scope, $state, $auth) {
 	$scope.usuario = {};
 	$scope.usuario.correo = "admin@indumentariaABCS.com";
 	$scope.usuario.clave = "Admin123$";
 
 	if ($auth.isAuthenticated())
-		console.info("token", jwtHelper.decodeToken($auth.getToken()));
+		console.info("token", $auth.getPayload());
+	else
+		console.info("no token", $auth.getPayload());		
 
 	$scope.Verificar = function(){
+		//esto es una llamada igual que el http
 		$auth.login($scope.usuario)
 			.then(function(response){
+				console.info("correcto", response);
+				//solo sabemos que nos devolvio un token correcto con el isauthenticated
 				if ($auth.isAuthenticated())
 				{
 					$state.go("inicio");
 				}
+				else
+					console.info("no token", $auth.getPayload());		
 				
 			}).catch(function(response){
 				console.info("NO volvio bien", response);
@@ -198,12 +184,12 @@ miApp.controller("controlLogin", function($scope, $state, $auth, jwtHelper) {
 	};
 });
 
-miApp.controller("controlRegistro", function($scope, $auth, $state, $http, jwtHelper, FileUploader) {
+miApp.controller("controlRegistro", function($scope, $auth, $state, $http, jwtHelper) {
 	$scope.usuario={};
-    $scope.usuario.nombre = "Cliente";
-    $scope.usuario.correo = "cliente@gmail.com";
-    $scope.usuario.clave = "cliente123";
-    $scope.usuario.claveRepetida = "cliente123";
+    $scope.usuario.nombre = "Aministrador";
+    $scope.usuario.correo = "admin@indumentariaABCS.com";
+    $scope.usuario.clave = "Admin123$";
+    $scope.usuario.claveRepetida = "Admin123$";
     $scope.usuario.perfil = "cliente";
 
 	if ($auth.isAuthenticated())
@@ -213,46 +199,14 @@ miApp.controller("controlRegistro", function($scope, $auth, $state, $http, jwtHe
 		$scope.admin = true;
 	}
 
-	$scope.uploader = new FileUploader({url: 'http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/archivos'});
-	$scope.uploader.queueLimit = 10; // indico cuantos archivos permito cargar
-				
-	/* Si quiero restringir los archivos a imagenes añado este filtro */
-	$scope.uploader.filters.push({
-        name: 'imageFilter',
-        fn: function(item, options) {
-            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-        }
-    });
-
 	$scope.Guardar = function(){
-		$scope.uploader.uploadAll();
-		for (var i = 0; i < $scope.uploader.queue.length; i++) {
-			$scope.foto = $scope.uploader.queue[i];
-			if (i==0)
-				$scope.usuario.foto = $scope.foto.file.name;
-			else
-				$scope.usuario.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
-		};
-
-		$scope.usuario.fechaCreacion = new Date();
 		$http.post('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuario/' + JSON.stringify($scope.usuario))
 		.then(function(respuesta) {     	
 		    $state.go("inicio");
 		},function errorCallback(response) {
-			console.log(response);
-	 	});
+				console.log(response);
+		 	});
 	};
-
-	$scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
-        console.info('onErrorItem', fileItem, response, status, headers);
-    };
-    $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-	    console.info('onCompleteItem', fileItem, response, status, headers);
-	};
-    $scope.uploader.onCompleteAll = function() {
-        console.info('Se cargo con exito');
-    };
 });	
 
 miApp.controller("controlUsuarios", function($scope, $http, $state, $auth, $stateParams, jwtHelper) {
@@ -289,18 +243,6 @@ miApp.controller("controlAltaLocal", function($scope, $auth, $state, $http, jwtH
 	{
 		$state.go("inicio");
 	}
-	
-	$scope.uploader = new FileUploader({url: 'http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/archivos'});
-	$scope.uploader.queueLimit = 10; // indico cuantos archivos permito cargar
-				
-	/* Si quiero restringir los archivos a imagenes añado este filtro */
-	$scope.uploader.filters.push({
-        name: 'imageFilter',
-        fn: function(item, options) {
-            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-        }
-    });
 
 	$scope.local={};
     $scope.local.direccion = "Av. Rivadavia";
@@ -309,18 +251,10 @@ miApp.controller("controlAltaLocal", function($scope, $auth, $state, $http, jwtH
     $scope.local.provincia = "Buenos Aires";
     $scope.local.longitud = "-58.468439";
     $scope.local.latitud = "-34.629645";
+    $scope.local.foto = "sucursalPorDefecto.png";
     $scope.local.sucursal = "Flores";
 
 	$scope.Guardar = function(){
-		$scope.uploader.uploadAll();
-		for (var i = 0; i < $scope.uploader.queue.length; i++) {
-			$scope.foto = $scope.uploader.queue[i];
-			if (i==0)
-				$scope.local.foto = $scope.foto.file.name;
-			else
-				$scope.local.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
-		};
-
 		$http.post('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/local/' + JSON.stringify($scope.local))
 		.then(function(respuesta) {     	
 		    console.log(respuesta);
@@ -328,16 +262,6 @@ miApp.controller("controlAltaLocal", function($scope, $auth, $state, $http, jwtH
 				console.log(response);
 		 	});
 	};
-
-	$scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
-        console.info('onErrorItem', fileItem, response, status, headers);
-    };
-    $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-	    console.info('onCompleteItem', fileItem, response, status, headers);
-	};
-    $scope.uploader.onCompleteAll = function() {
-        console.info('Se cargo con exito');
-    };
 });
 
 miApp.controller("controlLocales", function($scope, $http, $state, $auth) {

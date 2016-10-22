@@ -5,6 +5,7 @@
 	<script SRC="bower_components/angular-ui-router/release/angular-ui-router.min.js" TYPE="text/javascript"></script>
 	<script SRC="bower_components/angular-file-upload/dist/angular-file-upload.min.js" TYPE="text/javascript"></script>
 	<script SRC="bower_components/satellizer/dist/satellizer.min.js" TYPE="text/javascript"></script>
+	<script SRC="bower_components/angular-jwt/dist/angular-jwt.min.js" TYPE="text/javascript"></script>
 	<script SRC="js/miAplicacion.js" TYPE="text/javascript"></script>
 	<script SRC="js/ngThumb.js" TYPE="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="css/landing-page.css">
@@ -17,28 +18,6 @@
     <link rel="stylesheet" type="text/css" href="css/landing-page.css">
 </head>
 <body ng-app="indumentariaABCS" >
-	<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation" style="background-color:#204862; border-color:#3481B5;color:#ffffff;">
-	    <div class="container topnav">
-	        <!-- Brand and toggle get grouped for better mobile display -->
-	        <div class="navbar-header">
-	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-	                <span class="sr-only">Toggle navigation</span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	            </button>
-	        </div>
-	        <!-- Collect the nav links, forms, and other content for toggling -->
-	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	            <ul class="nav navbar-nav navbar-right">
-	            	<li><a ui-sref="inicio()" ng-if="!logeado && !menu" style="color: #ffffff;">Inicio</a></li>
-	            	<li><a ui-sref="login.registro()" ng-if="!logeado && !admin" style="color: #ffffff;">Nuevo Usuario</a></li>
-				    <li><a ui-sref="login.registro()" ng-if="logeado" style="color: #ffffff;">Registrarse</a></li>
-				    <li><a ui-sref="login.login()" ng-if="logeado" style="color: #ffffff;">Login</a></li>
-	            </ul>
-	        </div>
-	    </div>
-	</nav>
 	<div ui-view> 
 	</div>
 </body>

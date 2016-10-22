@@ -1,5 +1,5 @@
 <?php
-require_once"accesoDatos.php";
+require_once"AccesoDatos.php";
 class Usuario
 {
 //--------------------------------------------------------------------------------//
@@ -11,7 +11,7 @@ class Usuario
   	public $perfil;
   	public $fechaAcceso;
   	public $fechaCreacion;
-  	public $cantidad;
+  	public $foto;
 
 //--------------------------------------------------------------------------------//
 
@@ -123,16 +123,6 @@ class Usuario
 		return $arrUsuarios;
 	}
 
-	public static function BuscarCantidadUsuarios($perfil)
-	{
-		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT COUNT(*) AS cantidad FROM usuario WHERE perfil=:perfil");
-		$consulta->bindValue(':perfil',$perfil, PDO::PARAM_STR);
-		$consulta->execute();			
-		$usuarioBuscado= $consulta->fetchObject('usuario');
-		return $usuarioBuscado;	
-	}
-	
 	public static function Borrar($id)
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -172,11 +162,14 @@ class Usuario
 	public static function Guardar($usuario)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,correo,clave,perfil) VALUES(:nombre,:correo,:clave,:perfil)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,correo,clave,perfil,fechaCreacion,foto) 
+														VALUES(:nombre,:correo,:clave,:perfil,:fechaCreacion,:foto)");
 		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':correo', $usuario->correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $usuario->clave, PDO::PARAM_STR);
 		$consulta->bindValue(':perfil', $usuario->perfil, PDO::PARAM_STR);
+		$consulta->bindValue(':foto', $usuario->foto, PDO::PARAM_STR);
+		$consulta->bindValue(':fechaCreacion', $usuario->fechaCreacion, PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}	

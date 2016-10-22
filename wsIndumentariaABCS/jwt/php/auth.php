@@ -11,9 +11,12 @@ $usuarioBuscado = Usuario::Verificar($user->correo, $user->clave);
 
 if ($usuarioBuscado != null)
 {
+	$usuarioBuscado->fechaAcceso = date("Y-m-d H:i:s");
+	Usuario::EditarAcceso($usuarioBuscado);
+
 	$ClaveDeEncriptacion="estaeslaclave";
-	$toke["usuario"] = $usuarioBuscado->nombre;
-	$token["perfil"] = "admin";//$usuarioBuscado->perfil;
+	$token["usuario"] = $usuarioBuscado->nombre;
+	$token["perfil"] = $usuarioBuscado->perfil;
 	$token["iat"] = time();
 	$token["exp"] = time()+30000;
 
