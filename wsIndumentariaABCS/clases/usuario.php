@@ -12,6 +12,7 @@ class Usuario
   	public $fechaAcceso;
   	public $fechaCreacion;
   	public $foto;
+  	public $activo;
 
 //--------------------------------------------------------------------------------//
 
@@ -138,11 +139,15 @@ class Usuario
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("
 				UPDATE usuario 
-				SET nombre=:nombre
+				SET nombre=:nombre,
+					correo=:correo,
+					activo=:activo
 				WHERE id=:id");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			$consulta->bindValue(':id',$usuario->id, PDO::PARAM_INT);
 			$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
+			$consulta->bindValue(':correo',$usuario->correo, PDO::PARAM_STR);
+			$consulta->bindValue(':activo',$usuario->activo, PDO::PARAM_INT);
 			return $consulta->execute();
 	}
 

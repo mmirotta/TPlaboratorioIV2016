@@ -118,7 +118,7 @@ $app->post('/local/{local}', function ($request, $response, $args) {
             $rutaNueva=$local->sucursal. "_". $i .".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
             copy($rutaVieja, "fotos/".$rutaNueva);
             unlink($rutaVieja);
-            $arrayFoto[]="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/".$rutaNueva;
+            $arrayFoto[]=$rutaNueva;
         } 
         $local->foto=json_encode($arrayFoto); 
     }

@@ -2,12 +2,15 @@
 	<h1>Listado de {{perfil}}</h1>
 	<div class="divListaUsuarios" ng-repeat="usuario in ListadoUsuarios">
 		<div class="row" style="padding: 5px;">
-			<div class="col-lg-1">
+			<div class="col-lg-1" style="text-align:center">
 				<img style="width:80px; border-radius:50%" src="img/Matias.jpg">
 			</div>
-			<div class="col-lg-10">
+			<div class="col-lg-9">
 				<h4 style="100%">{{usuario.nombre}}</h4>
 				<p>Correo: {{usuario.correo}}</p>
+			</div>
+			<div class="col-lg-2" style="text-align:center">
+				<a ng-click="Modificar(usuario)" ><i class="fa fa-pencil fa-3x"></i></a>
 			</div>
 		</div>
 	</div>

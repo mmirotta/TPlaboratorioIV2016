@@ -55,6 +55,19 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 		)
 
 		.state(
+			"login.usuario",
+			{
+				url:"/usuario/:usuario",
+				views:{
+					"contenido": {
+					templateUrl:"vistas/login/modificarUsuario.html",
+					controller:"controlModificarUsuario"
+					}
+				}
+			}
+		)
+
+		.state(
 			"login.usuarios",
 			{
 				url:"/usuarios/:perfil",
@@ -255,17 +268,55 @@ miApp.controller("controlRegistro", function($scope, $auth, $state, $http, jwtHe
     };
 });	
 
-miApp.controller("controlUsuarios", function($scope, $http, $state, $auth, $stateParams, jwtHelper) {
+miApp.controller("controlModificarUsuario", function($scope, $auth, $state, $stateParams, $http, jwtHelper, FileUploader) {
 	if ($auth.isAuthenticated())
 	{
-		$scope.usuario = jwtHelper.decodeToken($auth.getToken());
-		$scope.usuario.logeado = true;
+		$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
+		$scope.logeado = true;
+		$scope.usuario = JSON.parse($stateParams.usuario);
 	}
 	else
 	{
 		$state.go("inicio");
 	}
+
+	$scope.Guardar = function(){
+
+		$http.put('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuario/' + JSON.stringify($scope.usuario))
+		.then(function(respuesta) {     	
+		    $state.go("inicio");
+		},function errorCallback(response) {
+			console.log(response);
+	 	});
+	};
+
+});	
+
+miApp.controller("controlUsuarios", function($scope, $http, $state, $auth, $stateParams, jwtHelper) {
  	$scope.perfil = $stateParams.perfil;
+	if ($auth.isAuthenticated())
+	{
+		$scope.usuario = jwtHelper.decodeToken($auth.getToken());
+		$scope.usuario.logeado = true;
+	    $scope.editar = false;
+
+		switch($scope.usuario.perfil)
+		{
+			case "admin":
+					$scope.editar = true;
+				break;
+
+			case "encargado":
+					if ($scope.perfil == "empleado")
+						$scope.editar = true;
+				break;
+		}
+	}
+	else
+	{
+		$state.go("inicio");
+	}
+
  	$http.get('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuariosPorPerfil/' + $scope.perfil)
  	.then(function(respuesta) {     	
       	 $scope.ListadoUsuarios = respuesta.data;
@@ -275,11 +326,16 @@ miApp.controller("controlUsuarios", function($scope, $http, $state, $auth, $stat
      		console.log(response);
 
  	 });
+
+ 	$scope.Modificar = function(usuario){
+ 		var param = JSON.stringify(usuario);
+    	$state.go('login.usuario', {usuario:param});
+ 	}
 });
 
 /*LOCALES*/
 
-miApp.controller("controlAltaLocal", function($scope, $auth, $state, $http, jwtHelper) {
+miApp.controller("controlAltaLocal", function($scope, $auth, $state, $http, jwtHelper, FileUploader) {
 	if ($auth.isAuthenticated())
 	{
 		$scope.usuario = jwtHelper.decodeToken($auth.getToken());

@@ -1,0 +1,9 @@
+<div class="divLogin" name="loginForm">
+    <div class="row">
+        <h2 class="h2Login">Modificar cuenta:</h2>
+    	<input type="text" placeholder="Nombre" class="txtLogin" name="nombre" ng-model='usuario.nombre' required>
+	    <input type="text" placeholder="Usuario" class="txtLogin" name="correo" ng-model='usuario.correo' required>
+	    <input type="checkbox" text="Activo" ng-model="activo">
+	    <input type="submit" value="Guardar" class="btnLogin" ng-disabled="formAlta.$invalid && (usuario.clave == usuario.copiaClave)" ng-click="Guardar()">
+    </div>
+</form>
