@@ -96,7 +96,7 @@ class Usuario
 	public static function Verificar($correo, $clave) 
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE correo =:correo and clave =:clave");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE correo =:correo AND clave =:clave AND activo = 0");
 		$consulta->bindValue(':correo', $correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $clave, PDO::PARAM_STR);
 		$consulta->execute();
@@ -108,7 +108,7 @@ class Usuario
 	public static function Buscar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE activo = 0");
 		$consulta->execute();			
 		$arrUsuarios= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");	
 		return $arrUsuarios;
@@ -117,7 +117,7 @@ class Usuario
 	public static function BuscarPorPerfil($perfil)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE perfil=:perfil");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE perfil=:perfil AND activo = 0");
 		$consulta->bindValue(':perfil',$perfil, PDO::PARAM_STR);
 		$consulta->execute();			
 		$arrUsuarios= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");	

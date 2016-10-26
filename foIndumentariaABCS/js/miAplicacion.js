@@ -250,8 +250,24 @@ miApp.controller("controlRegistro", function($scope, $auth, $state, $http, jwtHe
 
 		$scope.usuario.fechaCreacion = new Date();
 		$http.post('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuario/' + JSON.stringify($scope.usuario))
-		.then(function(respuesta) {     	
-		    $state.go("inicio");
+		.then(function(respuesta) { 
+			if ($auth.isAuthenticated())
+			{  
+			  	$auth.login($scope.usuario)
+				.then(function(response){
+					if ($auth.isAuthenticated())
+					{
+						$state.go("inicio");
+					}
+					
+				}).catch(function(response){
+					console.info("NO volvio bien", response);
+				});
+			}
+			else
+			{
+		    	$state.go("inicio");
+		    }
 		},function errorCallback(response) {
 			console.log(response);
 	 	});

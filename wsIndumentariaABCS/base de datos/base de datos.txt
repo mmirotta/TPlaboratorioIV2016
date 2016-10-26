@@ -6,7 +6,8 @@ CREATE TABLE `utn`.`usuario`
   `nombre` VARCHAR(50) NOT NULL , 
   `perfil` VARCHAR(30) NOT NULL , 
   `fechaAcceso` DATETIME NOT NULL , 
-  `fechaCreacion` DATETIME NOT NULL , PRIMARY KEY (`id`)) 
+  `fechaCreacion` DATETIME NOT NULL ,
+  `activo` tinyint(1) NOT NULL ,  PRIMARY KEY (`id`)) 
   ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 CREATE TABLE `utn`.`local` 
@@ -19,4 +20,28 @@ CREATE TABLE `utn`.`local`
   `longitud` VARCHAR(50) NOT NULL , 
   `foto` VARCHAR(250) NOT NULL , 
   `sucursal` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) 
+ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
+CREATE TABLE `utn`.`producto` 
+( `id` INT NOT NULL AUTO_INCREMENT, 
+  `nombre` VARCHAR(50) NOT NULL , 
+  `descripcion` VARCHAR(250) NOT NULL , 
+  `precio` FLOAT NOT NULL , 
+  `foto` VARCHAR(250) NOT NULL , 
+  `vigente` tinyint(1) NOT NULL , PRIMARY KEY (`id`)) 
+ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
+CREATE TABLE `utn`.`pedido` 
+( `id` INT NOT NULL AUTO_INCREMENT, 
+  `usuarioId` INT NOT NULL , 
+  `fechaPedido` DATETIME NOT NULL , 
+  `fechaEntrega` DATETIME NOT NULL , 
+  `entregado` tinyint(1) NOT NULL, PRIMARY KEY (`id`)) 
+ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
+CREATE TABLE `utn`.`pedidoProducto` 
+( `id` INT NOT NULL AUTO_INCREMENT, 
+  `pedidoId` INT NOT NULL , 
+  `productoId` INT NOT NULL , 
+  `cantidad` INT NOT NULL , PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;

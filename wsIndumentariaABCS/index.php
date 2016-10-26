@@ -7,9 +7,11 @@
  * PSR-4 autoloader.
  */
 require 'vendor/autoload.php';
-require 'clases/Personas.php';
 require 'clases/usuario.php';
 require 'clases/local.php';
+require 'clases/producto.php'; 
+require 'clases/pedido.php';
+require 'clases/pedidoProducto.php';
 /**
  * Step 2: Instantiate a Slim application
  *
@@ -65,13 +67,6 @@ $app->get('/locales[/]', function ($request, $response, $args) {
     return $response->write(json_encode($datos));
 });
 
-$app->get('/personas[/]', function ($request, $response, $args) {
-    $listado=Persona::Buscar();
-    $response->write(json_encode($listado));
-    
-    return $response;
-});
-
 
 /*CARGAR*/
 
@@ -80,13 +75,6 @@ $app->get('/usuario/{id}', function ($request, $response, $args) {
     $response->write(json_encode($usuario));
     return $response;
 });
-
-$app->get('/persona/{id}', function ($request, $response, $args) {
-    $persona=Persona::Cargar($args['id']);
-    $response->write(json_encode($persona));
-    return $response;
-});
-
 
 /* POST: Para crear recursos GUARDAR*/
 $app->post('/usuario/{usuario}', function ($request, $response, $args) {
@@ -126,11 +114,6 @@ $app->post('/local/{local}', function ($request, $response, $args) {
     return $response->write(Local::Guardar($local));
 });
 
-$app->post('/persona/{persona}', function ($request, $response, $args) {
-    Persona::Guardar(json_decode($args['persona']));
-    return $response;
-});
-
 
 // /* PUT: Para editar recursos MODIFICAR*/
 $app->put('/usuario/{usuario}', function ($request, $response, $args) {
@@ -138,25 +121,12 @@ $app->put('/usuario/{usuario}', function ($request, $response, $args) {
     return $response;
 });
 
-$app->put('/persona/{persona}', function ($request, $response, $args) {
-    Persona::Editar(json_decode($args['persona']));
-    return $response;
-});
-
-
-
 
 // /* DELETE: Para eliminar recursos ELIMINAR*/
 $app->delete('/usuario/{id}', function ($request, $response, $args) {
     Usuario::Borrar($args['id']);
     return $response;
 });
-
-$app->delete('/persona/{id}', function ($request, $response, $args) {
-    Persona::Borrar($args['id']);
-    return $response;
-});
-
 
 /*Archivos*/
 $app->post('/archivos', function ($request, $response, $args) {

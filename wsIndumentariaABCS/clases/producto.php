@@ -1,109 +1,67 @@
 <?php
 require_once"AccesoDatos.php";
-class Usuario
+class Producto
 {
 //--------------------------------------------------------------------------------//
 //--ATRIBUTOS
 	public $id;
- 	public $correo;
-  	public $clave;
-  	public $nombre;
+	public $nombre;
+ 	public $descripcion;
+  	public $precio;
+  	public $foto;
+  	public $vigente;
 
-
-//--------------------------------------------------------------------------------//
-
-//--------------------------------------------------------------------------------//
-//--GETTERS Y SETTERS
-  	public function GetId()
-	{
-		return $this->id;
-	}
-	public function GetCorreo()
-	{
-		return $this->correo;
-	}
-	public function GetClave()
-	{
-		return $this->clave;
-	}
-	public function GetNombre()
-	{
-		return $this->nombre;
-	}
-
-	public function SetId($valor)
-	{
-		$this->id = $valor;
-	}
-	public function SetCorreo($valor)
-	{
-		$this->correo = $valor;
-	}
-	public function SetClave($valor)
-	{
-		$this->clave = $valor;
-	}
-	public function SetNombre($valor)
-	{
-		$this->nombre = $valor;
-	}
 
 //--------------------------------------------------------------------------------//
 //--METODO DE CLASE
-	public static function Cargar($idParametro) 
+	public static function Cargar($id) 
 	{	
 
 
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("select * from usuario where id =:id");
-		$consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM producto WHERE id =:id");
+		$consulta->bindValue(':id', $id, PDO::PARAM_INT);
 		$consulta->execute();
-		$usuarioBuscado= $consulta->fetchObject('usuario');
-		return $usuarioBuscado;	
-					
-	}
-
-	public static function Verificar($correo, $clave) 
-	{	
-		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("select * from usuario where correo =:correo and clave =:clave");
-		$consulta->bindValue(':correo', $correo, PDO::PARAM_STR);
-		$consulta->bindValue(':clave', $clave, PDO::PARAM_STR);
-		$consulta->execute();
-		$usuarioBuscado= $consulta->fetchObject('usuario');
-		return $usuarioBuscado;	
+		$productoBuscado= $consulta->fetchObject('producto');
+		return $productoBuscado;	
 					
 	}
 	
 	public static function Buscar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("select * from usuario");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM producto WHERE vigente = 0");
 		$consulta->execute();			
-		$arrUsuarios= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");	
-		return $arrUsuarios;
+		$arrProducto= $consulta->fetchAll(PDO::FETCH_CLASS, "producto");	
+		return $arrProducto;
 	}
 	
 	public static function Borrar($id)
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("delete from usuario WHERE id=:id");	
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM producto WHERE id=:id");	
 		$consulta->bindValue(':id',$id, PDO::PARAM_INT);		
 		$consulta->execute();
 		return $consulta->rowCount();
 		
 	}
 	
-	public static function Editar($usuario)
+	public static function Editar($producto)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("
-				update usuario 
-				set nombre=:nombre
+				UPDATE producto 
+				SET nombre=:nombre,
+					descripcion=:descripcion,
+					precio=:precio,
+					vigente=:vigente
 				WHERE id=:id");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-			$consulta->bindValue(':id',$usuario->id, PDO::PARAM_INT);
-			$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
+			$consulta->bindValue(':id',$producto->id, PDO::PARAM_INT);
+			$consulta->bindValue(':nombre',$producto->nombre, PDO::PARAM_STR);
+			$consulta->bindValue(':descripcion',$producto->descripcion, PDO::PARAM_STR);
+			$consulta->bindValue(':precio',$producto->precio, PDO::PARAM_STR);
+			$consulta->bindValue(':vigente',$producto->vigente, PDO::PARAM_STR);
 			return $consulta->execute();
 	}
 
@@ -111,13 +69,15 @@ class Usuario
 
 //--------------------------------------------------------------------------------//
 
-	public static function Guardar($usuario)
+	public static function Guardar($producto)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into usuario (nombre,correo,clave) values(:nombre,:correo,:clave)");
-		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
-		$consulta->bindValue(':correo', $usuario->correo, PDO::PARAM_STR);
-		$consulta->bindValue(':clave', $usuario->clave, PDO::PARAM_STR);
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO producto (nombre,descripcion,precio,foto)
+														VALUES (:nombre,:descripcion,:precio,:foto)");
+		$consulta->bindValue(':nombre',$producto->nombre, PDO::PARAM_STR);
+		$consulta->bindValue(':descripcion',$producto->descripcion, PDO::PARAM_STR);
+		$consulta->bindValue(':precio', $producto->precio, PDO::PARAM_STR);
+		$consulta->bindValue(':foto', $producto->foto, PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	
