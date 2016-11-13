@@ -10,6 +10,8 @@ class Producto
   	public $precio;
   	public $foto;
   	public $vigente;
+  	public $usuarioEmpleadoId;
+  	public $usuarioEmpleadoNombre;
 
 
 //--------------------------------------------------------------------------------//
@@ -72,12 +74,26 @@ class Producto
 	public static function Guardar($producto)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO producto (nombre,descripcion,precio,foto)
-														VALUES (:nombre,:descripcion,:precio,:foto)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO producto (nombre,
+																			  descripcion,
+																			  precio,
+																			  foto,
+																			  usuarioEmpleadoId,
+																			  usuarioEmpleadoNombre,
+																			  vigente)
+														VALUES (:nombre,
+															    :descripcion,
+															    :precio,
+															    :foto
+															    :usuarioEmpleadoId,
+																:usuarioEmpleadoNombre,
+																1)");
 		$consulta->bindValue(':nombre',$producto->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':descripcion',$producto->descripcion, PDO::PARAM_STR);
 		$consulta->bindValue(':precio', $producto->precio, PDO::PARAM_STR);
 		$consulta->bindValue(':foto', $producto->foto, PDO::PARAM_STR);
+		$consulta->bindValue(':usuarioEmpleadoId', $producto->usuarioEmpleadoId, PDO::PARAM_INT);
+		$consulta->bindValue(':usuarioEmpleadoNombre', $producto->usuarioEmpleadoNombre, PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	

@@ -5,43 +5,46 @@ CREATE TABLE `utn`.`usuario`
   `clave` VARCHAR(30) NOT NULL , 
   `nombre` VARCHAR(50) NOT NULL , 
   `perfil` VARCHAR(30) NOT NULL , 
-  `fechaAcceso` DATETIME NOT NULL , 
-  `fechaCreacion` DATETIME NOT NULL ,
-  `activo` tinyint(1) NOT NULL ,  PRIMARY KEY (`id`)) 
+  `fechaAcceso` DATETIME NULL , 
+  `fechaCreacion` DATETIME NULL ,
+  `activo` tinyint(1) NULL 
+  `sucursalId` INT NULL ,
+  `sucursalNombre` VARCHAR(50) sNULL ,  PRIMARY KEY (`id`)) 
   ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 CREATE TABLE `utn`.`local` 
 ( `id` INT NOT NULL AUTO_INCREMENT, 
-  `direccion` VARCHAR(150) NOT NULL , 
-  `numero` INT NOT NULL , 
-  `localidad` VARCHAR(50) NOT NULL , 
-  `provincia` VARCHAR(50) NOT NULL , 
-  `latitud` VARCHAR(50) NOT NULL , 
-  `longitud` VARCHAR(50) NOT NULL , 
-  `foto` VARCHAR(250) NOT NULL , 
-  `sucursal` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) 
+  `direccion` VARCHAR(150) NULL , 
+  `numero` INT NULL , 
+  `localidad` VARCHAR(50) NULL , 
+  `provincia` VARCHAR(50) NULL , 
+  `latitud` VARCHAR(50) NULL , 
+  `longitud` VARCHAR(50) NULL , 
+  `foto` VARCHAR(250) NULL , 
+  `sucursal` VARCHAR(50) NULL , PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 CREATE TABLE `utn`.`producto` 
 ( `id` INT NOT NULL AUTO_INCREMENT, 
-  `nombre` VARCHAR(50) NOT NULL , 
-  `descripcion` VARCHAR(250) NOT NULL , 
-  `precio` FLOAT NOT NULL , 
-  `foto` VARCHAR(250) NOT NULL , 
-  `vigente` tinyint(1) NOT NULL , PRIMARY KEY (`id`)) 
+  `nombre` VARCHAR(50) NULL , 
+  `descripcion` VARCHAR(250) NULL , 
+  `precio` FLOAT NULL , 
+  `foto` VARCHAR(250) NULL , 
+  `vigente` tinyint(1) NULL,
+  `usuarioEmpleadoId` INT NULL,
+  `usuarioEmpleadoNombre` VARCHAR(50) NULL, PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 CREATE TABLE `utn`.`pedido` 
 ( `id` INT NOT NULL AUTO_INCREMENT, 
-  `usuarioId` INT NOT NULL , 
-  `fechaPedido` DATETIME NOT NULL , 
-  `fechaEntrega` DATETIME NOT NULL , 
-  `entregado` tinyint(1) NOT NULL, PRIMARY KEY (`id`)) 
-ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
-
-CREATE TABLE `utn`.`pedidoProducto` 
-( `id` INT NOT NULL AUTO_INCREMENT, 
-  `pedidoId` INT NOT NULL , 
-  `productoId` INT NOT NULL , 
-  `cantidad` INT NOT NULL , PRIMARY KEY (`id`)) 
+  `usuarioClienteId` INT NULL , 
+  `usuarioClienteNombre` VARCHAR(50) NULL , 
+  `usuarioEmpleadoId` INT NULL , 
+  `usuarioEmpleadoNombre` VARCHAR(50) NULL , 
+  `fechaPedido` DATETIME NULL , 
+  `fechaEntrega` DATETIME NULL ,
+  `nombreProducto` VARCHAR(50) NULL , 
+  `descripcionProducto` VARCHAR(250) NULL , 
+  `precioProducto` FLOAT NULL ,  
+  `estado` VARCHAR(50) NULL, PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
