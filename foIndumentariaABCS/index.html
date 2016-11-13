@@ -1,21 +1,38 @@
 <html>
 <head>
-	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 	<script SRC="bower_components/angular/angular.min.js" TYPE="text/javascript"></script>
 	<script SRC="bower_components/angular-ui-router/release/angular-ui-router.min.js" TYPE="text/javascript"></script>
 	<script SRC="bower_components/angular-file-upload/dist/angular-file-upload.min.js" TYPE="text/javascript"></script>
 	<script SRC="bower_components/satellizer/dist/satellizer.min.js" TYPE="text/javascript"></script>
 	<script SRC="bower_components/angular-jwt/dist/angular-jwt.min.js" TYPE="text/javascript"></script>
-	<script SRC="js/miAplicacion.js" TYPE="text/javascript"></script>
-	<script SRC="js/ngThumb.js" TYPE="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="css/landing-page.css">
-	<link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="css/landing-page.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <!-- Scripts -->
+    <script SRC="js/miAplicacion.js" TYPE="text/javascript"></script>
+
+    <!-- Controladores -->
+    <script src="js/controladores/usuario.js"></script>
+    <script src="js/controladores/inicio.js"></script>
+    <script src="js/controladores/menuPrincipal.js"></script>
+    <script src="js/controladores/login.js"></script>
+
+    <!-- Servicio -->
+    <script src="js/servicios/Servicio.js"></script>
+
+    <!-- Factory -->
+    <script src="js/factory/factoryUsuario.js"></script>
+    <script src="js/factory/factoryRutas.js"></script>
+    <script src="js/factory/factoryProducto.js"></script>
+    <!-- Directivas -->
 </head>
 <body ng-app="indumentariaABCS" >
 	<div ui-view> 
