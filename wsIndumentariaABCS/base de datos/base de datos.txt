@@ -9,7 +9,7 @@ CREATE TABLE `utn`.`usuario`
   `fechaCreacion` DATETIME NULL ,
   `activo` tinyint(1) NULL 
   `sucursalId` INT NULL ,
-  `sucursalNombre` VARCHAR(50) sNULL ,  PRIMARY KEY (`id`)) 
+  `sucursalNombre` VARCHAR(50) NULL ,  PRIMARY KEY (`id`)) 
   ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 CREATE TABLE `utn`.`local` 
