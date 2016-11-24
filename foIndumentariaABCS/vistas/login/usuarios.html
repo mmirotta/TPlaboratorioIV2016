@@ -1,16 +1,27 @@
 <div class="container" style="margin-top:5%">
-	<h1>Listado de {{perfil}}</h1>
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
+	<utn-titulo titulo="Listado de Usuarios"></utn-titulo>
+	<div class="row">
+		<select ng-model="buscarPerfil" class="txtLogin" style="width:30%; display: inline; margin-left:1%">
+			<option value="todos">Todos</option>
+	    	<option value="admin">Administrador</option>
+	    	<option value="vendedor">Vendedor</option>
+	    	<option value="comprador">Comprador</option>
+	    </select>
+	    <a ng-click="Buscar()" style="margin-left:1%"><i class="fa fa-search fa-3x"></i></a>
+	</div>
 	<div class="divListaUsuarios" ng-repeat="usuario in ListadoUsuarios">
 		<div class="row" style="padding: 5px;">
-			<div class="col-lg-1" style="text-align:center">
-				<img style="width:80px; border-radius:50%" src="img/Matias.jpg">
-			</div>
-			<div class="col-lg-9">
-				<h4 style="100%">{{usuario.nombre}}</h4>
-				<p>Correo: {{usuario.correo}}</p>
+			<div class="col-lg-10">
+				<h4 style="width:100%; font-size:28px">{{usuario.nombre}}</h4>
+				<p style="font-size:18px">Correo: {{usuario.correo}}</p>
+				<p style="font-size:18px">Perfil: {{usuario.perfil}}</p>
 			</div>
 			<div class="col-lg-2" style="text-align:center">
 				<a ng-click="Modificar(usuario)" ><i class="fa fa-pencil fa-3x"></i></a>
+				<a ng-click="Borrar(usuario)" ><i class="fa fa-trash fa-3x"></i></a>
 			</div>
 		</div>
 	</div>

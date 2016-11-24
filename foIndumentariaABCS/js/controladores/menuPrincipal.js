@@ -1,6 +1,6 @@
 angular
   .module('indumentariaABCS')
-  .controller('MenuPrincipalCtrl', function($scope, $auth, $http, $state, jwtHelper, FactoryUsuario) {
+  .controller('MenuPrincipalCtrl', function($scope, $auth, $http, $state, jwtHelper, FactoryUsuario, FactoryLocal) {
     if ($auth.isAuthenticated())
     {
       $scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
@@ -42,7 +42,7 @@ angular
             }
           );
 
-          FactoryUsuario.BuscarPor("usuariosPorPerfil", "locales").then(
+          FactoryLocal.BuscarTodos().then(
             function(respuesta){
               $scope.cantidadLocales = respuesta.length;
             },
@@ -71,10 +71,6 @@ angular
       $scope.menu = false;
       $scope.admin = false;
     }
-
-    $scope.VerUsuarios = function(perfil){
-      $state.go('login.usuarios', {perfil:perfil});
-    };
 
     $scope.Salir = function(){
       $auth.logout();
