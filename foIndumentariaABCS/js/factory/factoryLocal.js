@@ -14,7 +14,7 @@ angular
     }
 
     function BuscarTodos(){
-      return Servicio.BuscarTodos('locales');
+      return Servicio.BuscarTodos("locales");
     }
 
     function Cargar(parametro){
