@@ -13,70 +13,8 @@ class Usuario
   	public $fechaCreacion;
   	public $foto;
   	public $activo;
-
-//--------------------------------------------------------------------------------//
-
-//--------------------------------------------------------------------------------//
-//--GETTERS Y SETTERS
-  	public function GetId()
-	{
-		return $this->id;
-	}
-	public function GetCorreo()
-	{
-		return $this->correo;
-	}
-	public function GetClave()
-	{
-		return $this->clave;
-	}
-	public function GetNombre()
-	{
-		return $this->nombre;
-	}
-	public function GetPerfil()
-	{
-		return $this->perfil;
-	}
-	public function GetFechaAcceso()
-	{
-	return $this->fechaAcceso;
-	}
-	public function GetFechaCreacion()
-	{
-	return $this->fechaCreacion;
-	}
-
-
-	public function SetId($valor)
-	{
-		$this->id = $valor;
-	}
-	public function SetCorreo($valor)
-	{
-		$this->correo = $valor;
-	}
-	public function SetClave($valor)
-	{
-		$this->clave = $valor;
-	}
-	public function SetNombre($valor)
-	{
-		$this->nombre = $valor;
-	}
-	public function SetPerfil($valor)
-	{
-		$this->perfil = $valor;
-	}
-	public function SetFechaAcceso($valor)
-	{
-		$this->fechaAcceso = $valor;
-	}
-	public function SetFechaCreacion($valor)
-	{
-		$this->fechaCreacion = $valor;
-	}
-
+  	public $localId;
+	public $localNombre;
 
 //--------------------------------------------------------------------------------//
 //--METODO DE CLASE
@@ -163,14 +101,29 @@ class Usuario
 	public static function Guardar($usuario)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,correo,clave,perfil,fechaCreacion,foto) 
-														VALUES(:nombre,:correo,:clave,:perfil,:fechaCreacion,:foto)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,
+																			 correo,
+																			 clave,
+																			 perfil,
+																			 fechaCreacion,
+																			 foto,
+																			 localId,
+																			 activo) 
+																VALUES (:nombre,
+																		:correo,
+																		:clave,
+																		:perfil,
+																		:fechaCreacion,
+																		:foto,
+																		:localId,
+																		1)");
 		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':correo', $usuario->correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $usuario->clave, PDO::PARAM_STR);
 		$consulta->bindValue(':perfil', $usuario->perfil, PDO::PARAM_STR);
 		$consulta->bindValue(':foto', $usuario->foto, PDO::PARAM_STR);
 		$consulta->bindValue(':fechaCreacion', $usuario->fechaCreacion, PDO::PARAM_STR);
+		$consulta->bindValue(':localId', $usuario->localId, PDO::PARAM_INT);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}	

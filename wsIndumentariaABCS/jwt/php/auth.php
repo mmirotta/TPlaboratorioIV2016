@@ -17,6 +17,8 @@ if ($usuarioBuscado != null)
 	$ClaveDeEncriptacion="estaeslaclave";
 	$token["usuario"] = $usuarioBuscado->nombre;
 	$token["perfil"] = $usuarioBuscado->perfil;
+	$token["id"] = $usuarioBuscado->id;
+	$token["localId"] = $usuarioBuscado->localId;
 	$token["iat"] = time();
 	$token["exp"] = time()+30000;
 

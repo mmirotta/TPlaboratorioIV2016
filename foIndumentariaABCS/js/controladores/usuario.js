@@ -31,17 +31,18 @@ angular
 	}
 })
 
-.controller("RegistroCtrl", function($scope, $auth, $state, jwtHelper, FileUploader, FactoryUsuario, FactoryRutas) {
+.controller("RegistroCtrl", function($scope, $auth, $state, jwtHelper, FileUploader, FactoryUsuario, FactoryRutas, FactoryLocal) {
 	try
 	{
 		$scope.resultado = {};
 		$scope.resultado.ver = false;
 		$scope.usuario={};
-	    $scope.usuario.nombre = "Comprador";
-	    $scope.usuario.correo = "comprador@gmail.com";
+	    $scope.usuario.nombre = "Cliente";
+	    $scope.usuario.correo = "Cliente@gmail.com";
 	    $scope.usuario.clave = "123456";
 	    $scope.usuario.claveRepetida = "123456";
-	    $scope.usuario.perfil = "comprador";
+	    $scope.usuario.perfil = "cliente";
+	    $scope.usuario.localId = "0";
 
 		if ($auth.isAuthenticated())
 		{
@@ -49,6 +50,13 @@ angular
 			$scope.logeado = true;
 			$scope.admin = true;
 		}
+
+		FactoryLocal.BuscarTodos().then(
+	 		function(respuesta) {     	
+	  			$scope.ListaLocales = respuesta;
+	    	},function(error) {
+	 			$scope.ListaLocales= [];
+	 	});
 
 		$scope.uploader = new FileUploader({url: FactoryRutas.UrlArchivos});
 		$scope.uploader.queueLimit = 10; // indico cuantos archivos permito cargar
@@ -77,7 +85,7 @@ angular
 				else
 					$scope.usuario.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
 			};
-
+			$scope.usuario.fechaCreacion = new Date();
 			FactoryUsuario.Guardar($scope.usuario).then(
 				function(respuesta) { 
 					$scope.resultado.ver = true;   	
