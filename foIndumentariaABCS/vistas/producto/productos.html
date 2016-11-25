@@ -1,13 +1,19 @@
 <div class="container" style="margin-top:5%">
-	<h1>Listado de {{perfil}}</h1>
-	<div class="divListaUsuarios" ng-repeat="usuario in ListadoUsuarios">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
+	<utn-titulo titulo="Listado de Productos"></utn-titulo>
+	<div class="divListaProductos" ng-repeat="producto in ListadoProductos">
 		<div class="row" style="padding: 5px;">
-			<div class="col-lg-1">
-				<img style="width:80px; border-radius:50%" src="img/Matias.jpg">
+			<div class="col-lg-9">
+				<h4 style="width: 100%; font-size:24px">{{producto.nombre}}</h4>
+				<p style="font-size:18px">Descripcion: {{producto.descripcion}}</p>
 			</div>
-			<div class="col-lg-10">
-				<h4 style="100%">{{usuario.nombre}}</h4>
-				<p>Correo: {{usuario.correo}}</p>
+			<div class="col-lg-2" style="text-align:right">
+				<p style="font-size:28px">${{producto.precio}}</p>
+			</div>
+			<div class="col-lg-1" style="text-align:right">
+				<a ng-click="Borrar({{producto}})" ng-if="borrarProducto"><i class="fa fa-trash fa-3x"></i></a>
 			</div>
 		</div>
 	</div>

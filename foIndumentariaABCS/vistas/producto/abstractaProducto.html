@@ -12,11 +12,25 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="inicio()" style="color: #ffffff;">Inicio</a></li>
+                <li><a ui-sref="inicio()" style="color: #ffffff;">Menu Principal</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<div ui-view name="contenido"> 
+<div ui-view name="contenido" style="margin-bottom:25%"> 
 </div>
-
+<!-- Footer -->
+<footer style="position:fixed; bottom:0; width:100%">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://github.com/mmirotta/Mirotta.SPLab42016" ><i class="fa fa-github fa-fw fa-2x"></i></a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small">Copyright &copy; Lab4 2016. Matias Mirotta</p>
+            </div>
+        </div>
+    </div>
+</footer>
