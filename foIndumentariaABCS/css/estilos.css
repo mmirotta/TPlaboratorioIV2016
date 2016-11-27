@@ -249,3 +249,26 @@ a:hover{
 .btnLogin:active {
 	transform: scale(0.95);
 }
+
+.btnComprar{
+	display: block;
+	padding: 10px;
+	width: 100%;
+	margin: 30px 0;
+	font-size: 20px;
+	background: linear-gradient(#31B251, #5BAE70);
+	border: 0;
+	color: #fff;
+	opacity: 0.8;
+	cursor: pointer;
+	border-radius: 10px;
+	margin-bottom: 0;
+}
+
+.btnComprar:hover {
+	opacity: 1;
+}
+
+.btnComprar:active {
+	transform: scale(0.95);
+}

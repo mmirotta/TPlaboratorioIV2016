@@ -2,14 +2,23 @@
     <div class="{{resultado.estilo}}" ng-show="resultado.ver">
         <span style="font-size:26px;">{{resultado.mensaje}}</span>
     </div>
-	<utn-titulo titulo="Listado de Productos"></utn-titulo>
 	<div class="row">
-		<div class="col-lg-2" ng-repeat="producto in ListadoProductos">
-			<a>
-				<img src="img/logoIndumentariaABCS.png" style="width:100%">
-				<p style="width: 100%; font-size:28px; text-align:center">${{producto.precio}}</p>
-				<h4 style="width: 100%; font-size:14px">{{producto.nombre}}</h4>
-			</a>
+		<div class="col-lg-3">
+			<img src="img/logoIndumentariaABCS.png" style="width:100%">
+		</div>
+		<div class="col-lg-1">
+		</div>
+		<div class="col-lg-5">
+			<h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
+			<p style="width: 100%; font-size:28px;">${{producto.precio}}</p>
+			<input type="submit" value="Comprar" class="btnComprar" ng-click="Comprar()">
+			<input type="submit" value="Borrar" class="btnComprar" ng-click="Borrar()">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h4 style="width: 100%; font-size:28px">Descripción</h4>
+			<p style="width: 100%; font-size:18px;">{{producto.descripcion}}</p>
 		</div>
 	</div>
 </div>

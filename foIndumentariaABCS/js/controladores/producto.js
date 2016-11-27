@@ -103,11 +103,42 @@ angular
 	 		$scope.resultado.estilo = "alert alert-danger";
 		    $scope.resultado.mensaje = "Error en el controlador productos.";
 	 	}
+	 	 	
+	 	$scope.VerProducto = function(producto){
+	 		var param = JSON.stringify(producto);
+	    	$state.go('producto.verProducto', {producto:param});
+		}
+  })
+  .controller("VerProductoCtrl", function($scope, $http, $state, $stateParams, $auth, $timeout, jwtHelper, FactoryProducto) {
+		try
+		{
+			$scope.resultado = {};
+			$scope.resultado.ver = false;
+			if ($auth.isAuthenticated())
+			{
+				$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
+				$scope.producto = JSON.parse($stateParams.producto);
+				$scope.logeado = true;
+			}
+			else
+			{
+				$scope.logeado = false;
+				$state.go("inicio");
+			}
 
-	 	$scope.Borrar = function(producto){
+	 	}
+	 	catch(error)
+	 	{
+	 		console.info(error);
+	 		$scope.resultado.ver = true;
+	 		$scope.resultado.estilo = "alert alert-danger";
+		    $scope.resultado.mensaje = "Error en el controlador VerProductoCtrl.";
+	 	}
+
+	 	$scope.Borrar = function(){
 	 		try
 	 		{
-	 			FactoryProducto.Borrar(producto.id);
+	 			FactoryProducto.Borrar($scope.producto.id);
  				$scope.resultado.ver = true;
 		 		$scope.resultado.estilo = "alert alert-success";
 				$scope.resultado.mensaje = "Producto Eliminado";
@@ -124,46 +155,11 @@ angular
 				$scope.resultado.mensaje = "Error al borrar un producto";
 		 	}
 	 	}
-  })
-  .controller("VerProductoCtrl", function($scope, $http, $state, $stateParams, $auth, $timeout, jwtHelper, FactoryProducto) {
-		try
-		{
-			$scope.resultado = {};
-			$scope.resultado.ver = false;
-			if ($auth.isAuthenticated())
-			{
-				$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
-				$scope.logeado = true;
-				if ($scope.usuarioLogeado.perfil == 'vendedor')
-					$scope.borrarProducto = true;
-				else
-					$scope.borrarProducto = false;
-			}
-			else
-			{
-				$scope.logeado = false;
-				$state.go("inicio");
-			}
 
-		 	FactoryProducto.BuscarTodos().then(
-		 		function(respuesta) {     	
-	      			$scope.ListadoProductos = respuesta;
-		    	},function(error) {
-	     			$scope.ListadoProductos= [];
-		 	});
-	 	}
-	 	catch(error)
-	 	{
-	 		console.info(error);
-	 		$scope.resultado.ver = true;
-	 		$scope.resultado.estilo = "alert alert-danger";
-		    $scope.resultado.mensaje = "Error en el controlador productos.";
-	 	}
-
-	 	$scope.Borrar = function(producto){
+	 	$scope.Comprar = function(){
 	 		try
 	 		{
-	 			FactoryProducto.Borrar(producto.id);
+	 			FactoryProducto.Borrar($scope.producto.id);
  				$scope.resultado.ver = true;
 		 		$scope.resultado.estilo = "alert alert-success";
 				$scope.resultado.mensaje = "Producto Eliminado";
@@ -177,7 +173,7 @@ angular
 		 		console.info(error);
 		 		$scope.resultado.ver = true;
 		 		$scope.resultado.estilo = "alert alert-danger";
-				$scope.resultado.mensaje = "Error al borrar un producto";
+				$scope.resultado.mensaje = "Error al comprar ";
 		 	}
 	 	}
   });

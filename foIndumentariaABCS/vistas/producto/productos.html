@@ -5,7 +5,7 @@
 	<utn-titulo titulo="Listado de Productos"></utn-titulo>
 	<div class="row">
 		<div class="col-lg-2" ng-repeat="producto in ListadoProductos">
-			<a>
+			<a ng-click="VerProducto(producto)">
 				<img src="img/logoIndumentariaABCS.png" style="width:100%">
 				<p style="width: 100%; font-size:28px; text-align:center">${{producto.precio}}</p>
 				<h4 style="width: 100%; font-size:14px">{{producto.nombre}}</h4>
