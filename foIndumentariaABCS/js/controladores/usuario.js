@@ -2,7 +2,7 @@ angular
   .module('indumentariaABCS')
   .controller('LoginCtrl', function($scope, $state, $auth, jwtHelper) {
 	$scope.usuario = {};
-	$scope.usuario.correo = "admin@utn.com";
+	$scope.usuario.correo = "admin@indumentariaABCS.com";
 	$scope.usuario.clave = "123456";
 
 	$scope.Verificar = function(){
