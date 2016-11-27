@@ -3,8 +3,8 @@ var miApp = angular.module('indumentariaABCS', ['ui.router', 'angularFileUpload'
 miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 	//proveedor de autentificacion.
 	$authProvider.loginUrl = 'http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/jwt/php/auth.php';
-	$authProvider.tokenName = 'MiTokenGeneradoEnPHP';
-	$authProvider.tokenPrefix = 'Aplicacion';
+	$authProvider.tokenName = 'IndumentariaABCS';
+	$authProvider.tokenPrefix = '';
 	//$authProvider.authReader = 'data';
 
 	//aca se genera el ruteo atravez de estados
@@ -127,6 +127,44 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 					"contenido": {
 					templateUrl:"vistas/local/locales.html",
 					controller:"LocalesCtrl"
+					}
+				}
+			}
+		)
+
+		.state(
+			"producto",
+			{
+				url:"/producto",
+				cache:false,
+				abstract:true, 
+				templateUrl:"vistas/producto/abstractaProducto.html"
+			}
+		)
+
+		.state(
+			"producto.alta",
+			{
+				url:"/alta",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/producto/altaProducto.html",
+					controller:"ProductoAltaCtrl"
+					}
+				}
+			}
+		)
+
+		.state(
+			"producto.productos",
+			{
+				url:"/productos",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/producto/productos.html",
+					controller:"ProductosCtrl"
 					}
 				}
 			}

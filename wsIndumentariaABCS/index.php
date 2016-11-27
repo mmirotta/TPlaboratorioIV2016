@@ -46,16 +46,18 @@ $app->get('/', function ($request, $response, $args) {
 
 $app->get('/usuarios[/]', function ($request, $response, $args) {
     $listado=Usuario::Buscar();
-    $response->write(json_encode($listado));
-    
-    return $response;
+    for ($i = 0; $i < count($listado); $i++ ){
+        $listado[$i]->foto=json_decode($listado[$i]->foto);
+    }
+    return $response->write(json_encode($listado));
 });
 
 $app->get('/usuariosPorPerfil/{perfil}', function ($request, $response, $args) {
     $listado=Usuario::BuscarPorPerfil($args['perfil']);
-    $response->write(json_encode($listado));
-    
-    return $response;
+    for ($i = 0; $i < count($listado); $i++ ){
+        $listado[$i]->foto=json_decode($listado[$i]->foto);
+    }
+    return $response->write(json_encode($listado));
 });
 
 $app->get('/locales[/]', function ($request, $response, $args) {

@@ -25,25 +25,21 @@ ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 CREATE TABLE `utn`.`producto` 
 ( `id` INT NOT NULL AUTO_INCREMENT, 
-  `nombre` VARCHAR(50) NULL , 
-  `descripcion` VARCHAR(250) NULL , 
+  `nombre` VARCHAR(250) NULL , 
+  `descripcion` VARCHAR(1500) NULL , 
   `precio` FLOAT NULL , 
-  `foto` VARCHAR(250) NULL , 
-  `vigente` tinyint(1) NULL,
-  `usuarioEmpleadoId` INT NULL,
-  `usuarioEmpleadoNombre` VARCHAR(50) NULL, PRIMARY KEY (`id`)) 
+  `foto` VARCHAR(1500) NULL , 
+  `vigente` BIT NULL,
+  `usuarioEmpleadoId` INT NULL, PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 CREATE TABLE `utn`.`pedido` 
 ( `id` INT NOT NULL AUTO_INCREMENT, 
   `usuarioClienteId` INT NULL , 
-  `usuarioClienteNombre` VARCHAR(50) NULL , 
   `usuarioEmpleadoId` INT NULL , 
-  `usuarioEmpleadoNombre` VARCHAR(50) NULL , 
   `fechaPedido` DATETIME NULL , 
   `fechaEntrega` DATETIME NULL ,
-  `nombreProducto` VARCHAR(50) NULL , 
-  `descripcionProducto` VARCHAR(250) NULL , 
-  `precioProducto` FLOAT NULL ,  
+  `productoId` INT NULL ,
+  `localId` INT NULL , 
   `estado` VARCHAR(50) NULL, PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;

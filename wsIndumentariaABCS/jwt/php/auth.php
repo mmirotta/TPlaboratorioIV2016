@@ -29,7 +29,7 @@ else
 	$jwt = false;
 }
 
-$ArrayConToken["MiTokenGeneradoEnPHP"] = $jwt; 
+$ArrayConToken["IndumentariaABCS"] = $jwt; 
 echo json_encode($ArrayConToken); 
 
 ?>
