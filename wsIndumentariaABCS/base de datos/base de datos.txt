@@ -41,5 +41,6 @@ CREATE TABLE `utn`.`pedido`
   `fechaEntrega` DATETIME NULL ,
   `productoId` INT NULL ,
   `localId` INT NULL , 
+  `total` FLOAT NULL , 
   `estado` VARCHAR(50) NULL, PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;

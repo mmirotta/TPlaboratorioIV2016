@@ -9,11 +9,14 @@ class Pedido
   	public $usuarioClienteNombre;
   	public $usuarioEmpleadoId;
   	public $usuarioEmpleadoNombre;
-	public $nombreProducto;
- 	public $descripcionProducto;
-  	public $precioProducto;
+  	public $productoId;
+	public $productoNombre;
+ 	public $productoDescripcion;
+  	public $productoPrecion;
   	public $fechaPedido;
-  	public $fechaCreacion;
+  	public $fechaEntrega;
+  	public $total;
+  	public $localId;
   	public $estado;
 
 //--------------------------------------------------------------------------------//
@@ -55,25 +58,22 @@ class Pedido
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO pedido (usuarioClienteId,
-																			usuarioClienteNombre,
 																			fechaPedido,
-																			nombreProducto,
-																			descripcionProducto,
-																			precioProducto,
+																			productoId,
+																			localId,
+																			total,
 																			estado)
 														VALUES (:usuarioClienteId,
-																:usuarioClienteNombre,
 																:fechaPedido,
-																:nombreProducto,
-																:descripcionProducto,
-																:precioProducto,
+																:productoId,
+																:localId,
+																:total,
 																:estado)");
 		$consulta->bindValue(':usuarioClienteId', $reserva->usuarioClienteId, PDO::PARAM_INT);
-		$consulta->bindValue(':usuarioClienteNombre', $reserva->usuarioClienteId, PDO::PARAM_STR);
-		$consulta->bindValue(':nombreProducto', $reserva->nombreProducto, PDO::PARAM_STR);
-		$consulta->bindValue(':descripcionProducto', $reserva->descripcionProducto, PDO::PARAM_STR);
-		$consulta->bindValue(':precioProducto', $reserva->precioProducto, PDO::PARAM_STR);
 		$consulta->bindValue(':fechaPedido', $reserva->fechaPedido, PDO::PARAM_STR);
+		$consulta->bindValue(':productoId', $reserva->productoId, PDO::PARAM_STR);
+		$consulta->bindValue(':localId', $reserva->localId, PDO::PARAM_STR);
+		$consulta->bindValue(':total', $reserva->total, PDO::PARAM_STR);
 		$consulta->bindValue(':estado', $reserva->estado, PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();

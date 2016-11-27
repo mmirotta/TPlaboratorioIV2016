@@ -115,6 +115,7 @@ angular
 			$scope.resultado = {};
 			$scope.resultado.ver = false;
 			$scope.comprar = false;
+			$scope.localId = "";
 			if ($auth.isAuthenticated())
 			{
 				$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
@@ -167,8 +168,6 @@ angular
 	 		try
 	 		{
 	 			$scope.comprar = true;
-				
-
 			 	$scope.Latitud = -34.623743;
 				$scope.Longitud = -58.493723;
 				$scope.customIcon = {
@@ -179,6 +178,26 @@ angular
 				NgMap.getMap().then(function (map) {
 				    //console.log(map.getBounds().toString());
 				});
+	 		}
+		 	catch(error)
+		 	{
+		 		console.info(error);
+		 		$scope.resultado.ver = true;
+		 		$scope.resultado.estilo = "alert alert-danger";
+				$scope.resultado.mensaje = "Error al comprar ";
+		 	}
+	 	}
+
+	 	$scope.ConfirmarCompra = function(){
+	 		try
+	 		{
+	 			$scope.pedido = {
+	 				usuarioClienteId = $scope.usuario.id,
+	 				fechaPedido = new Date(),
+	 				productoId = $scope.producto.id,
+	 				localId = $scope.localId,
+	 				estado = "Pedido"
+	 			};
 	 		}
 		 	catch(error)
 		 	{
