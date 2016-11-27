@@ -3,7 +3,7 @@ angular
   .controller('LoginCtrl', function($scope, $state, $auth, jwtHelper) {
 	$scope.usuario = {};
 	$scope.usuario.correo = "admin@indumentariaABCS.com";
-	$scope.usuario.clave = "123456";
+	$scope.usuario.clave = "Admin123$";
 
 	$scope.Verificar = function(){
 		try
@@ -12,7 +12,7 @@ angular
 				.then(function(response){
 					if ($auth.isAuthenticated())
 					{
-						$state.go("menu");
+						$state.go("inicio");
 					}
 					
 				}).catch(function(response){
