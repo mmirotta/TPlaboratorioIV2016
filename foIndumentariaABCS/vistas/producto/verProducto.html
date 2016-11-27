@@ -2,23 +2,46 @@
     <div class="{{resultado.estilo}}" ng-show="resultado.ver">
         <span style="font-size:26px;">{{resultado.mensaje}}</span>
     </div>
-	<div class="row">
-		<div class="col-lg-3">
-			<img src="img/logoIndumentariaABCS.png" style="width:100%">
+    <div ng-if="!comprar">
+		<div class="row">
+			<div class="col-lg-3">
+				<img src="img/logoIndumentariaABCS.png" style="width:100%">
+			</div>
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-5">
+				<h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
+				<p style="width: 100%; font-size:28px;">${{producto.precio}}</p>
+				<input type="submit" value="Comprar" class="btnComprar" ng-click="Comprar()">
+				<input type="submit" value="Borrar" class="btnComprar" ng-click="Borrar()">
+			</div>
 		</div>
-		<div class="col-lg-1">
-		</div>
-		<div class="col-lg-5">
-			<h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
-			<p style="width: 100%; font-size:28px;">${{producto.precio}}</p>
-			<input type="submit" value="Comprar" class="btnComprar" ng-click="Comprar()">
-			<input type="submit" value="Borrar" class="btnComprar" ng-click="Borrar()">
+		<div class="row">
+			<div class="col-lg-12">
+				<h4 style="width: 100%; font-size:28px">Descripción</h4>
+				<p style="width: 100%; font-size:18px;">{{producto.descripcion}}</p>
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<h4 style="width: 100%; font-size:28px">Descripción</h4>
-			<p style="width: 100%; font-size:18px;">{{producto.descripcion}}</p>
+	<div ng-if="comprar">
+		<div class="row">
+			<div class="col-lg-8">
+				<ng-map center="[{{Latitud}}, {{Longitud}}]" style="height:400px">
+          			<marker position ="[{{Latitud}}, {{Longitud}}]" title="Mi ubicación" animation="Animation.DROP" ></marker>
+       				<div ng-repeat="local in ListaLocales">
+            			<marker  position ="[{{local.latitud}}, {{local.longitud}}]"  animation="Animation.DROP" ></marker>
+            		</div>
+            	</ng-map>
+			</div>
+			<div class="col-lg-4">
+				<h4 style="width: 100%; font-size:28px">Elija la sucursal:</h4>
+				<select ng-model="localId" class="txtLogin">
+			    	<option value="{{local.id}}" ng-repeat="local in ListaLocales">{{local.sucursal}}</option>
+			    </select>
+			    <h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
+				<p style="width: 100%; font-size:28px;">${{producto.precio}}</p>
+				<input type="submit" value="Confirmar Compra" class="btnComprar" ng-click="ConfirmarCompra()" ng-if="localId != ''">
+			</div>
 		</div>
 	</div>
 </div>

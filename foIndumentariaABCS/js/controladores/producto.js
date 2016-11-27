@@ -109,11 +109,12 @@ angular
 	    	$state.go('producto.verProducto', {producto:param});
 		}
   })
-  .controller("VerProductoCtrl", function($scope, $http, $state, $stateParams, $auth, $timeout, jwtHelper, FactoryProducto) {
+  .controller("VerProductoCtrl", function($scope, $http, $state, $stateParams, $auth, $timeout, jwtHelper, FactoryProducto, FactoryLocal, NgMap) {
 		try
 		{
 			$scope.resultado = {};
 			$scope.resultado.ver = false;
+			$scope.comprar = false;
 			if ($auth.isAuthenticated())
 			{
 				$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
@@ -126,6 +127,12 @@ angular
 				$state.go("inicio");
 			}
 
+			FactoryLocal.BuscarTodos().then(
+		 		function(respuesta) {     	
+		  			$scope.ListaLocales = respuesta;
+		    	},function(error) {
+		 			$scope.ListaLocales= [];
+		 	});
 	 	}
 	 	catch(error)
 	 	{
@@ -159,14 +166,19 @@ angular
 	 	$scope.Comprar = function(){
 	 		try
 	 		{
-	 			FactoryProducto.Borrar($scope.producto.id);
- 				$scope.resultado.ver = true;
-		 		$scope.resultado.estilo = "alert alert-success";
-				$scope.resultado.mensaje = "Producto Eliminado";
+	 			$scope.comprar = true;
+				
 
-		 		$timeout(function(){
-		 			$state.go('inicio');
-		 		}, 1000);
+			 	$scope.Latitud = -34.623743;
+				$scope.Longitud = -58.493723;
+				$scope.customIcon = {
+				  "scaledSize": [32, 32],
+				  "url":  $scope.nombre
+				};
+
+				NgMap.getMap().then(function (map) {
+				    //console.log(map.getBounds().toString());
+				});
 	 		}
 		 	catch(error)
 		 	{

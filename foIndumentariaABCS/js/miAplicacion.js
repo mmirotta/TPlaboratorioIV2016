@@ -1,4 +1,4 @@
-var miApp = angular.module('indumentariaABCS', ['ui.router', 'angularFileUpload','satellizer', 'angular-jwt']);
+var miApp = angular.module('indumentariaABCS', ['ui.router', 'angularFileUpload','satellizer', 'angular-jwt', 'ngMap']);
 
 miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 	//proveedor de autentificacion.
