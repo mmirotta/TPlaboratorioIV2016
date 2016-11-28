@@ -63,8 +63,6 @@ angular
     }
 
     function Guardar(entidad, parametro){
-      console.info(entidad);
-      console.info(parametro);
       return $http.post(TraerUrl(entidad, parametro)).then(
         function (respuesta){
           return respuesta;

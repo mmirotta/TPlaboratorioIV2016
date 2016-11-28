@@ -1,0 +1,18 @@
+<div class="container" style="margin-top:5%">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
+	<utn-titulo titulo="Listado de Pedidos"></utn-titulo>
+	<div class="row" ng-repeat="pedido in ListadoPedidos">
+		<div class="col-lg-10">
+			<p style="width: 100%; font-size:14px">
+				Producto: {{pedido.productoNombre}} - Cliente: {{pedido.usuarioClienteNombre}} - 
+				Fecha: {{pedido.fechaPedido}} - Precio: {{pedido.productoPrecio}} - 
+				Descuento: {{pedido.descuento}} - Total: {{pedido.total}}
+			</p>
+		</div>
+		<div class="col-lg-2" style="text-align:right">
+			<a ng-if="pedido.estado == 'Pedido'" ng-click="Entregar(pedido)">Entregar</a>
+		</div>
+	</div>
+</div>

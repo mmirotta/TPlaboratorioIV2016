@@ -184,5 +184,29 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			}
 		)
 
+		.state(
+			"pedido",
+			{
+				url:"/pedido",
+				cache:false,
+				abstract:true, 
+				templateUrl:"vistas/pedido/abstractaPedido.html"
+			}
+		)
+
+		.state(
+			"pedido.pedidos",
+			{
+				url:"/pedidos",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/pedido/pedidos.html",
+					controller:"PedidosCtrl"
+					}
+				}
+			}
+		)
+
 	$urlRouterProvider.otherwise("/inicio");
 });

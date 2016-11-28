@@ -6,19 +6,16 @@ angular
     objeto.BuscarTodos = BuscarTodos;
     objeto.BuscarPor = BuscarPor;
     objeto.Guardar = Guardar;
-    objeto.Cargar = Cargar;
+    objeto.Editar = Editar;
     objeto.Borrar = Borrar;
 
     function BuscarPor(entidad, parametro){
+      console.info(parametro);
       return Servicio.BuscarPor(entidad, parametro);
     }
 
     function BuscarTodos(){
       return Servicio.BuscarTodos('pedidos');
-    }
-
-    function Cargar(parametro){
-      return Servicio.Cargar('pedido', parametro);
     }
 
     function Borrar(parametro){
@@ -27,6 +24,10 @@ angular
 
     function Guardar(parametro){
       return Servicio.Guardar('pedido', JSON.stringify(parametro));
+    }
+
+    function Editar(parametro){
+      return Servicio.Editar('pedido', JSON.stringify(parametro));
     }
 
     return objeto;

@@ -76,11 +76,20 @@ $app->get('/productos[/]', function ($request, $response, $args) {
     return $response->write(json_encode($datos));
 });
 
-$app->get('/pedidosPorLocal/{perfil}', function ($request, $response, $args) {
-    $listado=Pedido::BuscarPorLocal($args['perfil']);
-    for ($i = 0; $i < count($listado); $i++ ){
-        $listado[$i]->foto=json_decode($listado[$i]->foto);
-    }
+/*BUSCAR PEDIDOS*/
+
+$app->get('/pedidosPorLocal/{localId}', function ($request, $response, $args) {
+    $listado=Pedido::BuscarPorLocal($args['localId']);
+    return $response->write(json_encode($listado));
+});
+
+$app->get('/pedidosPorLocalTop10/{localId}', function ($request, $response, $args) {
+    $listado=Pedido::BuscarPorLocalTop10($args['localId']);
+    return $response->write(json_encode($listado));
+});
+
+$app->get('/pedidosPorUsuario/{usuarioId}', function ($request, $response, $args) {
+    $listado=Pedido::BuscarPorUsuario($args['usuarioId']);
     return $response->write(json_encode($listado));
 });
 
