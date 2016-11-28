@@ -35,12 +35,12 @@
 			</div>
 			<div class="col-lg-4">
 				<h4 style="width: 100%; font-size:28px">Elija la sucursal:</h4>
-				<select ng-model="localId" class="txtLogin">
+				<select ng-model="pedido.localId" class="txtLogin">
 			    	<option value="{{local.id}}" ng-repeat="local in ListaLocales">{{local.sucursal}}</option>
 			    </select>
 			    <h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
 				<p style="width: 100%; font-size:28px;">${{producto.precio}}</p>
-				<input type="submit" value="Confirmar Compra" class="btnComprar" ng-click="ConfirmarCompra()" ng-if="localId != ''">
+				<input type="submit" value="Confirmar Compra" class="btnComprar" ng-click="ConfirmarCompra()" ng-if="pedido.localId != ''">
 			</div>
 		</div>
 	</div>

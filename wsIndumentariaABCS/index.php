@@ -76,6 +76,18 @@ $app->get('/productos[/]', function ($request, $response, $args) {
     return $response->write(json_encode($datos));
 });
 
+$app->get('/pedidosPorLocal/{perfil}', function ($request, $response, $args) {
+    $listado=Pedido::BuscarPorLocal($args['perfil']);
+    for ($i = 0; $i < count($listado); $i++ ){
+        $listado[$i]->foto=json_decode($listado[$i]->foto);
+    }
+    return $response->write(json_encode($listado));
+});
+
+$app->get('/pedidos[/]', function ($request, $response, $args) {
+    $datos=Pedido::Buscar();
+    return $response->write(json_encode($datos));
+});
 
 /*CARGAR*/
 
@@ -154,6 +166,11 @@ $app->post('/producto/{producto}', function ($request, $response, $args) {
     return $response->write(Producto::Guardar($producto));
 });
 
+$app->post('/pedido/{pedido}', function ($request, $response, $args) {
+    $pedido=json_decode($args['pedido']);
+    return $response->write(Pedido::Guardar($pedido));
+});
+
 // /* PUT: Para editar recursos MODIFICAR*/
 $app->put('/usuario/{usuario}', function ($request, $response, $args) {
     Usuario::Editar(json_decode($args['usuario']));
@@ -171,6 +188,12 @@ $app->put('/producto/{producto}', function ($request, $response, $args) {
     return $response;
 });
 
+$app->put('/pedido/{pedido}', function ($request, $response, $args) {
+    Pedido::Editar(json_decode($args['pedido']));
+    return $response;
+});
+
+
 // /* DELETE: Para eliminar recursos ELIMINAR*/
 $app->delete('/usuario/{id}', function ($request, $response, $args) {
     Usuario::Borrar($args['id']);
@@ -184,6 +207,11 @@ $app->delete('/local/{id}', function ($request, $response, $args) {
 
 $app->delete('/producto/{id}', function ($request, $response, $args) {
     Producto::Borrar($args['id']);
+    return $response;
+});
+
+$app->delete('/pedido/{id}', function ($request, $response, $args) {
+    Pedido::Borrar($args['id']);
     return $response;
 });
 

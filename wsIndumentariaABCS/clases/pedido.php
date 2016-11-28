@@ -69,12 +69,12 @@ class Pedido
 																:localId,
 																:total,
 																:estado)");
-		$consulta->bindValue(':usuarioClienteId', $reserva->usuarioClienteId, PDO::PARAM_INT);
-		$consulta->bindValue(':fechaPedido', $reserva->fechaPedido, PDO::PARAM_STR);
-		$consulta->bindValue(':productoId', $reserva->productoId, PDO::PARAM_STR);
-		$consulta->bindValue(':localId', $reserva->localId, PDO::PARAM_STR);
-		$consulta->bindValue(':total', $reserva->total, PDO::PARAM_STR);
-		$consulta->bindValue(':estado', $reserva->estado, PDO::PARAM_STR);
+		$consulta->bindValue(':usuarioClienteId', $pedido->usuarioClienteId, PDO::PARAM_INT);
+		$consulta->bindValue(':fechaPedido', $pedido->fechaPedido, PDO::PARAM_STR);
+		$consulta->bindValue(':productoId', $pedido->productoId, PDO::PARAM_STR);
+		$consulta->bindValue(':localId', $pedido->localId, PDO::PARAM_STR);
+		$consulta->bindValue(':total', $pedido->total, PDO::PARAM_STR);
+		$consulta->bindValue(':estado', $pedido->estado, PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}	

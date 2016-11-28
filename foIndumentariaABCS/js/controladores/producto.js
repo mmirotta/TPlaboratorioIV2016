@@ -109,13 +109,14 @@ angular
 	    	$state.go('producto.verProducto', {producto:param});
 		}
   })
-  .controller("VerProductoCtrl", function($scope, $http, $state, $stateParams, $auth, $timeout, jwtHelper, FactoryProducto, FactoryLocal, NgMap) {
+  .controller("VerProductoCtrl", function($scope, $http, $state, $stateParams, $auth, $timeout, jwtHelper, FactoryProducto, FactoryLocal, FactoryPedido, NgMap) {
 		try
 		{
 			$scope.resultado = {};
 			$scope.resultado.ver = false;
 			$scope.comprar = false;
-			$scope.localId = "";
+			$scope.pedido = {};
+			$scope.pedido.localId = "";
 			if ($auth.isAuthenticated())
 			{
 				$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
@@ -191,13 +192,23 @@ angular
 	 	$scope.ConfirmarCompra = function(){
 	 		try
 	 		{
-	 			$scope.pedido = {
-	 				usuarioClienteId = $scope.usuario.id,
-	 				fechaPedido = new Date(),
-	 				productoId = $scope.producto.id,
-	 				localId = $scope.localId,
-	 				estado = "Pedido"
-	 			};
+ 				$scope.pedido.usuarioClienteId = $scope.usuarioLogeado.id;
+ 				$scope.pedido.fechaPedido = new Date();
+ 				$scope.pedido.productoId = $scope.producto.id;
+ 				$scope.pedido.total = $scope.producto.precio;
+ 				$scope.pedido.estado = "Pedido";
+	 			
+	 			FactoryPedido.Guardar($scope.pedido).then(
+					function(respuesta) {  
+						$scope.resultado.ver = true;   	
+				    	$scope.resultado.estilo = "alert alert-success";
+						$scope.resultado.mensaje = "Pedido realizado";
+					},function(error) {
+						$scope.resultado.ver = true;
+						$scope.resultado.estilo = "alert alert-danger";
+						$scope.resultado.mensaje = "Error al guardar el realizado";
+						console.log(error);
+			 	});
 	 		}
 		 	catch(error)
 		 	{
