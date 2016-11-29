@@ -35,7 +35,8 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			{
 				url:"/login",
 				abstract:true, 
-				templateUrl:"vistas/login/abstractaLogin.html"
+				templateUrl:"vistas/login/abstractaLogin.html",
+				controller:"MenuPrincipalCtrl"
 			}
 		)
 
@@ -139,7 +140,8 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 				url:"/producto",
 				cache:false,
 				abstract:true, 
-				templateUrl:"vistas/producto/abstractaProducto.html"
+				templateUrl:"vistas/producto/abstractaProducto.html",
+				controller:"MenuPrincipalCtrl"
 			}
 		)
 
@@ -191,7 +193,8 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 				url:"/pedido",
 				cache:false,
 				abstract:true, 
-				templateUrl:"vistas/pedido/abstractaPedido.html"
+				templateUrl:"vistas/pedido/abstractaPedido.html",
+				controller:"MenuPrincipalCtrl"
 			}
 		)
 
