@@ -44,3 +44,16 @@ CREATE TABLE `utn`.`pedido`
   `total` FLOAT NULL , 
   `estado` VARCHAR(50) NULL, PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
+
+//Datos Usuario
+
+INSERT INTO `usuario`(`correo`, `clave`, `nombre`, `perfil`, `foto`, `activo`, `localId`) 
+VALUES 
+('administrador@abcs.com', 'admin123', 'Administrador', 'admin', '["administrador@abcs.com_0.jpg"]', 1, NULL),
+('hugosuarez@abcs.com', '123', 'Hugo Suarez', 'encargado', '["hugosuarez@abcs.com_0.jpg"]', 1, 1),
+('ramirofernandez@abcs.com', 'admin123', 'Ramiro Fernandez', 'encargado', '["ramirofernandez@abcs.com_0.jpg"]', 1, 2),
+('juanperez@abcs.com', '123', 'Juan Perez', 'encargado', '["juanperez@abcs.com_0.jpg"]', 1, 3),
+('luisjose@abcs.com', '123', 'Luis Jose', 'empleado', '["luisjose@abcs.com_0.jpg"]', 1, 1),
+('camilacoria@abcs.com', '123', 'Camila Coria', 'empleado', '["camilacoria@abcs.com_0.jpg"]', 1, 2),
+('matiasgarcia@abcs.com', '123', 'Matias Garcia', 'empleado', '["matiasgarcia@abcs.com_0.jpg"]', 1, 3),

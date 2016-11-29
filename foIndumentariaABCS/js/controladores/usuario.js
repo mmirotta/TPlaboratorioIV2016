@@ -6,6 +6,8 @@ angular
 	$scope.usuario.clave = "admin123";
 	$scope.resultado = {};
 	$scope.resultado.ver = false;
+	$scope.masBotones = false;
+
 	$scope.Verificar = function(){
 		try
 		{
@@ -34,7 +36,15 @@ angular
 
 	$scope.Acceso = function(correo, clave){
 		$scope.usuario.clave = clave;
-		$scope.usuario.nombre = nombre;
+		$scope.usuario.correo = correo;
+	}
+
+	$scope.MasBotones = function(){
+		$scope.masBotones = true;
+	}
+
+	$scope.MenosBotones = function(){
+		$scope.masBotones = false;
 	}
 })
 

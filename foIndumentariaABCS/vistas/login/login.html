@@ -15,11 +15,28 @@
       <p class="text-center text-muted">
         <small>No tienes una cuenta? <a ui-sref="login.registro()">Registrate</a></small>
       </p>
+      <div style="text-align:right">
+        <a ng-click="MasBotones()" ng-if="!masBotones"><i class="fa fa-angle-down fa-3x"></i></a>
+        <a ng-click="MenosBotones()" ng-if="masBotones"><i class="fa fa-angle-up fa-3x"></i></a>
+      </div>
     </div>
   </div>
-  <div class="row" style="width:100%; text-align:center">
-      <input type="submit" value="Administrador" class="btnLogin" style="width:30%; display:inline" ng-click="Acceso('admin@gmail.com', 'admin123')">
-      <input type="submit" value="Encargado Flores" class="btnLogin" style="width:32%; display:inline" ng-click="Acceso('JuanPerez@gmail.com', '123456')">
-      <input type="submit" value="Empleado Flores" class="btnLogin" style="width:32%; display:inline" ng-click="Acceso('comprador@utn.com', '123456')">
+  <div ng-if="masBotones">
+    <div class="row" style="width:100%; text-align:center">
+      <input type="submit" value="Administrador" class="btnLogin" style="width:48%; display:inline" ng-click="Acceso('administrador@abcs.com', 'admin123')">
     </div>
+    <div class="row" style="width:100%; text-align:center">
+      <input type="submit" value="Encargado Flores" class="btnLogin" style="width:48%; display:inline" ng-click="Acceso('hugosuarez@abcs.com', '123')">
+      <input type="submit" value="Empleado Flores" class="btnLogin" style="width:48%; display:inline" ng-click="Acceso('luisjose@abcs.com', '123')">
+    </div>
+    <div class="row" style="width:100%; text-align:center">
+      <input type="submit" value="Encargado Devoto" class="btnLogin" style="width:48%; display:inline" ng-click="Acceso('ramirofernandez@abcs.com', '123')">
+      <input type="submit" value="Empleado Devoto" class="btnLogin" style="width:48%; display:inline" ng-click="Acceso('camilacoria@abcs.com', '123')">
+    </div>
+    <div class="row" style="width:100%; text-align:center">
+      <input type="submit" value="Encargado Lugano" class="btnLogin" style="width:48%; display:inline" ng-click="Acceso('juanperez@abcs.com', '123')">
+      <input type="submit" value="Empleado Lugano" class="btnLogin" style="width:48%; display:inline" ng-click="Acceso('matiasgarcia@abcs.com', '123')">
+      
+    </div>
+  </div>
 </div>
