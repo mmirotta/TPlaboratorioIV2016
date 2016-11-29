@@ -121,6 +121,20 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 		)
 
 		.state(
+			"local.verLocal",
+			{
+				url:"/verLocal/:local",
+				cache: false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/local/verLocal.html",
+					controller:"VerLocalCtrl"
+					}
+				}
+			}
+		)
+
+		.state(
 			"local.locales",
 			{
 				url:"/locales",

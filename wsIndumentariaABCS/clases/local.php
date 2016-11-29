@@ -54,8 +54,7 @@ class Local
 					localidad=:localidad,
 					provincia=:provincia,
 					latitud=:latitud,
-					longitud=:longitud,
-					foto=:foto
+					longitud=:longitud
 				WHERE id=:id");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			$consulta->bindValue(':id',$local->id, PDO::PARAM_INT);
@@ -65,7 +64,6 @@ class Local
 			$consulta->bindValue(':provincia',$local->provincia, PDO::PARAM_STR);
 			$consulta->bindValue(':latitud',$local->latitud, PDO::PARAM_STR);
 			$consulta->bindValue(':longitud',$local->longitud, PDO::PARAM_STR);
-			$consulta->bindValue(':foto',$local->foto, PDO::PARAM_STR);
 			return $consulta->execute();
 	}
 

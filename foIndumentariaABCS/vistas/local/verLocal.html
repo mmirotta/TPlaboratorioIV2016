@@ -1,0 +1,73 @@
+<div class="divAltaLocal" name="localForm">
+	<div class="{{resultado.estilo}}" ng-show="resultado.ver">
+      <span style="font-size:26px;">{{resultado.mensaje}}</span>
+  </div>
+    <div ng-if="ver">
+	    <div class="row">
+		    <div class="col-lg-6">
+		    	<h2>Sucursal {{local.sucursal}}</h2>
+				<p>Dirección: {{local.direccion}} Nro {{local.numero}}</p>
+				<p>{{local.localidad}}, {{local.provincia}}</p>
+	    	</div>
+		    <div class="col-lg-6">
+		    	<ng-map center="[{{local.latitud}}, {{local.longitud}}]" style="height:400px">
+	      			<marker position ="[{{local.latitud}}, {{local.longitud}}]" animation="Animation.DROP" ></marker>
+	        	</ng-map>
+		    </div>
+		</div>
+		<div class="row">
+		    <div class="col-lg-12" style="text-align:center">
+		    	<img ng-repeat="foto in local.foto" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{foto}}"
+				    	style="width:20%; height:20%; margin:2%"/>
+	    	</div>
+		</div>
+		<div class="row" style="text-align:right; margin-top:1%">
+		    <div class="col-lg-12" >
+		    	<input type="submit" value="Editar" class="btnVerde" ng-click="Editar()">
+		    	<input type="submit" value="Volver" class="btnVolver" ng-click="Volver()">
+	    	</div>
+		</div>
+	</div>
+	<div ng-if="!ver">
+		<div class="row">
+		    <div class="col-lg-12">
+		    	<div class="row">
+		    		<div class="col-lg-12">
+		    			<h2 class="h2Login">Editar Sucursal</h2>
+		    		</div>
+		    	</div>
+		    	<div class="row">
+				    <div class="col-lg-4">
+			    		<input type="text" placeholder="Direccion" class="txtLogin" name="direccion" ng-model='local.direccion' required>
+			    	</div>
+				    <div class="col-lg-2">
+				    	<input type="text" placeholder="Numero" class="txtLogin" name="numero" ng-model='local.numero' required>
+				    </div>
+				    <div class="col-lg-3">
+				    	<input type="text" placeholder="Localidad" class="txtLogin" name="localidad" ng-model='local.localidad' required>
+			    	</div>
+			    	<div class="col-lg-3">
+				    	<input type="text" placeholder="Provincia" class="txtLogin" name="provincia" ng-model='local.provincia' required>
+				    </div>
+				</div>
+				<div class="row">
+				    <div class="col-lg-6">
+				    	<input type="text" placeholder="Sucursal" class="txtLogin" name="sucursal" ng-model='local.sucursal' required>
+			    	</div>
+				    <div class="col-lg-3">
+			    		<input type="text" placeholder="Latitud" class="txtLogin" name="latitud" ng-model='local.latitud' required>
+			    	</div>
+				    <div class="col-lg-3">
+				    	<input type="text" placeholder="Longitud" class="txtLogin" name="longitud" ng-model='local.longitud' required>
+				    </div>
+				</div>
+	    	</div>
+		</div>
+		<div class="row" style="text-align:right; margin-top:1%">
+		    <div class="col-lg-12" >
+		    	<input type="submit" value="Guardar" class="btnVerde" ng-click="GuardarEditar()">
+		    	<input type="submit" value="Volver" class="btnVolver" ng-click="VolverEditar()">
+	    	</div>
+		</div>
+	</div>
+</form>

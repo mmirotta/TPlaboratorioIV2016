@@ -6,12 +6,12 @@
 	<div class="divListaLocales" ng-repeat="local in ListadoLocales">
 		<div class="row" style="padding: 5px;">
 			<div class="col-lg-10">
-				<h4 style="100%">{{local.sucursal}}</h4>
+				<h2 style="100%">{{local.sucursal}}</h2>
 				<p>Dirección: {{local.direccion}} Nro {{local.numero}}</p>
 				<p>{{local.localidad}}, {{local.provincia}}</p>
 			</div>
 			<div class="col-lg-1">
-				<a ><i class="fa fa-map-marker fa-3x"></i></a>
+				<a ng-click="VerLocal(local)" class="btnVerde">Ver</a>
 			</div>
 		</div>
 	</div>

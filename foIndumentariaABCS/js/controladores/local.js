@@ -1,6 +1,6 @@
 angular
   .module('indumentariaABCS')
-  .controller("LocalCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryRutas, FactoryLocal) {
+  .controller("LocalCtrl", function($scope, $auth, $state, $http, $timeout, jwtHelper, FileUploader, FactoryRutas, FactoryLocal) {
 	try
 	{
 		$scope.resultado = {};
@@ -61,6 +61,9 @@ angular
 			    	$scope.resultado.ver = true;   	
 			    	$scope.resultado.estilo = "alert alert-success";
 					$scope.resultado.mensaje = "Local Guardado";
+					$timeout(function(){
+			 			$state.go("local.locales");
+			 		}, 2000);
 				},function(error) {
 					console.info(error);
 					$scope.resultado.ver = true;
@@ -111,4 +114,110 @@ angular
 		$scope.resultado.estilo = "alert alert-danger";
 		$scope.resultado.mensaje = "Error en LocalesCtrl";
 	}
+
+	$scope.VerLocal = function(local){
+		try
+		{
+			var param = JSON.stringify(local);
+	    	$state.go('local.verLocal', {local:param});
+		}
+		catch (error)
+		{
+			console.info(error);
+			$scope.resultado.ver = true;
+			$scope.resultado.estilo = "alert alert-danger";
+			$scope.resultado.mensaje = "Error al ver el local";
+		}
+	};
+}).controller("VerLocalCtrl", function($scope, $http, $state, $stateParams, $timeout, $auth, jwtHelper, FactoryLocal) {
+	try
+	{
+		$scope.resultado = {};
+		$scope.resultado.ver = false;
+		$scope.ver = true;
+		if ($auth.isAuthenticated())
+		{
+			$scope.logeado = true;
+			$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
+			$scope.local = JSON.parse($stateParams.local);
+		}
+		else
+		{
+			$scope.logeado = false;
+			$state.go("inicio");
+		}
+
+
+	}
+	catch(error)
+	{
+		console.info(error);
+		$scope.resultado.ver = true;
+		$scope.resultado.estilo = "alert alert-danger";
+		$scope.resultado.mensaje = "Error en LocalesCtrl";
+	}
+
+	$scope.Editar = function(){
+		try
+		{
+	 		$scope.ver = false;
+		}
+		catch (error)
+		{
+			console.info(error);
+			$scope.resultado.ver = true;
+			$scope.resultado.estilo = "alert alert-danger";
+			$scope.resultado.mensaje = "Error en editar el local";
+		}
+	};
+
+	$scope.Volver = function(){
+		try
+		{
+	 		$state.go("local.locales");
+		}
+		catch (error)
+		{
+			console.info(error);
+			$scope.resultado.ver = true;
+			$scope.resultado.estilo = "alert alert-danger";
+			$scope.resultado.mensaje = "Error al volver al listado de locales";
+		}
+	};
+
+	$scope.VolverEditar = function(){
+		try
+		{
+	 		$scope.ver = true;
+		}
+		catch (error)
+		{
+			console.info(error);
+			$scope.resultado.ver = true;
+			$scope.resultado.estilo = "alert alert-danger";
+			$scope.resultado.mensaje = "Error en el volver de la edición del local";
+		}
+	};
+
+	$scope.GuardarEditar = function(){
+		try
+		{
+			FactoryLocal.Editar($scope.local);
+			$scope.resultado.ver = true;
+	 		$scope.resultado.estilo = "alert alert-success";
+			$scope.resultado.mensaje = "Local editado";
+			$timeout(function(){
+	 			$scope.ver = true;
+	 			$scope.resultado.ver = false;
+	 		}, 2000);
+	 		
+		}
+		catch (error)
+		{
+			console.info(error);
+			$scope.resultado.ver = true;
+			$scope.resultado.estilo = "alert alert-danger";
+			$scope.resultado.mensaje = "Error en el guardar edición del local";
+		}
+	};
 });
