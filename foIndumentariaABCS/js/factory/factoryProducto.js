@@ -14,6 +14,7 @@ angular
     }
 
     function BuscarTodos(){
+      
       return Servicio.BuscarTodos('productos');
     }
 

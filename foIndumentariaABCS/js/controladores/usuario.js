@@ -2,9 +2,10 @@ angular
   .module('indumentariaABCS')
   .controller('LoginCtrl', function($scope, $state, $auth, jwtHelper) {
 	$scope.usuario = {};
-	$scope.usuario.correo = "admin@indumentariaABCS.com";
-	$scope.usuario.clave = "Admin123$";
-
+	$scope.usuario.correo = "admin@gmail.com";
+	$scope.usuario.clave = "admin123";
+	$scope.resultado = {};
+	$scope.resultado.ver = false;
 	$scope.Verificar = function(){
 		try
 		{
@@ -13,6 +14,12 @@ angular
 					if ($auth.isAuthenticated())
 					{
 						$state.go("inicio");
+					}
+					else
+					{
+						$scope.resultado.ver = true;
+						$scope.resultado.estilo = "alert alert-danger";
+						$scope.resultado.mensaje = "Los datos ingresados son incorrectos.";
 					}
 					
 				}).catch(function(response){
@@ -26,8 +33,8 @@ angular
 	}
 
 	$scope.Acceso = function(correo, clave){
-		$scope.usuario.correo = correo;
 		$scope.usuario.clave = clave;
+		$scope.usuario.nombre = nombre;
 	}
 })
 
@@ -134,8 +141,19 @@ angular
 	 		$scope.resultado.estilo = "alert alert-success";
 			$scope.resultado.mensaje = "Usuario editado";
 			$timeout(function(){
-	 			$state.go('inicio');
+	 			$state.go('login.usuarios');
 	 		}, 1000);
+	 	}
+		catch(error)
+		{
+			console.info(error);
+		}
+	};
+
+	$scope.Volver = function(){
+		try
+		{
+			$state.go('login.usuarios');
 	 	}
 		catch(error)
 		{
@@ -150,6 +168,7 @@ angular
 		$scope.resultado = {};
 		$scope.resultado.ver = true;
 		$scope.buscarPerfil = "todos";
+
 		if ($auth.isAuthenticated())
 		{
 			$scope.usuario = jwtHelper.decodeToken($auth.getToken());
@@ -164,6 +183,7 @@ angular
 	 	FactoryUsuario.BuscarTodos().then(
 	 		function(respuesta) {     	
 	  			$scope.ListadoUsuarios = respuesta;
+	  			console.info(respuesta);
 	    	},function(error) {
 	 			$scope.ListadoUsuarios= [];
 	 	});

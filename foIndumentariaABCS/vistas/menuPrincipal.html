@@ -13,9 +13,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="producto.alta()" ng-if="logeado && admin" style="color: #ffffff;">Nuevo Producto</a></li>
-                <li><a ui-sref="local.alta()" ng-if="logeado && admin" style="color: #ffffff;">Nueva Sucursal</a></li>
-                <li><a ui-sref="login.registro()" ng-if="logeado && admin" style="color: #ffffff;">Nuevo Usuario</a></li>
                 <li><a ui-sref="login.registro()" ng-if="!logeado" style="color: #ffffff;">Registrarse</a></li>
                 <li><a ui-sref="login.login()" ng-if="!logeado" style="color: #ffffff;">Login</a></li>
                 <li><a ng-click="Salir()" ng-if="logeado" style="color: #ffffff;">Salir</a></li>
@@ -25,84 +22,73 @@
 </nav>
 <div class="intro-MenuPrincipal"> 
     <div class="container">
-        <!-- Administrador-->
-        <div class="row" style="margin-top: 5px" ng-if="logeado && admin">
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-yellow">
-                    <a ui-sref="login.usuarios()">
-                        <div class="panel-footer">
-                            <span class="pull-left">Ver Usuarios </span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
+        <div class="row" style="margin-top: 5px" ng-if="logeado">
+            <div class="col-lg-3">
+                <div style="background-color:white">
+                    <a ui-sref="local.alta()" class="list-group-item" style="text-align:left" ng-if="admin">
+                        <i class="fa fa-users fa-fw fa-2x"></i> Nueva Sucursal
+                    </a>
+                    <a ui-sref="login.registro()" class="list-group-item" style="text-align:left" ng-if="!cliente">
+                        <i class="fa fa-users fa-fw fa-2x"></i> Nuevo Usuario
+                    </a>
+                    <a ui-sref="login.usuarios()" class="list-group-item" style="text-align:left" ng-if="!cliente">
+                        <i class="fa fa-users fa-fw fa-2x"></i> Usuarios
+                    </a>
+                    <a ui-sref="local.locales()" class="list-group-item" style="text-align:left" ng-if="!cliente">
+                        <i class="fa fa-users fa-fw fa-2x"></i> Locales
+                    </a>
+                    <a ui-sref="pedido.misPedidos()" class="list-group-item" style="text-align:left">
+                        <i class="fa fa-users fa-fw fa-2x"></i> Mis Pedidos
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
-                    <a ui-sref="local.locales()">
-                        <div class="panel-footer">
-                            <span class="pull-left">Ver Locales </span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
+            <div class="col-lg-8" ng-if="admin">
+                <div>
+                    <!-- Estadisticas -->
+                </div>
+            </div>
+            <div class="col-lg-8" ng-if="empleado || encargado">
+                <div class="list-group">
+                    <a class="list-group-item">
+                        Pedidos
+                    </a>
+                    <a class="list-group-item" style="text-align:left" ng-repeat="pedido in ListadoPedidos">
+                        Producto: {{pedido.productoNombre}} - Cliente: {{pedido.usuarioClienteNombre}} - 
+                        Total: {{pedido.total}}
+                    </a>
+                    <a ui-sref="pedido.pedidos()" class="list-group-item" style="text-align:right">
+                        Ver todos los pedidos..
+                    </a>
+                </div>
+                <div class="list-group" style="margin-top:1%">
+                    <a class="list-group-item">
+                        Productos
+                    </a>
+                    <a class="list-group-item" style="text-align:left" ng-repeat="producto in ListadoProductos">
+                        Producto: {{producto.nombre}} - Precio: {{producto.precio}}
+                    </a>
+                    <a ui-sref="producto.productos()" class="list-group-item" style="text-align:right">
+                        Ver todos los productos..
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
+            <div class="col-lg-8" style="background-color:white" ng-if="cliente">
+                <div class="row" >
+                    <div class="col-lg-2" ng-repeat="producto in ListadoProductos">
+                        <a ng-click="VerProducto(producto)">
+                            <img src="img/logoIndumentariaABCS.png" style="width:100%">
+                            <p style="width: 100%; font-size:28px; text-align:center">${{producto.precio}}</p>
+                            <h4 style="width: 100%; font-size:14px">{{producto.nombre}}</h4>
+                        </a>
+                    </div>
+                </div>
+                <div class="row" style="text-align:right; padding:1%">
                     <a ui-sref="producto.productos()">
-                        <div class="panel-footer">
-                            <span class="pull-left">Ver Productos</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
-                    <a ui-sref="pedido.pedidos()">
-                        <div class="panel-footer">
-                            <span class="pull-left">Ver Pedidos</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
+                        Ver mas productos
                     </a>
                 </div>
             </div>
         </div>  
-        <div class="row" style="margin-top: 5px" ng-if="logeado && empleado">
-            <div class="col-lg-3">
-                <div class="list-group">
-                    <a ui-sref="producto.alta()" class="list-group-item" style="text-align:left">
-                        <i class="fa fa-users fa-fw fa-2x"></i> Nuevo Producto
-                    </a>
-                    <a href="#" class="list-group-item" style="text-align:left">
-                        <i class="fa fa-users fa-fw fa-2x"></i> Nuevo Pedido
-                    </a>
-                    <a href="#" class="list-group-item" style="text-align:left">
-                        <i class="fa fa-users fa-fw fa-2x"></i> Nueva Oferta
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-8">
-            </div>
-        </div>
-        <div class="row" style="margin-top: 5px" ng-if="logeado && encargado">
-            <div class="col-lg-3">
-                
-            </div>
-            <div class="col-lg-8">
-            </div>
-        </div>
-        <div class="row" style="margin-top: 5px" ng-if="logeado && cliente">
-            <div class="col-lg-3">
-                
-            </div>
-            <div class="col-lg-8">
-            </div>
-        </div>
     </div>
 </div>
 <!-- Footer -->

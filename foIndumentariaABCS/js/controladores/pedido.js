@@ -15,7 +15,7 @@ angular
 				$scope.logeado = false;
 				$state.go("inicio");
 			}
-			console.info($scope.usuarioLogeado.localId);
+
 		 	FactoryPedido.BuscarPor('pedidosPorLocal', $scope.usuarioLogeado.localId).then(
 		 		function(respuesta) {     	
 	      			$scope.ListadoPedidos = respuesta;

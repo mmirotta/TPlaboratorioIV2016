@@ -15,7 +15,7 @@ angular
     }
 
     function BuscarTodos(){
-      return Servicio.BuscarTodos("usuarios");
+      return Servicio.BuscarTodos("usuarios");;
     }
 
     function Cargar(parametro){

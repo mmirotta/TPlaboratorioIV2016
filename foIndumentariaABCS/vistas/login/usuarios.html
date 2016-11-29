@@ -14,7 +14,10 @@
 	</div>
 	<div class="divListaUsuarios" ng-repeat="usuario in ListadoUsuarios">
 		<div class="row" style="padding: 5px;">
-			<div class="col-lg-10">
+			<div class="col-lg-2">
+				<img ng-repeat="foto in usuario.foto" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{foto}}"/>
+			</div>
+			<div class="col-lg-8">
 				<h4 style="width:100%; font-size:28px">{{usuario.nombre}}</h4>
 				<p style="font-size:18px">Correo: {{usuario.correo}}</p>
 				<p style="font-size:18px">Perfil: {{usuario.perfil}}</p>

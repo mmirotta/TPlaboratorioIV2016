@@ -64,7 +64,7 @@ class Pedido
 	public static function BuscarPorLocalTop10($localId)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT TOP 10 pedido.id AS id, producto.nombre AS productoNombre, producto.descripcion AS productoDescripcion, producto.precio AS productoPrecio,
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT pedido.id AS id, producto.nombre AS productoNombre, producto.descripcion AS productoDescripcion, producto.precio AS productoPrecio,
 																usuarioCliente.nombre AS usuarioClienteNombre, usuarioEmpleado.nombre AS usuarioEmpleadoNombre, 
 														        fechaPedido, fechaEntrega, total, local.sucursal AS localSucursal, estado, 
 														        (producto.precio - pedido.total) AS descuento
@@ -73,7 +73,9 @@ class Pedido
 														INNER JOIN usuario AS usuarioCliente ON usuarioCliente.id = pedido.usuarioClienteId
 														LEFT JOIN usuario AS usuarioEmpleado ON usuarioEmpleado.id = pedido.usuarioEmpleadoId
 														INNER JOIN local ON local.id = pedido.localId
-														WHERE pedido.localId = :localId");
+														WHERE pedido.localId = :localId
+														ORDER BY id DESC 
+														LIMIT 10");
 		$consulta->bindValue(':localId', $localId, PDO::PARAM_INT);
 		$consulta->execute();			
 		$arrpedido= $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");	
