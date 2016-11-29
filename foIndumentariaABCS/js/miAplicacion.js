@@ -100,7 +100,8 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			{
 				url:"/local",
 				abstract:true, 
-				templateUrl:"vistas/local/abstractaLocal.html"
+				templateUrl:"vistas/local/abstractaLocal.html",
+				controller:"MenuPrincipalCtrl"
 			}
 		)
 
