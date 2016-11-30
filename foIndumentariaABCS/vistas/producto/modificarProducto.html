@@ -1,0 +1,19 @@
+<div class="divFormulario" name="formProducto">
+    <div class="row">
+	    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+	        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+	    </div>
+    </div>
+    <div class="row">
+	    <div class="col-lg-12">
+        	<h2 class="h2Login">Editar Producto:</h2>
+    		<input type="text" placeholder="Nombre" class="txtLogin" name="nombre" ng-model='producto.nombre' required>
+	    	<textarea placeholder="Descripcion" class="txtLogin" name="descripcion" ng-model='producto.descripcion' required></textarea>
+	    	<input type="number" placeholder="Precio" class="txtLogin" style="width:30%; display: block" name="precio" ng-model='producto.precio' required>
+	    	<div style="width:100%; text-align:center">
+	    		<input type="submit" value="Guardar" class="btnVerde" ng-click="Guardar()">
+	    		<input type="submit" value="Volver" class="btnVolver" ng-click="Volver()">
+	    	</div>
+    	</div>
+	</div>
+</form>

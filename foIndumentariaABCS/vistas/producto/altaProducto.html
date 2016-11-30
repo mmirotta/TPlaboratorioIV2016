@@ -34,8 +34,8 @@
     		<input type="text" placeholder="Nombre" class="txtLogin" name="nombre" ng-model='producto.nombre' required>
 	    	<textarea placeholder="Descripcion" class="txtLogin" name="descripcion" ng-model='producto.descripcion' required></textarea>
 	    	<input type="number" placeholder="Precio" class="txtLogin" style="width:30%; display: block" name="precio" ng-model='producto.precio' required>
-	    	<div style="width:100%;">
-	    		<input type="submit" value="Guardar" class="btnLogin" style="width:30%; float:right" ng-disabled="formProducto.$invalid" ng-click="Guardar()">
+	    	<div style="width:100%; text-align:right">
+	    		<input type="submit" value="Guardar" class="btnVerde" ng-disabled="formProducto.$invalid" ng-click="Guardar()">
 	    	</div>
     	</div>
 	</div>

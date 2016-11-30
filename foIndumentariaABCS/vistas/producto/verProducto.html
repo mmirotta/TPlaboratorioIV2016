@@ -1,4 +1,4 @@
-<div class="container" style="margin-top:5%">
+<div class="divFormulario" style="margin-top:5%">
     <div class="{{resultado.estilo}}" ng-show="resultado.ver">
         <span style="font-size:26px;">{{resultado.mensaje}}</span>
     </div>
@@ -9,11 +9,25 @@
 			</div>
 			<div class="col-lg-1">
 			</div>
-			<div class="col-lg-5">
-				<h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
-				<p style="width: 100%; font-size:28px;">${{producto.precio}}</p>
-				<input type="submit" value="Comprar" class="btnComprar" ng-click="Comprar()">
-				<input type="submit" value="Borrar" class="btnComprar" ng-click="Borrar()">
+			<div class="col-lg-8">
+				<div class="row">
+					<div class="col-lg-12">
+						<h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
+						<p style="width: 100%; font-size:28px; color:#4A7AC6">${{producto.precio}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<input type="submit" value="Comprar" class="btnVerde" style="width:48%" ng-click="Comprar()">
+						<input type="submit" value="Volver" class="btnVolver" style="width:48%" ng-click="Volver()">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<input type="submit" value="Editar" class="btnVerde" style="width:48%" ng-click="Editar(producto)" ng-if="encargado || empleado">
+						<input type="submit" value="Borrar" class="btnVolver" style="width:48%" ng-click="Borrar(producto)" ng-if="encargado || empleado">
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="row">

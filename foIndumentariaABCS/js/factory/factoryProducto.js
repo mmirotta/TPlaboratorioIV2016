@@ -8,6 +8,7 @@ angular
     objeto.Guardar = Guardar;
     objeto.Cargar = Cargar;
     objeto.Borrar = Borrar;
+    objeto.Editar = Editar;
 
     function BuscarPor(entidad, parametro){
       return Servicio.BuscarPor(entidad, parametro);
@@ -30,5 +31,9 @@ angular
       return Servicio.Guardar('producto', JSON.stringify(parametro));
     }
 
+    function Editar(parametro){
+      return Servicio.Editar('producto', JSON.stringify(parametro));
+    }    
+    
     return objeto;
   })//Cierra Factory Producto

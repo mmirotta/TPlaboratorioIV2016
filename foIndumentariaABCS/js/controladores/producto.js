@@ -114,6 +114,12 @@ angular
 		{
 			$scope.resultado = {};
 			$scope.resultado.ver = false;
+
+			$scope.admin = false;
+		    $scope.empleado = false;
+			$scope.encargado = false;
+			$scope.cliente = false;
+
 			$scope.comprar = false;
 			$scope.pedido = {};
 			$scope.pedido.localId = "";
@@ -122,6 +128,21 @@ angular
 				$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
 				$scope.producto = JSON.parse($stateParams.producto);
 				$scope.logeado = true;
+				switch ($scope.usuarioLogeado.perfil)
+				{
+					case "admin":
+						$scope.admin = true;
+						break;
+					case "empleado":
+						$scope.empleado = true;
+						break;
+					case "encargado":
+						$scope.encargado = true;
+						break;
+					case "cliente":
+						$scope.cliente = true;
+						break;
+				}
 			}
 			else
 			{
@@ -153,8 +174,8 @@ angular
 				$scope.resultado.mensaje = "Producto Eliminado";
 
 		 		$timeout(function(){
-		 			$state.go('inicio');
-		 		}, 1000);
+		 			$state.go('producto.productos');
+		 		}, 2000);
 	 		}
 		 	catch(error)
 		 	{
@@ -209,6 +230,97 @@ angular
 						$scope.resultado.mensaje = "Error al guardar el realizado";
 						console.log(error);
 			 	});
+	 		}
+		 	catch(error)
+		 	{
+		 		console.info(error);
+		 		$scope.resultado.ver = true;
+		 		$scope.resultado.estilo = "alert alert-danger";
+				$scope.resultado.mensaje = "Error al comprar ";
+		 	}
+	 	}
+
+	 	$scope.Editar = function(producto){
+	 		try
+	 		{
+	 			var param = JSON.stringify(producto);
+    			$state.go('producto.modificar', {producto:param});
+	 		}
+		 	catch(error)
+		 	{
+		 		console.info(error);
+		 		$scope.resultado.ver = true;
+		 		$scope.resultado.estilo = "alert alert-danger";
+				$scope.resultado.mensaje = "Error al editar un producto ";
+		 	}
+	 	}
+
+	 	$scope.Volver = function(){
+	 		try
+	 		{
+	 			$state.go('producto.productos');
+	 		}
+		 	catch(error)
+		 	{
+		 		console.info(error);
+		 		$scope.resultado.ver = true;
+		 		$scope.resultado.estilo = "alert alert-danger";
+				$scope.resultado.mensaje = "Error al comprar ";
+		 	}
+	 	}
+
+  }).controller("ProductoModificarCtrl", function($scope, $http, $state, $stateParams, $auth, $timeout, jwtHelper, FactoryProducto, FactoryLocal, FactoryPedido, NgMap) {
+		try
+		{
+			$scope.resultado = {};
+			$scope.resultado.ver = false;
+
+			if ($auth.isAuthenticated())
+			{
+				$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
+				$scope.producto = JSON.parse($stateParams.producto);
+				$scope.logeado = true;
+			}
+			else
+			{
+				$scope.logeado = false;
+				$state.go("inicio");
+			}
+			console.info($scope.producto);
+	 	}
+	 	catch(error)
+	 	{
+	 		console.info(error);
+	 		$scope.resultado.ver = true;
+	 		$scope.resultado.estilo = "alert alert-danger";
+		    $scope.resultado.mensaje = "Error en el controlador ProductoModificarCtrl.";
+	 	}
+
+	 	$scope.Guardar = function(){
+	 		try
+	 		{
+	 			FactoryProducto.Editar($scope.producto);
+ 				$scope.resultado.ver = true;
+		 		$scope.resultado.estilo = "alert alert-success";
+				$scope.resultado.mensaje = "Producto Editado";
+
+		 		$timeout(function(){
+		 			$state.go('producto.productos');
+		 		}, 2000);
+	 		}
+		 	catch(error)
+		 	{
+		 		console.info(error);
+		 		$scope.resultado.ver = true;
+		 		$scope.resultado.estilo = "alert alert-danger";
+				$scope.resultado.mensaje = "Error al borrar un producto";
+		 	}
+	 	}
+
+	 	$scope.Volver = function(){
+	 		try
+	 		{
+	 			$state.go('producto.productos');
 	 		}
 		 	catch(error)
 		 	{

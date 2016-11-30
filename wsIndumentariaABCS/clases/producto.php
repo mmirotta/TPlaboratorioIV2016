@@ -53,7 +53,7 @@ class Producto
 	public static function Borrar($id)
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM producto WHERE id=:id");	
+		$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE producto SET vigente = 0 WHERE id=:id");	
 		$consulta->bindValue(':id',$id, PDO::PARAM_INT);		
 		$consulta->execute();
 		return $consulta->rowCount();
@@ -67,15 +67,13 @@ class Producto
 				UPDATE producto 
 				SET nombre=:nombre,
 					descripcion=:descripcion,
-					precio=:precio,
-					vigente=:vigente
+					precio=:precio
 				WHERE id=:id");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			$consulta->bindValue(':id',$producto->id, PDO::PARAM_INT);
 			$consulta->bindValue(':nombre',$producto->nombre, PDO::PARAM_STR);
 			$consulta->bindValue(':descripcion',$producto->descripcion, PDO::PARAM_STR);
 			$consulta->bindValue(':precio',$producto->precio, PDO::PARAM_STR);
-			$consulta->bindValue(':vigente',$producto->vigente, PDO::PARAM_STR);
 			return $consulta->execute();
 	}
 
