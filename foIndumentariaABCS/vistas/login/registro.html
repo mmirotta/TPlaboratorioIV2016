@@ -1,4 +1,7 @@
 <div class="divLogin" name="loginForm">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+      <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
     <div class="row">
     	<div class="col-lg-4">
     		<div ng-show="uploader.isHTML5">
@@ -29,11 +32,11 @@
 	    	<input type="text" placeholder="Nombre" class="txtLogin" name="nombre" ng-model='usuario.nombre' required>
 		    <input type="text" placeholder="Usuario" class="txtLogin" name="correo" ng-model='usuario.correo' required>
 		    <input type="password" placeholder="Clave" class="txtLogin" name="clave" ng-model='usuario.clave' required>
-		    <select ng-model="usuario.perfil" class="txtLogin" ng-if="admin">
-		    	<option value="admin">Administrador</option>
-		    	<option value="encargado">Encargado</option>
-		    	<option value="empleado">Empleado</option>
-		    	<option value="cliente">Cliente</option>
+		    <select ng-model="usuario.perfil" class="txtLogin" ng-if="!cliente">
+		    	<option value="admin" ng-if="admin">Administrador</option>
+		    	<option value="encargado" ng-if="encargado">Encargado</option>
+		    	<option value="empleado" ng-if="admin || encargado">Empleado</option>
+		    	<option value="cliente" ng-if="!cliente">Cliente</option>
 		    </select>
 		    <select ng-model="usuario.localId" class="txtLogin" ng-if="admin && (usuario.perfil == 'encargado' || usuario.perfil == 'empleado')">
 		    	<option value="{{local.id}}" ng-repeat="local in ListaLocales">{{local.sucursal}}</option>

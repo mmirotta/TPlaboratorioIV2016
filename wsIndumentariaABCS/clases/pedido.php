@@ -73,7 +73,7 @@ class Pedido
 														INNER JOIN usuario AS usuarioCliente ON usuarioCliente.id = pedido.usuarioClienteId
 														LEFT JOIN usuario AS usuarioEmpleado ON usuarioEmpleado.id = pedido.usuarioEmpleadoId
 														INNER JOIN local ON local.id = pedido.localId
-														WHERE pedido.localId = :localId
+														WHERE pedido.localId = :localId AND pedido.estado = 'Pedido'
 														ORDER BY id DESC 
 														LIMIT 10");
 		$consulta->bindValue(':localId', $localId, PDO::PARAM_INT);

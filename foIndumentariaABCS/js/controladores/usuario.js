@@ -2,7 +2,7 @@ angular
   .module('indumentariaABCS')
   .controller('LoginCtrl', function($scope, $state, $auth, jwtHelper) {
 	$scope.usuario = {};
-	$scope.usuario.correo = "admin@gmail.com";
+	$scope.usuario.correo = "administrador@abcs.com";
 	$scope.usuario.clave = "admin123";
 	$scope.resultado = {};
 	$scope.resultado.ver = false;
@@ -48,24 +48,45 @@ angular
 	}
 })
 
-.controller("RegistroCtrl", function($scope, $auth, $state, jwtHelper, FileUploader, FactoryUsuario, FactoryRutas, FactoryLocal) {
+.controller("RegistroCtrl", function($scope, $auth, $state, $timeout, jwtHelper, FileUploader, FactoryUsuario, FactoryRutas, FactoryLocal) {
 	try
 	{
 		$scope.resultado = {};
 		$scope.resultado.ver = false;
-		$scope.usuario={};
-	    $scope.usuario.nombre = "Cliente";
-	    $scope.usuario.correo = "Cliente@gmail.com";
-	    $scope.usuario.clave = "123456";
-	    $scope.usuario.claveRepetida = "123456";
-	    $scope.usuario.perfil = "cliente";
-	    $scope.usuario.localId = "0";
+		$scope.admin = false;
+	    $scope.empleado = false;
+		$scope.encargado = false;
+		$scope.cliente = false;
+
+		$scope.usuario={
+	    	nombre: "Cliente",
+	    	correo: "Cliente@gmail.com",
+	    	clave: "123456",
+	    	claveRepetida: "123456",
+	    	perfil: "cliente",
+	    	localId: "0"
+	    };
 
 		if ($auth.isAuthenticated())
 		{
 			$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
 			$scope.logeado = true;
-			$scope.admin = true;
+
+			switch ($scope.usuarioLogeado.perfil)
+			{
+				case "admin":
+					$scope.admin = true;
+					break;
+				case "empleado":
+					$scope.empleado = true;
+					break;
+				case "encargado":
+					$scope.encargado = true;
+					break;
+				case "cliente":
+					$scope.cliente = true;
+					break;
+			}
 		}
 
 		FactoryLocal.BuscarTodos().then(
@@ -108,6 +129,9 @@ angular
 					$scope.resultado.ver = true;   	
 			    	$scope.resultado.estilo = "alert alert-success";
 					$scope.resultado.mensaje = "Usuario Guardado";
+					$timeout(function(){
+			 			$state.go('login.usuarios');
+			 		}, 1000);
 				},function(error) {
 					console.log(error);
 					$scope.resultado.ver = true;
@@ -127,6 +151,11 @@ angular
 	{
 		$scope.resultado = {};
 		$scope.resultado.ver = false;
+		$scope.admin = false;
+	    $scope.empleado = false;
+		$scope.encargado = false;
+		$scope.cliente = false;
+
 		if ($auth.isAuthenticated())
 		{
 			$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
@@ -177,13 +206,31 @@ angular
 	{
 		$scope.resultado = {};
 		$scope.resultado.ver = true;
+		$scope.admin = false;
+	    $scope.empleado = false;
+		$scope.encargado = false;
+		$scope.cliente = false;
 		$scope.buscarPerfil = "todos";
 
 		if ($auth.isAuthenticated())
 		{
 			$scope.usuario = jwtHelper.decodeToken($auth.getToken());
 			$scope.usuario.logeado = true;
-		    $scope.editar = false;
+		    switch ($scope.usuarioLogeado.perfil)
+			{
+				case "admin":
+					$scope.admin = true;
+					break;
+				case "empleado":
+					$scope.empleado = true;
+					break;
+				case "encargado":
+					$scope.encargado = true;
+					break;
+				case "cliente":
+					$scope.cliente = true;
+					break;
+			}
 		}
 		else
 		{

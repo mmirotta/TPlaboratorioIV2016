@@ -24,12 +24,18 @@
     <div class="container">
         <div class="row" style="margin-top: 5px" ng-if="logeado">
             <div class="col-lg-3">
-                <div style="background-color:white">
+                <div style="background-color:white; border-radius:5px">
                     <a ui-sref="local.alta()" class="list-group-item" style="text-align:left" ng-if="admin">
                         <i class="fa fa-users fa-fw fa-2x"></i> Nueva Sucursal
                     </a>
                     <a ui-sref="login.registro()" class="list-group-item" style="text-align:left" ng-if="!cliente">
                         <i class="fa fa-users fa-fw fa-2x"></i> Nuevo Usuario
+                    </a>
+                    <a ui-sref="producto.alta()" class="list-group-item" style="text-align:left" ng-if="empleado || encargado">
+                        <i class="fa fa-users fa-fw fa-2x"></i> Nuevo Producto
+                    </a>
+                    <a ui-sref="oferta.alta()" class="list-group-item" style="text-align:left" ng-if="empleado || encargado">
+                        <i class="fa fa-users fa-fw fa-2x"></i> Nueva Oferta
                     </a>
                     <a ui-sref="login.usuarios()" class="list-group-item" style="text-align:left" ng-if="!cliente">
                         <i class="fa fa-users fa-fw fa-2x"></i> Usuarios
