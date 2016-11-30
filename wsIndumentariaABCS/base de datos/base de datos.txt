@@ -48,12 +48,25 @@ ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 //Datos Usuario
 
-INSERT INTO `usuario`(`correo`, `clave`, `nombre`, `perfil`, `foto`, `activo`, `localId`) 
+INSERT INTO `usuario`(`correo`, `clave`, `nombre`, `perfil`, `fechaCreacion`, `foto`, `activo`, `localId`) 
 VALUES 
-('administrador@abcs.com', 'admin123', 'Administrador', 'admin', '["administrador@abcs.com_0.jpg"]', 1, NULL),
-('hugosuarez@abcs.com', '123', 'Hugo Suarez', 'encargado', '["hugosuarez@abcs.com_0.jpg"]', 1, 1),
-('ramirofernandez@abcs.com', 'admin123', 'Ramiro Fernandez', 'encargado', '["ramirofernandez@abcs.com_0.jpg"]', 1, 2),
-('juanperez@abcs.com', '123', 'Juan Perez', 'encargado', '["juanperez@abcs.com_0.jpg"]', 1, 3),
-('luisjose@abcs.com', '123', 'Luis Jose', 'empleado', '["luisjose@abcs.com_0.jpg"]', 1, 1),
-('camilacoria@abcs.com', '123', 'Camila Coria', 'empleado', '["camilacoria@abcs.com_0.jpg"]', 1, 2),
-('matiasgarcia@abcs.com', '123', 'Matias Garcia', 'empleado', '["matiasgarcia@abcs.com_0.jpg"]', 1, 3),
+('administrador@abcs.com', 'admin123', 'Administrador', 'admin', '2016-11-30 00:15:03', '["administrador@abcs.com_0.jpg"]', 1, NULL),
+('hugosuarez@abcs.com', '123', 'Hugo Suarez', 'encargado', '2016-11-30 00:15:03', '["hugosuarez@abcs.com_0.jpg"]', 1, 1),
+('ramirofernandez@abcs.com', 'admin123', 'Ramiro Fernandez', 'encargado', '2016-11-30 00:15:03','["ramirofernandez@abcs.com_0.jpg"]', 1, 2),
+('juanperez@abcs.com', '123', 'Juan Perez', 'encargado', '2016-11-30 00:15:03', '["juanperez@abcs.com_0.jpg"]', 1, 3),
+('luisjose@abcs.com', '123', 'Luis Jose', 'empleado', '2016-11-30 00:15:03', '["luisjose@abcs.com_0.jpg"]', 1, 1),
+('camilacoria@abcs.com', '123', 'Camila Coria', 'empleado', '2016-11-30 00:15:03', '["camilacoria@abcs.com_0.jpg"]', 1, 2),
+('matiasgarcia@abcs.com', '123', 'Matias Garcia', 'empleado', '2016-11-30 00:15:03', '["matiasgarcia@abcs.com_0.jpg"]', 1, 3),
+('CristianSanchez@gmail.com', '1234', 'Cristian Sanchez', 'cliente', '2016-11-30 00:15:03','["CristianSanchez@gmailcom_0.jpg"]', 1, 0),
+('CarlosSuearez@gmail.com', '1234', 'Carlos Suearez', 'cliente', '2016-11-30 00:15:03','["CarlosSuearez@gmailcom_0.jpg"]', 1, 0),
+('GuidoFernandez@gmail.com', '1234', 'Guido Fernandez', 'cliente', '2016-11-30 00:15:03','["GuidoFernandez@gmailcom_0.jpg"]', 1, 0),
+('luisperez@gmail.com', '1234', 'Luis Perez', 'cliente', '2016-11-30 00:15:03','["luisperez@gmailcom_0.jpg"]', 1, 0),
+('JuanGutierrez@gmail.com', '1234', 'Juan Gutierrez', 'cliente', '2016-11-30 00:15:03','["JuanGutierrez@gmailcom_0.jpg"]', 1, 0);
+
+//Datos Locales
+
+INSERT INTO `local` (`id`, `direccion`, `numero`, `localidad`, `provincia`, `latitud`, `longitud`, `foto`, `sucursal`) VALUES
+(1, 'Av. Rivadavia', 7302, 'Capital Federal', 'Buenos Aires', '-34.629645', '-58.468439', '["Flores_0.jpg","Flores_1.jpg","Flores_2.jpg"]', 'Flores'),
+(2, 'Avenida Francisco Beiró ', 4702, 'Capital Federal', 'Buenos Aires', '-34.609125', '-58.517155', '["Devoto_0.jpg","Devoto_1.jpg","Devoto_2.jpg"]\r\n', 'Devoto'),
+(3, 'Av Fernández de la Cruz', 4464, 'Capital Federal', 'Buenos Aires', '-34.674195', '-58.459979', '["Lugano_0.jpg","Lugano_1.jpg","Lugano_2.jpg"]', 'Lugano');
+
