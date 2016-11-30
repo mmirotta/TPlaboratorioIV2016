@@ -56,6 +56,9 @@ angular
 					$scope.resultado.ver = true;   	
 			    	$scope.resultado.estilo = "alert alert-success";
 					$scope.resultado.mensaje = "Producto Guardado";
+					$timeout(function(){
+			 			$state.go('producto.productos');
+			 		}, 2000);
 				},function(error) {
 					$scope.resultado.ver = true;
 					$scope.resultado.estilo = "alert alert-danger";
@@ -90,7 +93,8 @@ angular
 			}
 
 		 	FactoryProducto.BuscarTodos().then(
-		 		function(respuesta) {     	
+		 		function(respuesta) {   
+		 		console.info(respuesta);  	
 	      			$scope.ListadoProductos = respuesta;
 		    	},function(error) {
 	     			$scope.ListadoProductos= [];
@@ -121,6 +125,7 @@ angular
 			$scope.cliente = false;
 
 			$scope.comprar = false;
+			$scope.finComprar = false;
 			$scope.pedido = {};
 			$scope.pedido.localId = "";
 			if ($auth.isAuthenticated())
@@ -224,6 +229,10 @@ angular
 						$scope.resultado.ver = true;   	
 				    	$scope.resultado.estilo = "alert alert-success";
 						$scope.resultado.mensaje = "Pedido realizado";
+						$timeout(function(){
+				 			$scope.finComprar = true;
+				 			$scope.comprar = false;
+				 		}, 2000);
 					},function(error) {
 						$scope.resultado.ver = true;
 						$scope.resultado.estilo = "alert alert-danger";

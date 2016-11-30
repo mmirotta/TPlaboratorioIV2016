@@ -4,9 +4,9 @@
     </div>
 	<utn-titulo titulo="Listado de Productos"></utn-titulo>
 	<div class="row">
-		<div class="col-lg-2" ng-repeat="producto in ListadoProductos">
-			<a ng-click="VerProducto(producto)">
-				<img src="img/logoIndumentariaABCS.png" style="width:100%">
+		<div class="col-lg-2 sombra" style="margin:1%; height:250px"  ng-repeat="producto in ListadoProductos">
+			<a ng-click="VerProducto(producto)" >
+				<img style="width:100%" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{producto.fotoPrincipal}}"/>
 				<p style="width: 100%; font-size:28px; text-align:center">${{producto.precio}}</p>
 				<h4 style="width: 100%; font-size:14px">{{producto.nombre}}</h4>
 			</a>

@@ -9,6 +9,7 @@ class Producto
  	public $descripcion;
   	public $precio;
   	public $foto;
+  	public $fotoPrincipal;
   	public $vigente;
   	public $usuarioEmpleadoId;
   	public $usuarioEmpleadoNombre;
@@ -88,18 +89,21 @@ class Producto
 																			  descripcion,
 																			  precio,
 																			  foto,
+																			  fotoPrincipal,
 																			  usuarioEmpleadoId,
 																			  vigente)
 														VALUES (:nombre,
 															    :descripcion,
 															    :precio,
 															    :foto,
+															    :fotoPrincipal,
 															    :usuarioEmpleadoId,
 																1)");
 		$consulta->bindValue(':nombre',$producto->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':descripcion',$producto->descripcion, PDO::PARAM_STR);
 		$consulta->bindValue(':precio', $producto->precio, PDO::PARAM_STR);
 		$consulta->bindValue(':foto', $producto->foto, PDO::PARAM_STR);
+		$consulta->bindValue(':fotoPrincipal', $producto->fotoPrincipal, PDO::PARAM_STR);
 		$consulta->bindValue(':usuarioEmpleadoId', $producto->usuarioEmpleadoId, PDO::PARAM_INT);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();

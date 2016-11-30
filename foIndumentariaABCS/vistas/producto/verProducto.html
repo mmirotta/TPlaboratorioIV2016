@@ -2,14 +2,15 @@
     <div class="{{resultado.estilo}}" ng-show="resultado.ver">
         <span style="font-size:26px;">{{resultado.mensaje}}</span>
     </div>
-    <div ng-if="!comprar">
+    <div ng-if="!comprar && !finComprar">
 		<div class="row">
-			<div class="col-lg-3">
-				<img src="img/logoIndumentariaABCS.png" style="width:100%">
+			<div class="col-lg-4">
+				<img style="width:100%; margin:1%" class="sombra" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{producto.fotoPrincipal}}"/>
+				<img ng-repeat="foto in producto.foto" style="width:48%; margin:1%" class="sombra" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{foto}}"/>
 			</div>
 			<div class="col-lg-1">
 			</div>
-			<div class="col-lg-8">
+			<div class="col-lg-7">
 				<div class="row">
 					<div class="col-lg-12">
 						<h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
@@ -37,7 +38,7 @@
 			</div>
 		</div>
 	</div>
-	<div ng-if="comprar">
+	<div ng-if="comprar && !finComprar">
 		<div class="row">
 			<div class="col-lg-8">
 				<ng-map center="[{{Latitud}}, {{Longitud}}]" style="height:400px">
@@ -55,6 +56,19 @@
 			    <h4 style="width: 100%; font-size:28px">{{producto.nombre}}</h4>
 				<p style="width: 100%; font-size:28px;">${{producto.precio}}</p>
 				<input type="submit" value="Confirmar Compra" class="btnComprar" ng-click="ConfirmarCompra()" ng-if="pedido.localId != ''">
+			</div>
+		</div>
+	</div>
+	<div ng-if="finComprar">
+		<div class="row">
+			<div class="col-lg-12">
+				<h4 style="width: 100%; font-size:28px">¿Desea realizar una encuesta de satisfacción?</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<input type="submit" value="Si" class="btnVerde" style="width:48%" ng-click="Encuesta()" >
+				<input type="submit" value="No" class="btnVolver" style="width:48%" ng-click="Volver()">
 			</div>
 		</div>
 	</div>

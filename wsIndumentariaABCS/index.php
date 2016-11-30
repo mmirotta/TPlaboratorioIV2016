@@ -147,6 +147,10 @@ $app->post('/producto/{producto}', function ($request, $response, $args) {
             copy($rutaVieja, "fotos/".$rutaNueva);
             unlink($rutaVieja);
             $arrayFoto[]=$rutaNueva;
+            if ($i==0)
+            {
+                $producto->fotoPrincipal = $rutaNueva;
+            }
         } 
         $producto->foto=json_encode($arrayFoto); 
     }

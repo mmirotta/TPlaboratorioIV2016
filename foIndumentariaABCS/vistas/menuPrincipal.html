@@ -78,11 +78,11 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-8" style="background-color:white" ng-if="cliente">
-                <div class="row" >
-                    <div class="col-lg-2" ng-repeat="producto in ListadoProductos">
+            <div class="col-lg-8" style="background-color:white; border-radius:5px" ng-if="cliente">
+                <div class="row" style="text-align:center">
+                    <div class="col-lg-2 sombra" style="margin:1%; height:200px" ng-repeat="producto in ListadoProductos">
                         <a ng-click="VerProducto(producto)">
-                            <img src="img/logoIndumentariaABCS.png" style="width:100%">
+                            <img style="width:100%" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{producto.fotoPrincipal}}"/>
                             <p style="width: 100%; font-size:28px; text-align:center">${{producto.precio}}</p>
                             <h4 style="width: 100%; font-size:14px">{{producto.nombre}}</h4>
                         </a>
