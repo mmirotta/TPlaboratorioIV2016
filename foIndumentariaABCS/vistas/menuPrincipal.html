@@ -20,30 +20,30 @@
         </div>
     </div>
 </nav>
-<div class="intro-MenuPrincipal"> 
-    <div class="container">
+<div style="padding-top:5%; padding-bottom:10%;"> 
+    <div class="container divMenuPrincipal" >
         <div class="row" style="margin-top: 5px" ng-if="logeado">
             <div class="col-lg-3">
                 <div style="background-color:white; border-radius:5px">
-                    <a ui-sref="local.alta()" class="list-group-item" style="text-align:left" ng-if="admin">
+                    <a ui-sref="local.alta()" class="list-group-item" style="text-align:left; background-color:#204862; color:#ffffff;" ng-if="admin">
                         <i class="fa fa-users fa-fw fa-2x"></i> Nueva Sucursal
                     </a>
-                    <a ui-sref="login.registro()" class="list-group-item" style="text-align:left" ng-if="!cliente">
+                    <a ui-sref="login.registro()" class="list-group-item" style="text-align:left; background-color:#204862; color:#ffffff;" ng-if="!cliente">
                         <i class="fa fa-users fa-fw fa-2x"></i> Nuevo Usuario
                     </a>
-                    <a ui-sref="producto.alta()" class="list-group-item" style="text-align:left" ng-if="empleado || encargado">
+                    <a ui-sref="producto.alta()" class="list-group-item" style="text-align:left; background-color:#204862; color:#ffffff;" ng-if="empleado || encargado">
                         <i class="fa fa-users fa-fw fa-2x"></i> Nuevo Producto
                     </a>
-                    <a ui-sref="oferta.alta()" class="list-group-item" style="text-align:left" ng-if="empleado || encargado">
+                    <a ui-sref="oferta.alta()" class="list-group-item" style="text-align:left; background-color:#204862; color:#ffffff;" ng-if="empleado || encargado">
                         <i class="fa fa-users fa-fw fa-2x"></i> Nueva Oferta
                     </a>
-                    <a ui-sref="login.usuarios()" class="list-group-item" style="text-align:left" ng-if="!cliente">
+                    <a ui-sref="login.usuarios()" class="list-group-item" style="text-align:left; background-color:#204862; color:#ffffff;" ng-if="!cliente">
                         <i class="fa fa-users fa-fw fa-2x"></i> Usuarios
                     </a>
-                    <a ui-sref="local.locales()" class="list-group-item" style="text-align:left" ng-if="!cliente">
+                    <a ui-sref="local.locales()" class="list-group-item" style="text-align:left; background-color:#204862; color:#ffffff;" ng-if="!cliente">
                         <i class="fa fa-users fa-fw fa-2x"></i> Locales
                     </a>
-                    <a ui-sref="pedido.misPedidos()" class="list-group-item" style="text-align:left">
+                    <a ui-sref="pedido.misPedidos()" class="list-group-item" style="text-align:left; background-color:#204862; color:#ffffff;">
                         <i class="fa fa-users fa-fw fa-2x"></i> Mis Pedidos
                     </a>
                 </div>
@@ -55,7 +55,7 @@
             </div>
             <div class="col-lg-8" ng-if="empleado || encargado">
                 <div class="list-group">
-                    <a class="list-group-item">
+                    <a class="list-group-item" style="text-align:center; background-color:#204862; color:#ffffff;">
                         Pedidos
                     </a>
                     <a class="list-group-item" style="text-align:left" ng-repeat="pedido in ListadoPedidos">
@@ -67,31 +67,65 @@
                     </a>
                 </div>
                 <div class="list-group" style="margin-top:1%">
-                    <a class="list-group-item">
+                    <a class="list-group-item" style="text-align:center; background-color:#204862; color:#ffffff;">
                         Productos
                     </a>
                     <a class="list-group-item" style="text-align:left" ng-repeat="producto in ListadoProductos">
-                        Producto: {{producto.nombre}} - Precio: {{producto.precio}}
+                        Producto: {{producto.nombre}} - Precio: {{producto.precio}}$
                     </a>
                     <a ui-sref="producto.productos()" class="list-group-item" style="text-align:right">
                         Ver todos los productos..
                     </a>
                 </div>
+                <div class="list-group" style="margin-top:1%">
+                    <a class="list-group-item" style="text-align:center; background-color:#204862; color:#ffffff;">
+                        Ofertas
+                    </a>
+                    <a class="list-group-item" style="text-align:left" ng-repeat="oferta in ListadoOfertas">
+                        Producto: {{oferta.productoNombre}} - Precio: {{oferta.productoPrecio}}$ - Precio Final: {{oferta.precioFinal}}$
+                    </a>
+                    <a ui-sref="oferta.ofertas()" class="list-group-item" style="text-align:right">
+                        Ver todos las ofertas..
+                    </a>
+                </div>
             </div>
             <div class="col-lg-8" style="background-color:white; border-radius:5px" ng-if="cliente">
-                <div class="row" style="text-align:center">
-                    <div class="col-lg-2 sombra" style="margin:1%; height:200px" ng-repeat="producto in ListadoProductos">
-                        <a ng-click="VerProducto(producto)">
-                            <img style="width:100%" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{producto.fotoPrincipal}}"/>
-                            <p style="width: 100%; font-size:28px; text-align:center">${{producto.precio}}</p>
-                            <h4 style="width: 100%; font-size:14px">{{producto.nombre}}</h4>
-                        </a>
+                <div class="row sombra">
+                    <div class="col-lg-12">
+                        <div class="row" style="text-align:center">
+                            <div class="col-lg-2 sombra" style="margin:1%; height:200px" ng-repeat="producto in ListadoProductos">
+                                <a ng-click="VerProducto(producto)">
+                                    <img style="width:100%" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{producto.fotoPrincipal}}"/>
+                                    <p style="width: 100%; font-size:28px; text-align:center">${{producto.precio}}</p>
+                                    <h4 style="width: 100%; font-size:14px">{{producto.nombre}}</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row" style="text-align:right; padding:1%">
+                            <a ui-sref="producto.productos()">
+                                Ver mas productos
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="row" style="text-align:right; padding:1%">
-                    <a ui-sref="producto.productos()">
-                        Ver mas productos
-                    </a>
+                <div class="row sombra" style="margin-top:1%">
+                    <div class="col-lg-12">
+                        <div class="row" style="text-align:center; margin-top:2%">
+                            <div class="col-lg-2 sombra" style="margin:1%; height:250px" ng-repeat="oferta in ListadoOfertas">
+                                <a ng-click="VerOferta(oferta)">
+                                    <img style="width:100%" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{oferta.productoFoto}}"/>
+                                    <p style="width: 100%; font-size:28px; color:#FA5858; text-decoration:line-through;">${{oferta.productoPrecio}}</p>
+                                    <p style="width: 100%; font-size:28px; color:#4A7AC6">${{oferta.precioFinal}}</p>
+                                    <h4 style="width: 100%; font-size:14px">{{oferta.productoNombre}}</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row" style="text-align:right; padding:1%">
+                            <a ui-sref="oferta.ofertas()">
+                                Ver mas ofertas
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>  

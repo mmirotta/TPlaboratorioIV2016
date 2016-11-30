@@ -9,6 +9,7 @@ class Pedido
   	public $usuarioClienteNombre;
   	public $usuarioEmpleadoId;
   	public $usuarioEmpleadoNombre;
+  	public $ofertaId;
   	public $productoId;
 	public $productoNombre;
  	public $productoDescripcion;
@@ -115,18 +116,21 @@ class Pedido
 		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO pedido (usuarioClienteId,
 																			fechaPedido,
 																			productoId,
+																			ofertaId,
 																			localId,
 																			total,
 																			estado)
 														VALUES (:usuarioClienteId,
 																:fechaPedido,
 																:productoId,
+																:ofertaId,
 																:localId,
 																:total,
 																:estado)");
 		$consulta->bindValue(':usuarioClienteId', $pedido->usuarioClienteId, PDO::PARAM_INT);
 		$consulta->bindValue(':fechaPedido', $pedido->fechaPedido, PDO::PARAM_STR);
-		$consulta->bindValue(':productoId', $pedido->productoId, PDO::PARAM_STR);
+		$consulta->bindValue(':productoId', $pedido->productoId, PDO::PARAM_INT);
+		$consulta->bindValue(':ofertaId', $pedido->ofertaId, PDO::PARAM_INT);
 		$consulta->bindValue(':localId', $pedido->localId, PDO::PARAM_STR);
 		$consulta->bindValue(':total', $pedido->total, PDO::PARAM_STR);
 		$consulta->bindValue(':estado', $pedido->estado, PDO::PARAM_STR);

@@ -1,0 +1,19 @@
+<div class="divLogin" name="formOferta">
+    <div class="row">
+	    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+	        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+	    </div>
+    </div>
+    <div class="row">
+	    <div class="col-lg-12">
+        	<h2 class="h2Login">Nueva Oferta:</h2>
+    		<select ng-model="oferta.productoId" class="txtLogin">
+		    	<option value="{{producto.id}}" ng-repeat="producto in ListadoProductos">{{producto.nombre}}</option>
+		    </select>
+	    	<input type="number" placeholder="Descuento" class="txtLogin" style="width:30%; display: block" name="descuento" ng-model='oferta.descuento' required>
+	    	<div style="width:100%; text-align:right">
+	    		<input type="submit" value="Guardar" class="btnVerde" ng-disabled="formOferta.$invalid" ng-click="Guardar()">
+	    	</div>
+    	</div>
+	</div>
+</form>

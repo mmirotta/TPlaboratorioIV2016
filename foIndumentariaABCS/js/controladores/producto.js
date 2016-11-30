@@ -1,6 +1,6 @@
 angular
   .module('indumentariaABCS')
-  .controller("ProductoAltaCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryProducto, FactoryRutas) {
+  .controller("ProductoAltaCtrl", function($scope, $auth, $state, $http, $timeout, jwtHelper, FileUploader, FactoryProducto, FactoryRutas) {
 	try
 	{
 		$scope.resultado = {};
@@ -81,10 +81,6 @@ angular
 			{
 				$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
 				$scope.logeado = true;
-				if ($scope.usuarioLogeado.perfil == 'vendedor')
-					$scope.borrarProducto = true;
-				else
-					$scope.borrarProducto = false;
 			}
 			else
 			{

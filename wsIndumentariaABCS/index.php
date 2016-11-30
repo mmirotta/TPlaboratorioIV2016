@@ -5,6 +5,7 @@ require 'clases/usuario.php';
 require 'clases/local.php';
 require 'clases/producto.php'; 
 require 'clases/pedido.php';
+require 'clases/oferta.php';
 
 $app = new Slim\App();
 
@@ -47,11 +48,21 @@ $app->get('/productos[/]', function ($request, $response, $args) {
     return $response->write(json_encode($datos));
 });
 
-$app->get('/productosTop10/{id}', function ($request, $response, $args) {
-    $datos=Producto::BuscarTop10();
+$app->get('/productosTop5/{id}', function ($request, $response, $args) {
+    $datos=Producto::BuscarTop5();
     for ($i = 0; $i < count($datos); $i++ ){
         $datos[$i]->foto=json_decode($datos[$i]->foto);
     }
+    return $response->write(json_encode($datos));
+});
+
+$app->get('/ofertas[/]', function ($request, $response, $args) {
+    $datos=Oferta::Buscar();
+    return $response->write(json_encode($datos));
+});
+
+$app->get('/ofertasTop5/{id}', function ($request, $response, $args) {
+    $datos=Oferta::BuscarTop5();
     return $response->write(json_encode($datos));
 });
 
@@ -94,6 +105,12 @@ $app->get('/local/{id}', function ($request, $response, $args) {
 $app->get('/producto/{id}', function ($request, $response, $args) {
     $producto=Producto::Cargar($args['id']);
     $response->write(json_encode($producto));
+    return $response;
+});
+
+$app->get('/oferta/{id}', function ($request, $response, $args) {
+    $oferta=Oferta::Cargar($args['id']);
+    $response->write(json_encode($oferta));
     return $response;
 });
 
@@ -163,6 +180,11 @@ $app->post('/pedido/{pedido}', function ($request, $response, $args) {
     return $response->write(Pedido::Guardar($pedido));
 });
 
+$app->post('/oferta/{oferta}', function ($request, $response, $args) {
+    $oferta=json_decode($args['oferta']);
+    return $response->write(Oferta::Guardar($oferta));
+});
+
 // /* PUT: Para editar recursos MODIFICAR*/
 $app->put('/usuario/{usuario}', function ($request, $response, $args) {
     Usuario::Editar(json_decode($args['usuario']));
@@ -185,6 +207,11 @@ $app->put('/pedido/{pedido}', function ($request, $response, $args) {
     return $response;
 });
 
+$app->put('/oferta/{oferta}', function ($request, $response, $args) {
+    Oferta::Editar(json_decode($args['oferta']));
+    return $response;
+});
+
 
 // /* DELETE: Para eliminar recursos ELIMINAR*/
 $app->delete('/usuario/{id}', function ($request, $response, $args) {
@@ -204,6 +231,12 @@ $app->delete('/producto/{id}', function ($request, $response, $args) {
 
 $app->delete('/pedido/{id}', function ($request, $response, $args) {
     Pedido::Borrar($args['id']);
+    return $response;
+});
+
+
+$app->delete('/oferta/{id}', function ($request, $response, $args) {
+    Oferta::Borrar($args['id']);
     return $response;
 });
 

@@ -1,0 +1,74 @@
+<div class="divFormulario" style="margin-top:5%">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
+    <div ng-if="!comprar && !finComprar">
+    	<div class="row">
+			<div class="col-lg-12">
+				<h2 class="h2Login">Oferta</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<img style="width:100%; margin:1%" class="sombra" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{oferta.productoFoto}}"/>
+			</div>
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-7">
+				<div class="row">
+					<div class="col-lg-12">
+						<h4 style="width: 100%; font-size:28px">{{oferta.productoNombre}}</h4>
+						<p style="width: 100%; font-size:28px; color:#FA5858; text-decoration:line-through;">${{oferta.productoPrecio}}</p>
+						<p style="width: 100%; font-size:28px; color:#4A7AC6">${{oferta.precioFinal}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<input type="submit" value="Comprar" class="btnVerde" style="width:48%" ng-click="Comprar()">
+						<input type="submit" value="Volver" class="btnVolver" style="width:48%" ng-click="Volver()">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<input type="submit" value="Borrar" class="btnVolver" style="width:48%" ng-click="Borrar(producto)" ng-if="encargado || empleado">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-if="comprar && !finComprar">
+		<div class="row">
+			<div class="col-lg-8">
+				<ng-map center="[{{Latitud}}, {{Longitud}}]" style="height:400px">
+          			<marker position ="[{{Latitud}}, {{Longitud}}]" title="Mi ubicación" animation="Animation.DROP" ></marker>
+       				<div ng-repeat="local in ListaLocales">
+            			<marker  position ="[{{local.latitud}}, {{local.longitud}}]"  animation="Animation.DROP" ></marker>
+            		</div>
+            	</ng-map>
+			</div>
+			<div class="col-lg-4">
+				<h4 style="width: 100%; font-size:28px">Elija la sucursal:</h4>
+				<select ng-model="pedido.localId" class="txtLogin">
+			    	<option value="{{local.id}}" ng-repeat="local in ListaLocales">{{local.sucursal}}</option>
+			    </select>
+			    <h4 style="width: 100%; font-size:28px">{{oferta.productoNombre}}</h4>
+				<p style="width: 100%; font-size:28px; color:#FA5858; text-decoration:line-through;">${{oferta.productoPrecio}}</p>
+				<p style="width: 100%; font-size:28px; color:#4A7AC6">${{oferta.precioFinal}}</p>
+				<input type="submit" value="Confirmar Compra" class="btnComprar" ng-click="ConfirmarCompra()" ng-if="pedido.localId != ''">
+			</div>
+		</div>
+	</div>
+	<div ng-if="finComprar">
+		<div class="row">
+			<div class="col-lg-12">
+				<h4 style="width: 100%; font-size:28px">¿Desea realizar una encuesta de satisfacción?</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<input type="submit" value="Si" class="btnVerde" style="width:48%" ng-click="Encuesta()" >
+				<input type="submit" value="No" class="btnVolver" style="width:48%" ng-click="Volver()">
+			</div>
+		</div>
+	</div>
+</div>

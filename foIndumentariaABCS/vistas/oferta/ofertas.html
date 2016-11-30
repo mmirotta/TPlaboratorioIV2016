@@ -1,0 +1,16 @@
+<div class="container" style="margin-top:5%">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
+	<utn-titulo titulo="Listado de Ofertas"></utn-titulo>
+	<div class="row">
+		<div class="col-lg-2 sombra" style="margin:1%; height:300px"  ng-repeat="oferta in ListadoOfertas">
+			<a ng-click="VerOferta(oferta)" >
+				<img style="width:100%" src="http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/fotos/{{oferta.productoFoto}}"/>
+				<p style="width: 100%; font-size:28px; text-align:center; color:#FA5858; text-decoration:line-through;">${{oferta.productoPrecio}}</p>
+				<p style="width: 100%; font-size:28px; text-align:center">${{oferta.precioFinal}}</p>
+				<h4 style="width: 100%; font-size:14px">{{oferta.productoNombre}}</h4>
+			</a>
+		</div>
+	</div>
+</div>

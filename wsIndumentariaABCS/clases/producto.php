@@ -39,13 +39,13 @@ class Producto
 		return $arrProducto;
 	}
 
-	public static function BuscarTop10()
+	public static function BuscarTop5()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM producto 
 														WHERE vigente = 1
 														ORDER BY id DESC
-														LIMIT 10");
+														LIMIT 5");
 		$consulta->execute();			
 		$arrProducto= $consulta->fetchAll(PDO::FETCH_CLASS, "producto");	
 		return $arrProducto;

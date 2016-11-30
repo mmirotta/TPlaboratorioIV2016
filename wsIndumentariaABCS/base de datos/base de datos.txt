@@ -40,9 +40,18 @@ CREATE TABLE `utn`.`pedido`
   `fechaPedido` DATETIME NULL , 
   `fechaEntrega` DATETIME NULL ,
   `productoId` INT NULL ,
+  `ofertaId` INT NULL ,
   `localId` INT NULL , 
   `total` FLOAT NULL , 
   `estado` VARCHAR(50) NULL, PRIMARY KEY (`id`)) 
+ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
+CREATE TABLE `utn`.`oferta` 
+( `id` INT NOT NULL AUTO_INCREMENT, 
+  `productoId` INT NULL , 
+  `descuento` FLOAT NULL , 
+  `vigente` BIT NULL,
+  `usuarioEmpleadoId` INT NULL, PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
 
