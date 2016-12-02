@@ -280,6 +280,20 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 		)
 
 		.state(
+			"pedido.verPedido",
+			{
+				url:"/verPedido/:pedido",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/pedido/verPedido.html",
+					controller:"VerPedidoCtrl"
+					}
+				}
+			}
+		)
+
+		.state(
 			"pedido.pedidos",
 			{
 				url:"/pedidos",
@@ -288,6 +302,20 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 					"contenido": {
 					templateUrl:"vistas/pedido/pedidos.html",
 					controller:"PedidosCtrl"
+					}
+				}
+			}
+		)
+
+		.state(
+			"pedido.misPedidos",
+			{
+				url:"/misPedidos",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/pedido/misPedidos.html",
+					controller:"MisPedidosCtrl"
 					}
 				}
 			}

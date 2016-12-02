@@ -10,7 +10,6 @@ angular
     objeto.Borrar = Borrar;
 
     function BuscarPor(entidad, parametro){
-      console.info(parametro);
       return Servicio.BuscarPor(entidad, parametro);
     }
 

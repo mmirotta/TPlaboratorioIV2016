@@ -9,6 +9,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand topnav" style="color:#ffffff" href="#" ng-if="logeado">Bienvenido {{usuarioLogeado.usuario}}</a>
+            <a class="navbar-brand topnav" style="color:#ffffff" href="#" ng-if="encargado || empleado"> - Sucursal {{usuarioLogeado.localNombre}}</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -24,7 +25,7 @@
     <div class="container divMenuPrincipal" >
         <div class="row" style="margin-top: 5px" ng-if="logeado">
             <div class="col-lg-3">
-                <div style="background-color:white; border-radius:5px">
+                <div class="sombra" style="background-color:white; border-radius:5px">
                     <a ui-sref="local.alta()" class="list-group-item" style="text-align:left; background-color:#204862; color:#ffffff;" ng-if="admin">
                         <i class="fa fa-users fa-fw fa-2x"></i> Nueva Sucursal
                     </a>
@@ -54,7 +55,7 @@
                 </div>
             </div>
             <div class="col-lg-8" ng-if="empleado || encargado">
-                <div class="list-group">
+                <div class="list-group sombra">
                     <a class="list-group-item" style="text-align:center; background-color:#204862; color:#ffffff;">
                         Pedidos
                     </a>
@@ -66,7 +67,7 @@
                         Ver todos los pedidos..
                     </a>
                 </div>
-                <div class="list-group" style="margin-top:1%">
+                <div class="list-group sombra" style="margin-top:1%">
                     <a class="list-group-item" style="text-align:center; background-color:#204862; color:#ffffff;">
                         Productos
                     </a>
@@ -77,7 +78,7 @@
                         Ver todos los productos..
                     </a>
                 </div>
-                <div class="list-group" style="margin-top:1%">
+                <div class="list-group sombra" style="margin-top:1%">
                     <a class="list-group-item" style="text-align:center; background-color:#204862; color:#ffffff;">
                         Ofertas
                     </a>

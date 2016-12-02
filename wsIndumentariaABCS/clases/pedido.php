@@ -82,6 +82,25 @@ class Pedido
 		$arrpedido= $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");	
 		return $arrpedido;
 	}
+
+	public static function BuscarPorUsuario($usuarioClienteId)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT pedido.id AS id, producto.nombre AS productoNombre, producto.descripcion AS productoDescripcion, producto.precio AS productoPrecio,
+																usuarioCliente.nombre AS usuarioClienteNombre, usuarioEmpleado.nombre AS usuarioEmpleadoNombre, 
+														        fechaPedido, fechaEntrega, total, local.sucursal AS localSucursal, estado, 
+														        (producto.precio - pedido.total) AS descuento
+														FROM `pedido` 
+														INNER JOIN producto ON producto.id = pedido.productoId
+														INNER JOIN usuario AS usuarioCliente ON usuarioCliente.id = pedido.usuarioClienteId
+														LEFT JOIN usuario AS usuarioEmpleado ON usuarioEmpleado.id = pedido.usuarioEmpleadoId
+														INNER JOIN local ON local.id = pedido.localId
+														WHERE pedido.usuarioClienteId = :usuarioClienteId");
+		$consulta->bindValue(':usuarioClienteId', $usuarioClienteId, PDO::PARAM_INT);
+		$consulta->execute();			
+		$arrpedido= $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");	
+		return $arrpedido;
+	}
 	
 	public static function Borrar($id)
 	{	

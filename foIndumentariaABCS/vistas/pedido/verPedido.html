@@ -1,0 +1,25 @@
+<div class="divFormulario" style="margin-top:5%">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
+    <div>
+    	<div class="row">
+			<div class="col-lg-12">
+				<h2 class="h2Login">Pedido</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<h4 style="width:100%; font-size: 24px"><b>Producto:</b> {{pedido.productoNombre}} - <b>Cliente:</b> {{pedido.usuarioClienteNombre}}</h4>
+				<h4 style="width:100%; font-size: 24px"><b>Fecha:</b> {{pedido.fechaPedido}}</h4>
+				<h4 style="width:100%; font-size: 28px"><b>Precio:</b> {{pedido.productoPrecio}} - <b>Descuento:</b> {{pedido.descuento}} - <b>Total:</b> {{pedido.total}}</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<input type="submit" value="Entregar" class="btnVerde" style="width:48%" ng-click="Entregar()">
+				<input type="submit" value="Volver" class="btnVolver" style="width:48%" ng-click="Volver()">
+			</div>
+		</div>
+    </div>
+</div>

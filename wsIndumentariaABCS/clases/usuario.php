@@ -31,7 +31,13 @@ class Usuario
 	public static function Verificar($correo, $clave) 
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE correo =:correo AND clave =:clave AND activo = 1");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT usuario.id AS id, usuario.correo AS correo, usuario.clave AS clave,
+																usuario.nombre AS nombre, usuario.perfil AS perfil, usuario.fechaAcceso AS fechaAcceso,
+																usuario.fechaCreacion AS fechaCreacion, usuario.foto AS foto, usuario.activo AS activo,
+																usuario.localId AS localId, local.sucursal AS localNombre
+														FROM usuario 
+														LEFT JOIN local ON local.id = usuario.localId
+														WHERE correo =:correo AND clave =:clave AND activo = 1");
 		$consulta->bindValue(':correo', $correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $clave, PDO::PARAM_STR);
 		$consulta->execute();
