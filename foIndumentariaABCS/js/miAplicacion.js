@@ -293,5 +293,31 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			}
 		)
 
+		//Estadisticas
+		.state(
+			"estadistica",
+			{
+				url:"/estadistica",
+				cache:false,
+				abstract:true, 
+				templateUrl:"vistas/estadisticas/abstractaEstadisticas.html",
+				controller:"MenuPrincipalCtrl"
+			}
+		)
+
+		.state(
+			"estadistica.graficoDCN",
+			{
+				url:"/graficoDCN",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/estadisticas/graficoDCN.html",
+					controller:"GraficoDCNCtrl"
+					}
+				}
+			}
+		)
+
 	$urlRouterProvider.otherwise("/inicio");
 });

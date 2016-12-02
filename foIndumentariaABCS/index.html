@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<script SRC="bower_components/angular/angular.min.js" TYPE="text/javascript"></script>
@@ -11,6 +12,13 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <!-- Estadisticas -->
+    <script src="bower_components/highcharts/highcharts.js"></script>
+    <script src="bower_components/highcharts/highcharts-more.js"></script>
+    <script src="bower_components/highcharts/modules/exporting.js"></script>
+    <script src="bower_components/highcharts/modules/solid-gauge.js"></script>
+    
+
     <!-- Bootstrap Core JavaScript -->
 	<link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
@@ -18,32 +26,33 @@
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 
     <!-- Scripts -->
-    <script SRC="js/miAplicacion.js" TYPE="text/javascript"></script>
+    <script SRC="js/miaplicacion.js" TYPE="text/javascript"></script>
 
     <!-- Controladores -->
     <script src="js/controladores/usuario.js"></script>
     <script src="js/controladores/inicio.js"></script>
-    <script src="js/controladores/menuPrincipal.js"></script>
+    <script src="js/controladores/menuprincipal.js"></script>
     <script src="js/controladores/local.js"></script>
     <script src="js/controladores/producto.js"></script>
     <script src="js/controladores/pedido.js"></script>
     <script src="js/controladores/oferta.js"></script>
+    <script src="js/controladores/estadisticas.js"></script>
 
     <!-- Servicio -->
-    <script src="js/servicios/Servicio.js"></script>
+    <script src="js/servicios/servicio.js"></script>
 
     <!-- Factory -->
-    <script src="js/factory/factoryUsuario.js"></script>
-    <script src="js/factory/factoryRutas.js"></script>
-    <script src="js/factory/factoryProducto.js"></script>
-    <script src="js/factory/factoryLocal.js"></script>
-    <script src="js/factory/factoryPedido.js"></script>
-    <script src="js/factory/factoryOferta.js"></script>
+    <script src="js/factory/factoryusuario.js"></script>
+    <script src="js/factory/factoryrutas.js"></script>
+    <script src="js/factory/factoryproducto.js"></script>
+    <script src="js/factory/factorylocal.js"></script>
+    <script src="js/factory/factorypedido.js"></script>
+    <script src="js/factory/factoryoferta.js"></script>
     
     <!-- Directivas -->
-    <script src="js/directivas/directivaTitulo.js"></script>
-    <script src="js/directivas/directivaFooter.js"></script>
-    <script src="js/directivas/directivaMenuSuperior.js"></script>
+    <script src="js/directivas/directivatitulo.js"></script>
+    <script src="js/directivas/directivafooter.js"></script>
+    <script src="js/directivas/directivamenusuperior.js"></script>
 
     <!-- Mapa -->
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyA0B0cK4wiwuattTGD2APe8-X0JSzeyMR4"></script>

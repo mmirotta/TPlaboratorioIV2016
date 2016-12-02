@@ -13,8 +13,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="local.alta()" ng-if="logeado && admin" style="color: #ffffff;">Nueva Sucursal</a></li>
-                <li><a ui-sref="login.registro()" ng-if="logeado && admin" style="color: #ffffff;">Nuevo Usuario</a></li>
+                <li><a ui-sref="estadistica.graficoDCN()" ng-if="!logeado" style="color: #ffffff;">Gráfico DCN</a></li>
                 <li><a ui-sref="login.registro()" ng-if="!logeado" style="color: #ffffff;">Registrarse</a></li>
                 <li><a ui-sref="login.login()" ng-if="!logeado" style="color: #ffffff;">Login</a></li>
                 <li><a ng-click="Salir()" ng-if="logeado" style="color: #ffffff;">Salir</a></li>
