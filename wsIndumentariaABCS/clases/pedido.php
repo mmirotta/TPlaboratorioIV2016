@@ -54,7 +54,7 @@ class Pedido
 														INNER JOIN producto ON producto.id = pedido.productoId
 														INNER JOIN usuario AS usuarioCliente ON usuarioCliente.id = pedido.usuarioClienteId
 														LEFT JOIN usuario AS usuarioEmpleado ON usuarioEmpleado.id = pedido.usuarioEmpleadoId
-														INNER JOIN local ON local.id = pedido.localId
+														INNER JOIN local ON local.id = pedido.localId AND pedido.estado = 'Pedido'
 														WHERE pedido.localId = :localId");
 		$consulta->bindValue(':localId', $localId, PDO::PARAM_INT);
 		$consulta->execute();			

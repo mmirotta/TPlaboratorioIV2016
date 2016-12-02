@@ -2,12 +2,18 @@
     <div class="{{resultado.estilo}}" ng-show="resultado.ver">
         <span style="font-size:26px;">{{resultado.mensaje}}</span>
     </div>
-	<utn-titulo titulo="Mis pedidos"></utn-titulo>
-	<div class="list-group sombra">
-        <a ng-click="VerPedido(pedido)" class="list-group-item" style="text-align:left" ng-repeat="pedido in ListadoPedidos">
-            Producto: {{pedido.productoNombre}} - Cliente: {{pedido.usuarioClienteNombre}} - 
-			Fecha: {{pedido.fechaPedido}} - Precio: {{pedido.productoPrecio}} - 
-			Descuento: {{pedido.descuento}} - Total: {{pedido.total}}
-        </a>
+    <div class="row">
+        <div class="col-lg-12">
+        	<div class="list-group sombra">
+                <a class="list-group-item" style="text-align:center; background-color:#204862; color:#ffffff;">
+                    Mis Pedidos
+                </a>
+                <a ng-click="VerPedido(pedido)" class="list-group-item" style="text-align:left" ng-repeat="pedido in ListadoPedidos">
+                    Producto: {{pedido.productoNombre}} - Cliente: {{pedido.usuarioClienteNombre}} - 
+        			Fecha: {{pedido.fechaPedido}} - Precio: {{pedido.productoPrecio}} - 
+        			Descuento: {{pedido.descuento}} - Total: {{pedido.total}}
+                </a>
+            </div>
+        </div>
     </div>
 </div>
