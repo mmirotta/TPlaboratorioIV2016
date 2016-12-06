@@ -347,5 +347,19 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			}
 		)
 
+		.state(
+			"estadistica.ventasPorLocal",
+			{
+				url:"/ventasPorLocal",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/estadisticas/ventasPorLocal.html",
+					controller:"VentasPorLocalCtrl"
+					}
+				}
+			}
+		)
+
 	$urlRouterProvider.otherwise("/inicio");
 });

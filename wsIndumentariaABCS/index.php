@@ -6,6 +6,7 @@ require 'clases/local.php';
 require 'clases/producto.php'; 
 require 'clases/pedido.php';
 require 'clases/oferta.php';
+require 'clases/estadisticas.php';
 
 $app = new Slim\App();
 
@@ -87,6 +88,14 @@ $app->get('/pedidos[/]', function ($request, $response, $args) {
     $datos=Pedido::Buscar();
     return $response->write(json_encode($datos));
 });
+
+/*BUSCAR ESTADISTICAS*/
+
+$app->get('/estadisiticasVentasPorLocal[/]', function ($request, $response, $args) {
+    $listado=Estadisticas::BuscarVentasPorLocal();
+    return $response->write(json_encode($listado));
+});
+
 
 /*CARGAR*/
 
