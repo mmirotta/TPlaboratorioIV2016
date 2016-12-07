@@ -91,12 +91,15 @@ $app->get('/pedidos[/]', function ($request, $response, $args) {
 
 /*BUSCAR ESTADISTICAS*/
 
-$app->get('/estadisiticasVentasPorLocal[/]', function ($request, $response, $args) {
+$app->get('/estadisticasVentasPorLocal[/]', function ($request, $response, $args) {
     $listado=Estadisticas::BuscarVentasPorLocal();
     return $response->write(json_encode($listado));
 });
 
-
+$app->get('/estadisticasVentasPorLocalYUsuario/{localId}', function ($request, $response, $args) {
+    $listado=Estadisticas::BuscarVentasPorLocalYUsuario($args['localId']);
+    return $response->write(json_encode($listado));
+});
 /*CARGAR*/
 
 $app->get('/usuario/{id}', function ($request, $response, $args) {

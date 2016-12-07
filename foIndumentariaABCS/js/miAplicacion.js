@@ -361,5 +361,19 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			}
 		)
 
+		.state(
+			"estadistica.ventasPorLocalYUsuario",
+			{
+				url:"/ventasPorLocalYUsuario",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/estadisticas/ventasPorLocalYUsuario.html",
+					controller:"VentasPorLocalYUsuarioCtrl"
+					}
+				}
+			}
+		)
+
 	$urlRouterProvider.otherwise("/inicio");
 });

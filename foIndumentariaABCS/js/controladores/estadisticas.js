@@ -154,39 +154,153 @@ angular
 
             Highcharts.chart('divGrafico', {
                 chart: {
-                type: 'column',
-                options3d: {
-                    enabled: true,
-                    alpha: 10,
-                    beta: 25,
-                    depth: 70
-                }
-            },
-            title: {
-                text: 'Ventas por Local'
-            },
-            subtitle: {
-                text: 'Cantidad de ventas que realizo cada local'
-            },
-            plotOptions: {
-                column: {
-                    depth: 25
-                }
-            },
-            xAxis: {
-                categories: $scope.local
-            },
-            yAxis: {
+                    type: 'column',
+                    options3d: {
+                        enabled: true,
+                        alpha: 10,
+                        beta: 25,
+                        depth: 70
+                    }
+                },
                 title: {
-                    text: null
-                }
-            },
-            series: [{
-                name: 'Ventas',
-                data: $scope.cantidad
-            }]
+                    text: 'Ventas por Local'
+                },
+                subtitle: {
+                    text: 'Cantidad de ventas que realizo cada local'
+                },
+                plotOptions: {
+                    column: {
+                        depth: 25
+                    }
+                },
+                xAxis: {
+                    categories: $scope.local
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    }
+                },
+                series: [{
+                    name: 'Ventas',
+                    data: $scope.cantidad
+                }]
             });
         }, 1000); 
+    }
+    catch(error)
+    {
+      console.info(error);
+      $scope.resultado.estilo = "alert alert-danger";
+      $scope.resultado.mensaje = "Error en el controlador producto.";
+    }
+  }).controller('VentasPorLocalYUsuarioCtrl', function($scope, $state, $auth, $timeout, jwtHelper, FactoryEstadisticas, FactoryLocal) {
+    try
+    {
+        $scope.resultado = {};
+        $scope.resultado.ver = false;
+        $scope.localId = "";
+
+        if ($auth.isAuthenticated())
+        {
+            $scope.usuario = jwtHelper.decodeToken($auth.getToken());
+            $scope.usuario.logeado = true;
+        }
+        else
+        {
+        $state.go("inicio");
+        }
+
+        FactoryLocal.BuscarTodos().then(
+            function(respuesta) {       
+                $scope.ListaLocales = respuesta;
+            },function(error) {
+                $scope.ListaLocales= [];
+        });
+
+        $scope.Buscar = function(){
+            try
+            {
+                $scope.cantidad = [];
+                $scope.usuarios = [];
+                FactoryEstadisticas.BuscarVentasPorLocalYUsuario($scope.localId).then(
+                function(respuesta) {   
+                    $scope.ListadoVentas = respuesta;
+                  },function(error) {
+                    $scope.ListadoVentas= [];
+                });
+
+                $timeout(function() {
+                    $scope.ListadoVentas.forEach(function(venta){
+                        $scope.cantidad.push(venta.cantidad);
+                        $scope.usuarios.push(venta.usuarioEmpleadoNombre);
+                        $scope.localNombre = venta.localNombre;
+                    });
+
+                    Highcharts.chart('divGrafico', {
+                        chart: {
+                            type: 'bar'
+                        },
+                        title: {
+                            text: 'Ventas por Empleado'
+                        },
+                        subtitle: {
+                            text: 'antidad de ventas que realizo cada empleado de la sucursal - ' + $scope.localNombre
+                        },
+                        xAxis: {
+                            categories: $scope.usuarios,
+                            title: {
+                                text: null
+                            }
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Ventas',
+                                align: 'high'
+                            },
+                            labels: {
+                                overflow: 'justify'
+                            }
+                        },
+                        plotOptions: {
+                            bar: {
+                                dataLabels: {
+                                    enabled: true
+                                }
+                            }
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'top',
+                            x: -40,
+                            y: 80,
+                            floating: true,
+                            borderWidth: 1,
+                            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                            shadow: true
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        series: [{
+                            name: 'Ventas',
+                            data: $scope.cantidad
+                        }]
+                    });
+                }, 1000); 
+            }
+            catch(error)
+            {
+                console.info(error);
+                $scope.resultado.ver = true;
+                $scope.resultado.estilo = "alert alert-danger";
+                $scope.resultado.mensaje = "Error al bucar por perfil";
+            }
+        }
+
+        
     }
     catch(error)
     {

@@ -1,0 +1,19 @@
+<div class="divGraficos">
+    <div class="row">
+	    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+	        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+	    </div>
+    </div>
+    <div class="row">
+        <span style="font-size:25px">Seleccione una sucursal: </span>
+		<select ng-model="localId" class="txtLogin" style="width:30%; display: inline; margin-left:1%">
+			<option value="{{local.id}}" ng-repeat="local in ListaLocales">{{local.sucursal}}</option>
+	    </select>
+	    <a ng-click="Buscar()" style="margin-left:1%"><i class="fa fa-search fa-3x"></i></a>
+	</div>
+	<div class="row" >
+		<div class="col-lg-12">
+			<div id="divGrafico"></div>
+		</div>
+	</div>
+</form>

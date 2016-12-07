@@ -4,7 +4,6 @@ angular
     if ($auth.isAuthenticated())
     {
       $scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
-      console.info($scope.usuarioLogeado);
       $scope.logeado = true;
       $scope.menu = true;
       switch ($scope.usuarioLogeado.perfil)
