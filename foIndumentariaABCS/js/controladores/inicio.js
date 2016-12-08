@@ -7,16 +7,16 @@ angular
     } 
 
     FactoryLocal.BuscarTodos().then(
- 		function(respuesta) {     	
-  			$scope.ListadoSucursal = respuesta;
-    	},function(error) {
- 			$scope.ListadoSucursal= [];
- 	});
+   		function(respuesta) {     	
+    			$scope.ListadoSucursal = respuesta;
+      	},function(error) {
+   			$scope.ListadoSucursal= [];
+   	});
 
- 	FactoryProducto.BuscarPor('productosTop6', 1).then(
-		function(respuesta) {       
-	      	$scope.ListadoProductos = respuesta;
-	  	},function(error) {
-	    	$scope.ListadoProductos= [];
-	});
+   	FactoryProducto.BuscarPor('productosTop6', 1).then(
+  		function(respuesta) {       
+  	      	$scope.ListadoProductos = respuesta;
+  	  	},function(error) {
+  	    	$scope.ListadoProductos= [];
+  	});
   });

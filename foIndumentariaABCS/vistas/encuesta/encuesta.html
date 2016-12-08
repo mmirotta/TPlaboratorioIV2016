@@ -1,0 +1,204 @@
+<div class="container" style="margin-top:5%">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
+	<div class="divFormulario sombra" style="font-size:36px;">
+        <div class="row" ng-if="pregunta == '1'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>¿Como calificas a nuestra página?</span><br>
+                          <input type="radio" ng-model="encuenta.calificacion" value="Muy Bueno"> Muy Bueno<br>
+                          <input type="radio" ng-model="encuenta.calificacion" value="Bueno"> Bueno<br>
+                          <input type="radio" ng-model="encuenta.calificacion" value="Regular"> Regular
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '2'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>¿Que te parecio la variedad de productos?</span><br>
+                          <input type="radio" ng-model="encuenta.variedad" value="Muy Bueno"> Muy Bueno<br>
+                          <input type="radio" ng-model="encuenta.variedad" value="Bueno"> Bueno<br>
+                          <input type="radio" ng-model="encuenta.variedad" value="Regular"> Regular
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '3'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>Sobre que productos quisieras mas variedad</span><br>
+                          <input type="radio" ng-model="encuenta.masVariedad" value="Remeras"> Remeras<br>
+                          <input type="radio" ng-model="encuenta.masVariedad" value="Camperas"> Camperas<br>
+                          <input type="radio" ng-model="encuenta.masVariedad" value="Buzos"> Buzos<br>
+                          <input type="radio" ng-model="encuenta.masVariedad" value="Zapatillas"> Zapatillas
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '4'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>¿Encontraste con facilidad el producto que buscabas?</span><br>
+                          <input type="radio" ng-model="encuenta.facilidad" value="Si"> Si<br>
+                          <input type="radio" ng-model="encuenta.facilidad" value="No"> No
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '5'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>De las páginas que conoces cual concideras mejor a la nuestra.</span><br>
+                          <input type="text" class="txtLogin" ng-model='encuesta.mejorPagina'>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '6'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>De las páginas que conoces cual concideras peor a la nuestra.</span><br>
+                          <input type="text" class="txtLogin" ng-model='encuesta.peorPagina'>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '7'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>Si ya compraste en otra oportunidad. ¿El producto te llego en el tiempo que esperabas?</span><br>
+                          <input type="radio" ng-model="encuenta.tiempoEntrega" value="Si"> Si<br>
+                          <input type="radio" ng-model="encuenta.tiempoEntrega" value="No"> No<br>
+                          <input type="radio" ng-model="encuenta.tiempoEntrega" value="Primera"> Es la primera compra
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '8'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>¿Te resulto seguro comprar en nuestra pagina?</span><br>
+                          <input type="radio" ng-model="encuenta.inconvenientes" value="Si"> Si<br>
+                          <input type="radio" ng-model="encuenta.inconvenientes" value="No"> No
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '9'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>Nos vamos a suscribir en las redes sociales. ¿Cual sugeris?</span><br>
+                          <input type="radio" ng-model="encuenta.redesSociales" value="Facebook"> Facebook<br>
+                          <input type="radio" ng-model="encuenta.redesSociales" value="Twitter"> Twitter<br>
+                          <input type="radio" ng-model="encuenta.redesSociales" value="Instagram"> Instagram<br>
+                          <input type="radio" ng-model="encuenta.redesSociales" value="Snapchat"> Snapchat<br>
+                          <input type="radio" ng-model="encuenta.redesSociales" value="Todas"> Todas
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '10'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>Recomendarias esta página a tus amigos</span><br>
+                          <input type="radio" ng-model="encuenta.recomendacion" value="Si"> Si<br>
+                          <input type="radio" ng-model="encuenta.recomendacion" value="No"> No
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '11'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>¿Te gustaria representarnos?</span><br>
+                          <input type="radio" ng-model="encuenta.representarnos" value="Si"> Si<br>
+                          <input type="radio" ng-model="encuenta.representarnos" value="No"> No
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Siguiente" class="btnVerde" style="width:48%" ng-click="Siguiente()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="pregunta == '12'" >
+            <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <span>¿Que mejoras sugeris? Dejanos tu opinion</span><br>
+                          <textarea  class="txtLogin" ng-model='encuesta.sugerencia' required></textarea>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12" style="text-align:right">
+                        <input type="submit" value="Finalizar" class="btnVerde" style="width:48%" ng-click="Finalizar()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

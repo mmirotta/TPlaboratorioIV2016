@@ -7,6 +7,7 @@ require 'clases/producto.php';
 require 'clases/pedido.php';
 require 'clases/oferta.php';
 require 'clases/estadisticas.php';
+require 'clases/encuesta.php';
 
 $app = new Slim\App();
 
@@ -207,6 +208,11 @@ $app->post('/pedido/{pedido}', function ($request, $response, $args) {
 $app->post('/oferta/{oferta}', function ($request, $response, $args) {
     $oferta=json_decode($args['oferta']);
     return $response->write(Oferta::Guardar($oferta));
+});
+
+$app->post('/encuesta/{encuesta}', function ($request, $response, $args) {
+    $encuesta=json_decode($args['encuesta']);
+    return $response->write(Encuesta::Guardar($encuesta));
 });
 
 // /* PUT: Para editar recursos MODIFICAR*/

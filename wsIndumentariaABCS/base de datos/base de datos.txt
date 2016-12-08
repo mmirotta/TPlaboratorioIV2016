@@ -55,6 +55,24 @@ CREATE TABLE `utn`.`oferta`
   `usuarioEmpleadoId` INT NULL, PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
 
+CREATE TABLE `utn`.`encuesta` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+  `calificacion` VARCHAR(50) NOT NULL , 
+  `variedad` VARCHAR(50) NOT NULL , 
+  `masVariedad` VARCHAR(50) NOT NULL , 
+  `facilidad` VARCHAR(50) NOT NULL , 
+  `mejorPagina` VARCHAR(50) NULL , 
+  `peorPagina` VARCHAR(50) NULL , 
+  `tiempoEntrega` VARCHAR(50) NULL , 
+  `inconvenientes` VARCHAR(50) NULL , 
+  `redesSociales` VARCHAR(50) NULL , 
+  `recomendacion` VARCHAR(50) NULL , 
+  `representarnos` VARCHAR(50) NULL , 
+  'sugerencia' VARCHAR(1500) NULL , 
+  `fechaCreacion` DATETIME NULL ,
+  `usuarioClienteId` INT NULL , PRIMARY KEY (`id`)) 
+  ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
 
 //Datos Usuario
 

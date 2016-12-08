@@ -25,7 +25,7 @@ class Estadisticas
 		$arrLocales= $consulta->fetchAll(PDO::FETCH_CLASS, "estadisticas");	
 		return $arrLocales;
 	}
-
+	
 	public static function BuscarVentasPorLocalYUsuario($localId)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -40,7 +40,6 @@ class Estadisticas
 		$arrLocales= $consulta->fetchAll(PDO::FETCH_CLASS, "estadisticas");	
 		return $arrLocales;
 	}
-	
 	
 
 }

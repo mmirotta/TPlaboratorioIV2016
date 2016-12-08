@@ -375,5 +375,31 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			}
 		)
 
+		//Encuesta
+		.state(
+			"encuesta",
+			{
+				url:"/encuesta",
+				cache:false,
+				abstract:true, 
+				templateUrl:"vistas/encuesta/abstractaEncuesta.html",
+				controller:"MenuPrincipalCtrl"
+			}
+		)
+
+		.state(
+			"encuesta.encuesta",
+			{
+				url:"/encuesta",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/encuesta/encuesta.html",
+					controller:"EncuestaCtrl"
+					}
+				}
+			}
+		)
+
 	$urlRouterProvider.otherwise("/inicio");
 });

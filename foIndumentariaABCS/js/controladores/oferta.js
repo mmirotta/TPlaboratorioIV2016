@@ -229,6 +229,20 @@ angular
 		 	}
 	 	}
 
+		$scope.Encuesta = function(){
+	 		try
+	 		{
+	 			$state.go('encuesta.encuesta');
+	 		}
+		 	catch(error)
+		 	{
+		 		console.info(error);
+		 		$scope.resultado.ver = true;
+		 		$scope.resultado.estilo = "alert alert-danger";
+				$scope.resultado.mensaje = "Error al ir a la encuesta ";
+		 	}
+	 	}
+
 	 	$scope.Volver = function(){
 	 		try
 	 		{
