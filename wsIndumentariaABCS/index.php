@@ -109,6 +109,11 @@ $app->get('/estadisticasVentasPorLocalYUsuario/{localId}', function ($request, $
     $listado=Estadisticas::BuscarVentasPorLocalYUsuario($args['localId']);
     return $response->write(json_encode($listado));
 });
+
+$app->get('/calificacion[/]', function ($request, $response, $args) {
+    $listado=Estadisticas::Calificacion();
+    return $response->write(json_encode($listado));
+});
 /*CARGAR*/
 
 $app->get('/usuario/{id}', function ($request, $response, $args) {

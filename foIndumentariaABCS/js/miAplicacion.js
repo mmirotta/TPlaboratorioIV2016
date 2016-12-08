@@ -375,6 +375,20 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			}
 		)
 
+		.state(
+			"estadistica.calificacion",
+			{
+				url:"/calificacion",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/estadisticas/calificacionClientes.html",
+					controller:"CalificacionCtrl"
+					}
+				}
+			}
+		)
+
 		//Encuesta
 		.state(
 			"encuesta",

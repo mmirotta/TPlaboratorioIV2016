@@ -41,5 +41,15 @@ class Estadisticas
 		return $arrLocales;
 	}
 	
+	public static function Calificacion()
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT COUNT(id) AS cantidad, calificacion 
+														FROM encuesta
+														GROUP BY calificacion");
+		$consulta->execute();			
+		$arrLocales= $consulta->fetchAll(PDO::FETCH_CLASS, "estadisticas");	
+		return $arrLocales;
+	}
 
 }

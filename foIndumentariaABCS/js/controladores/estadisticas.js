@@ -308,4 +308,94 @@ angular
       $scope.resultado.estilo = "alert alert-danger";
       $scope.resultado.mensaje = "Error en el controlador producto.";
     }
+  }).controller('CalificacionCtrl', function($scope, $state, $auth, $timeout, jwtHelper, FactoryEstadisticas, FactoryLocal) {
+    try
+    {
+        $scope.resultado = {};
+        $scope.resultado.ver = false;
+        $scope.localId = "";
+
+        if ($auth.isAuthenticated())
+        {
+            $scope.usuario = jwtHelper.decodeToken($auth.getToken());
+            $scope.usuario.logeado = true;
+        }
+        else
+        {
+            $state.go("inicio");
+        }
+
+        $scope.cantidadMuyBueno = 0;
+        $scope.cantidadBueno = 0;
+        $scope.cantidadRegular = 0;
+
+        FactoryEstadisticas.BuscarCalificacion().then(
+        function(respuesta) {   
+            $scope.ListadoVentas = respuesta;
+          },function(error) {
+            $scope.ListadoVentas= [];
+        });
+
+        $timeout(function() {
+            $scope.ListadoVentas.forEach(function(calificacion){
+                if (calificacion.calificacion == "Muy Bueno")
+                    $scope.cantidadMuyBueno = calificacion.cantidad;
+                else if (calificacion.calificacion == "Bueno")
+                    $scope.cantidadBueno = calificacion.cantidad;
+                else 
+                    $scope.cantidadRegular = calificacion.cantidad;
+            });
+
+            Highcharts.chart('divGrafico', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Calificacion Sitio Web'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.y} ',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Muy Bueno',
+                        y: $scope.cantidadMuyBueno
+                    }, {
+                        name: 'Bueno',
+                        y: $scope.cantidadBueno
+                    }, {
+                        name: 'Regular',
+                        y: $scope.cantidadRegular
+                    }]
+                }]
+            });
+        }, 1000); 
+            
+
+        
+    }
+    catch(error)
+    {
+      console.info(error);
+      $scope.resultado.estilo = "alert alert-danger";
+      $scope.resultado.mensaje = "Error en CalificacionCtrl.";
+    }
   });
