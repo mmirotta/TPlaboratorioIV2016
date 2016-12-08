@@ -19,6 +19,7 @@ CREATE TABLE `utn`.`local`
   `provincia` VARCHAR(50) NULL , 
   `latitud` VARCHAR(50) NULL , 
   `longitud` VARCHAR(50) NULL , 
+  `fotoPrincipal` VARCHAR(250) NULL , 
   `foto` VARCHAR(250) NULL , 
   `sucursal` VARCHAR(50) NULL , PRIMARY KEY (`id`)) 
 ENGINE = InnoDB CHARACTER SET latin1 COLLATE latin1_spanish_ci;

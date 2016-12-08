@@ -57,6 +57,14 @@ $app->get('/productosTop5/{id}', function ($request, $response, $args) {
     return $response->write(json_encode($datos));
 });
 
+$app->get('/productosTop6/{id}', function ($request, $response, $args) {
+    $datos=Producto::BuscarTop6();
+    for ($i = 0; $i < count($datos); $i++ ){
+        $datos[$i]->foto=json_decode($datos[$i]->foto);
+    }
+    return $response->write(json_encode($datos));
+});
+
 $app->get('/ofertas[/]', function ($request, $response, $args) {
     $datos=Oferta::Buscar();
     return $response->write(json_encode($datos));
@@ -157,6 +165,10 @@ $app->post('/local/{local}', function ($request, $response, $args) {
             copy($rutaVieja, "fotos/".$rutaNueva);
             unlink($rutaVieja);
             $arrayFoto[]=$rutaNueva;
+            if ($i==0)
+            {
+                $local->fotoPrincipal = $rutaNueva;
+            }
         } 
         $local->foto=json_encode($arrayFoto); 
     }

@@ -11,6 +11,7 @@ class Local
   	public $provincia;
   	public $longitud;
 	public $latitud;
+	public $fotoPrincipal;
 	public $foto;
 	public $sucursal;
 //--------------------------------------------------------------------------------//
@@ -70,14 +71,15 @@ class Local
 	public static function Guardar($local)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO local (direccion,numero,localidad,provincia,latitud,longitud,foto,sucursal) 
-																VALUES(:direccion,:numero,:localidad,:provincia,:latitud,:longitud,:foto,:sucursal)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO local (direccion,numero,localidad,provincia,latitud,longitud,fotoPrincipal,foto,sucursal) 
+																VALUES(:direccion,:numero,:localidad,:provincia,:latitud,:longitud,:fotoPrincipal,:foto,:sucursal)");
 		$consulta->bindValue(':direccion',$local->direccion, PDO::PARAM_STR);
 		$consulta->bindValue(':numero',$local->numero, PDO::PARAM_INT);
 		$consulta->bindValue(':localidad',$local->localidad, PDO::PARAM_STR);
 		$consulta->bindValue(':provincia',$local->provincia, PDO::PARAM_STR);
 		$consulta->bindValue(':latitud',$local->latitud, PDO::PARAM_STR);
 		$consulta->bindValue(':longitud',$local->longitud, PDO::PARAM_STR);
+		$consulta->bindValue(':fotoPrincipal',$local->fotoPrincipal, PDO::PARAM_STR);
 		$consulta->bindValue(':foto',$local->foto, PDO::PARAM_STR);
 		$consulta->bindValue(':sucursal',$local->sucursal, PDO::PARAM_STR);
 		$consulta->execute();		
