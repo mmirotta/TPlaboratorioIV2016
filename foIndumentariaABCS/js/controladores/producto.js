@@ -191,8 +191,15 @@ angular
 	 		try
 	 		{
 	 			$scope.comprar = true;
-			 	$scope.Latitud = -34.623743;
-				$scope.Longitud = -58.493723;
+ 				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function (position) {
+						$scope.Latitud = position.coords.latitude;
+						$scope.Longitud = position.coords.longitude;
+					});
+				} else {
+					console.info('Unable to locate current position');
+				}
+
 				$scope.customIcon = {
 				  "scaledSize": [32, 32],
 				  "url":  $scope.nombre
